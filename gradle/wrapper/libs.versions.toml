@@ -1,0 +1,46 @@
+[versions]
+
+appcompat_version = '1.6.1'
+ktx = '1.12.0'
+coroutinesVersion = '1.4.1'
+coroutinesAndroidVersion = '1.6.4'
+
+kotlinCEVersion = '1.5.1'
+compose_version = '1.5.1'
+compose_material_version = '1.5.1'
+compose_ui_version = '1.5.1'
+composeConstraintLayoutVersion = '1.0.1'
+composeLiveDataVersion = '1.5.1'
+composePagingVersion = '3.2.1'
+composeActivityVersion = '1.6.1'
+
+navigationVersion = '2.7.3'
+lifecycleViewModelVersion = '2.6.1'
+lifecycleVersion = '2.6.1'
+
+accompanistFlowLayoutVersion = '0.32.0'
+accompanistPagerVersion = '0.32.0'
+accompanistSystemUiControllerVersion = '0.32.0'
+accompanistPermissionsVersion = '0.32.0'
+
+coilVersion = '2.3.0'
+koin_version = '3.2.1'
+koin_core = '3.2.1'
+retrofitVersion = '2.9.0'
+junitVersion = '4.13.2'
+androidAnnotationVersion = '1.5.0'
+desugarJdkVersion = '2.0.3'
+livenessVersion = '8.0.2'
+lottieVersion = '6.1.0'
+pdfViewVersion = '2.8.2'
+firebaseVersion = '23.4.0'
+chat2DeskVersion = '1.3.0'
+jvmVersion = '1.8'
+
+kotlin_version = "1.9.0"
+
+[libraries]
+androidx-ktx = {group = "androidx.core", name = "core-ktx", version.ref = "ktx"}
+
+[plugins]
+
