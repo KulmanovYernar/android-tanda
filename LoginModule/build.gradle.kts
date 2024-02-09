@@ -40,6 +40,7 @@ dependencies {
     implementation(projects.tandaApp)
 
     implementation(libs.androidx.ktx)
+
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     testImplementation("junit:junit:4.14-SNAPSHOT")
