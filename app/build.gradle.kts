@@ -42,7 +42,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
-    packaging {
+    packagingOptions {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
@@ -51,15 +51,24 @@ android {
 
 dependencies {
     implementation(projects.icons)
+    implementation(projects.navigationModule)
+    implementation(projects.loginModule)
+    implementation(projects.utillibrary)
+    implementation(projects.domain)
+    implementation(projects.tandaApp)
+    implementation(projects.app)
 
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-    implementation("androidx.activity:activity-compose:1.8.2")
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.ktx)
+//    implementation(libs.koin.compose)
+//    implementation(libs.koin.android)
+//    implementation(libs.koin.core)
+    implementation(libs.compose.ui)
+    implementation(libs.material)
+
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    implementation("androidx.activity:activity-compose:1.5.1")
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
     testImplementation("junit:junit:4.14-SNAPSHOT")
     testImplementation("org.testng:testng:6.9.6")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -68,4 +77,5 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
 }

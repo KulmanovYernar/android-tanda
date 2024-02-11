@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "tandapp.icons"
+    namespace = "tandapp.navigationmodule"
     compileSdk = 34
 
     defaultConfig {
@@ -33,10 +33,12 @@ android {
 }
 
 dependencies {
-//    implementation(projects.app)
+    implementation(projects.utillibrary)
+
     implementation(libs.androidx.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
+    implementation(libs.androidx.navigation.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

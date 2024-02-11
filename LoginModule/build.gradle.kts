@@ -36,13 +36,14 @@ android {
 
 dependencies {
     implementation(projects.domain)
-    implementation(projects.app)
-    implementation(projects.tandaApp)
+//    implementation(projects.tandaApp)
+    implementation(projects.navigationModule)
+    implementation(projects.utillibrary)
 
     implementation(libs.androidx.ktx)
-
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
+    implementation(libs.appcompat)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.material)
     testImplementation("junit:junit:4.14-SNAPSHOT")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")

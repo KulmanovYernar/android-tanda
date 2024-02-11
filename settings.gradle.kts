@@ -20,10 +20,12 @@ dependencyResolutionManagement {
 
 rootProject.name = "TandaApp"
 include(":app")
+include(":icons")
+include(":navigationModule")
 include(":LoginModule")
 
 
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+//enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":domain")
 include(":domain:auth")
-include(":icons")
+include(":utillibrary")

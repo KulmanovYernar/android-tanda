@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "tandapp.icons"
+    namespace = "tandapp.utillibrary"
     compileSdk = 34
 
     defaultConfig {
@@ -13,6 +13,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"
+    }
+
 
     buildTypes {
         release {
@@ -35,8 +39,10 @@ android {
 dependencies {
 //    implementation(projects.app)
     implementation(libs.androidx.ktx)
-    implementation(libs.appcompat)
     implementation(libs.material)
+    implementation(libs.appcompat)
+    implementation(libs.compose.ui)
+    implementation(libs.androidx.navigation.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
