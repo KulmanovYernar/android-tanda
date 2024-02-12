@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         minSdk = 24
-
+        targetSdk = 34
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -34,10 +34,18 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"
+    }
 }
 
 dependencies {
-//    implementation(projects.app)
+//    implementation(projects.tandaApp)
+//    implementation(projects.domain)
+
     implementation(libs.androidx.ktx)
     implementation(libs.material)
     implementation(libs.appcompat)

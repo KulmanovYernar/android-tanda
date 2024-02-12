@@ -23,9 +23,10 @@ include(":app")
 include(":icons")
 include(":navigationModule")
 include(":LoginModule")
-
-
-//enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":domain")
-include(":domain:auth")
 include(":utillibrary")
+
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+include(":domain:auth")
+

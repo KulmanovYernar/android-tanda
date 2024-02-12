@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         minSdk = 24
-
+        targetSdk = 34
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -32,18 +32,26 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"
+    }
 }
 
 dependencies {
-    implementation(projects.domain)
+//    implementation(projects.domain)
 //    implementation(projects.tandaApp)
     implementation(projects.navigationModule)
     implementation(projects.utillibrary)
+    implementation(projects.icons)
 
     implementation(libs.androidx.ktx)
     implementation(libs.appcompat)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.material)
+    implementation(libs.compose.ui)
     testImplementation("junit:junit:4.14-SNAPSHOT")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
