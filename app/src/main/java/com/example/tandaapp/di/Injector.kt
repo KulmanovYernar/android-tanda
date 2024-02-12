@@ -1,15 +1,16 @@
 package com.example.tandaapp.di
 
-//import android.content.Context
-//import org.koin.android.ext.koin.androidContext
-//import org.koin.core.context.startKoin
+import android.content.Context
+import com.example.loginmodule.di.loginFeatureModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
-//internal fun configureKoin(context: Context) {
-//    startKoin {
-//        androidContext(context)
-//
-//        modules(
-//
-//        )
-//    }
-//}
+internal fun configureKoin(context: Context) {
+    startKoin {
+        androidContext(context)
+
+        modules(
+            loginFeatureModule
+        )
+    }
+}

@@ -23,8 +23,9 @@ accompanistSystemUiControllerVersion = '0.32.0'
 accompanistPermissionsVersion = '0.32.0'
 
 coilVersion = '2.3.0'
-koin_version = '3.2.1'
-koin_core = '3.2.1'
+koin_version = "3.2.1"
+koin_core = "3.2.1"
+koin_compose = "3.2.1"
 retrofitVersion = '2.9.0'
 junitVersion = '4.13.2'
 androidAnnotationVersion = '1.5.0'
@@ -46,7 +47,7 @@ navigationComposeVersion = "2.7.7"
 material3AndroidVersion = "1.2.0"
 
 [libraries]
-androidx-ktx = {group = "androidx.core", name = "core-ktx", version.ref = "ktx"}
+androidx-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "ktx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
@@ -55,9 +56,9 @@ material = { group = "androidx.compose.material", name = "material", version.ref
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationComposeVersion" }
 compose-ui = { group = "androidx.compose.ui", name = "ui", version.ref = "compose_ui_version" }
 #androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3AndroidVersion" }
-koin-android = {group= "io.insert-koin", name = "koin.android", version.ref = "koin_version"}
-koin-compose = {group= "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin_version"}
-koin-core = {group= "io.insert-koin", name = "koin-core-ext", version.ref = "koin_version"}
+koin-android = {group = "io.insert-koin", name = "koin.android", version.ref = "koin_version"}
+koin-compose = {group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin_version"}
+koin-core = {group = "io.insert-koin", name = "koin-core-ext", version.ref = "koin_version"}
 [plugins]
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
