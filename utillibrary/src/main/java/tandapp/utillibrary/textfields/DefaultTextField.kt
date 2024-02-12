@@ -45,7 +45,7 @@ fun DefaultTextField(
     onDoneClick: () -> Unit = { },
     onValueChange: (String) -> Unit,
     onFocusChanged: ((FocusState) -> Unit)? = null,
-    focusedBorderColor: Color = Color.Green,
+    focusedBorderColor: Color = Silver,
     unfocusedBorderColor: Color = Silver,
     trailingIcon: @Composable (() -> Unit)? = null,
     onTrailingIconClick: () -> Unit = { onValueChange("") },
@@ -67,8 +67,8 @@ fun DefaultTextField(
         borderColor = if (isFocused) colorOfFocus else if(isError) Color.Red else unfocusedBorderColor
     }
 
-//    val defaultTrailingIcon: @Composable () -> Unit = trailingIcon
-//        ?: { DefaultTrailingIcon(onTrailingIconClick = onTrailingIconClick, showIcon = value.isNotEmpty() && isFocused) }
+    val defaultTrailingIcon: @Composable () -> Unit = trailingIcon
+        ?: { DefaultTrailingIcon(onTrailingIconClick = onTrailingIconClick, showIcon = value.isNotEmpty() && isFocused) }
 
 
     var defaultTextFieldModifier = modifier
@@ -124,7 +124,7 @@ fun DefaultTextField(
             fontSize = fontSize16,
             lineHeight = lineHeight22
         ),
-//        trailingIcon = { defaultTrailingIcon() },
+        trailingIcon = { defaultTrailingIcon() },
         enabled = enabled,
         readOnly = readOnly
     )
