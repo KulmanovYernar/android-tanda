@@ -41,7 +41,9 @@ import tandapp.utillibrary.values.spacing32
 import tandapp.utillibrary.values.spacing40
 
 @Composable
-fun WelcomeScreen() {
+fun WelcomeScreen(
+    onBeginClick: () -> Unit
+) {
 
     Scaffold(
         backgroundColor = Color.White,
@@ -50,7 +52,7 @@ fun WelcomeScreen() {
             Column(modifier = Modifier.padding(top = spacing32)) {
                 DefaultToolbarWithRightText(
                     rightText = "Пропустить",
-                    onRightTextClick = {}
+                    onRightTextClick = onBeginClick
                 )
             }
         },
@@ -120,7 +122,7 @@ fun WelcomeScreen() {
                         .fillMaxWidth()
                         .padding(spacing16),
                     enabled = true,
-                    onButtonClicked = {},
+                    onButtonClicked = onBeginClick,
                     content = {
                         Row(
                             modifier = Modifier.fillMaxWidth(),

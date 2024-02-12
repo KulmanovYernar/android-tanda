@@ -80,12 +80,14 @@ fun CustomButtonText(
     lineHeight: TextUnit = lineHeight24,
     trailingIcon: (@Composable () -> Unit)? = null,
     leadingIcon: (@Composable () -> Unit)? = null,
+    horizontalArrangement:Arrangement.Horizontal = Arrangement.Center,
+    verticalAlignment:Alignment.Vertical = Alignment.CenterVertically,
     showIcon: Boolean = false
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
+        horizontalArrangement = horizontalArrangement,
+        verticalAlignment = verticalAlignment
     ) {
         if (leadingIcon != null && showIcon) {
             leadingIcon()
