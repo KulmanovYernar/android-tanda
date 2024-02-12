@@ -287,7 +287,7 @@ import tandapp.utillibrary.values.spacing4
 @Composable
 fun DefaultToolbarWithRightText(
     title: String = "",
-    backgroundColor: Color = Purple,
+    backgroundColor: Color = Color.White,
     onBackClick: () -> Unit = {},
     rightText: String = "",
     onRightTextClick: () -> Unit = {}
