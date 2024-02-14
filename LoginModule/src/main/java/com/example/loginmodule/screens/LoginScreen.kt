@@ -185,7 +185,7 @@ fun LoginScreen(
                         .fillMaxWidth()
                         .padding(start = spacing16, end = spacing16, bottom = spacing16),
                     enabled = true,
-                    onButtonClicked = {},
+                    onButtonClicked = onRegistrationClick,
                     content = {
                         Row(
                             modifier = Modifier.fillMaxWidth(),

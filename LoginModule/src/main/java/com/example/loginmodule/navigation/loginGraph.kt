@@ -22,7 +22,9 @@ fun NavGraphBuilder.loginGraph(navController: NavController, onLogged: () -> Uni
         LoginScreen(
             onForgotPasswordClick = {},
             onLoginClick = {},
-            onRegistrationClick = {},
+            onRegistrationClick = {
+                navController.navigate(LoginDestinations.REGISTRATION_SCREEN)
+            },
         )
     }
 
