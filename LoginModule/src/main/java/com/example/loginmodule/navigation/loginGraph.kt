@@ -20,7 +20,7 @@ fun NavGraphBuilder.loginGraph(navController: NavController, onLogged: () -> Uni
     }
     composable(route = LoginDestinations.SIGN_IN) {
         LoginScreen(
-            onForgotPasswordClick = {},
+            onForgotPasswordClick = {navController.navigate(LoginDestinations.FORGOT_PASSWORD)},
             onLoginClick = {},
             onRegistrationClick = {
                 navController.navigate(LoginDestinations.REGISTRATION_SCREEN)

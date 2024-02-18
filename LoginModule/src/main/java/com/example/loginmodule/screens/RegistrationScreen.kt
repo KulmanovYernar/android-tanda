@@ -34,6 +34,7 @@ import tandapp.utillibrary.buttons.CustomButton
 import tandapp.utillibrary.buttons.CustomButtonText
 import tandapp.utillibrary.click
 import tandapp.utillibrary.textfields.DefaultTextField
+import tandapp.utillibrary.toolbars.DefaultToolbar
 import tandapp.utillibrary.values.Gray
 import tandapp.utillibrary.values.Purple
 import tandapp.utillibrary.values.fontSize13
@@ -41,6 +42,7 @@ import tandapp.utillibrary.values.fontSize14
 import tandapp.utillibrary.values.fontSize32
 import tandapp.utillibrary.values.lineHeight18
 import tandapp.utillibrary.values.lineHeight24
+import tandapp.utillibrary.values.spacing100
 import tandapp.utillibrary.values.spacing140
 import tandapp.utillibrary.values.spacing16
 import tandapp.utillibrary.values.spacing24
@@ -61,10 +63,10 @@ fun RegistrationScreen(
         backgroundColor = Color.White,
         modifier = Modifier.fillMaxSize(),
         topBar = {
-//            DefaultToolbar(
-//                onBackClick = onBackClick,
-//                title = "Назад",
-//            )
+            DefaultToolbar(
+                onBackClick = onBackClick,
+                buttonText = "Назад",
+            )
         },
         content = {
             it.calculateTopPadding()
@@ -72,7 +74,7 @@ fun RegistrationScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(
-                        top = spacing140,
+                        top = spacing100,
                         start = spacing24,
                         end = spacing24,
                         bottom = spacing24

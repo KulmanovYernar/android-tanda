@@ -105,10 +105,8 @@ fun LoginScreen(
                     keyboardOptions = KeyboardOptions.Default.copy(
                         keyboardType = KeyboardType.Email,
                         imeAction = ImeAction.Next
-                        ),
-                    focusRequester = emailFocusRequester,
-
-                )
+                    ),
+                    focusRequester = emailFocusRequester)
 
                 Spacer(Modifier.height(spacing8))
 
@@ -137,20 +135,38 @@ fun LoginScreen(
                             painter = painterResource(id = tandapp.icons.R.drawable.ic_password_hide),
                             contentDescription = null,
                             tint = Gray,
-                            modifier = Modifier.size(24.dp).click {
-                                showPassword.value = !showPassword.value
-                            }
+                            modifier = Modifier
+                                .size(24.dp)
+                                .click {
+                                    showPassword.value = !showPassword.value
+                                }
                         )
                     },
                 )
 
-                Spacer(Modifier.height(spacing16))
+                Spacer(Modifier.height(spacing8))
 
-                CustomButtonText(
-                    text = "Забыли пароль?", color = Color.Blue,
-                    horizontalArrangement = Arrangement.End
+                CustomButton(
+                    buttonColors = ButtonDefaults.buttonColors(
+                        backgroundColor = Color.Transparent,
+                        contentColor = Color.Blue
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    enabled = true,
+                    onButtonClicked = onForgotPasswordClick,
+                    content = {
+                        Row(
+                            horizontalArrangement = Arrangement.End
+                        ) {
+                            CustomButtonText(
+                                text = "Забыли пароль?",
+                                color = Color.Blue,
+                                horizontalArrangement = Arrangement.End
+                            )
+                        }
+                    }
                 )
-
 
                 Spacer(Modifier.height(spacing16))
             }

@@ -44,7 +44,7 @@ android {
 
 dependencies {
 //    implementation(projects.tandaApp)
-//    implementation(projects.domain)
+    implementation(projects.icons)
 
     implementation(libs.androidx.ktx)
     implementation(libs.material)
