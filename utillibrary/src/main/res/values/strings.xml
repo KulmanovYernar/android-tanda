@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="welcome">Добро пожаловать!</string>
-
-
-
-
-
-
-
+    <string name="main">Main</string>
+    <string name="catalog">Catalog</string>
+    <string name="chat">Chat</string>
+    <string name="backet">Backet</string>
+    <string name="profile">Profile</string>
 </resources>

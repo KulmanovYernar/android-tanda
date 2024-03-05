@@ -9,16 +9,19 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.navigation
 import com.example.loginmodule.navigation.loginGraph
+import tandapp.homemodule.navigation.homeGraph
+import tandapp.navigationmodule.HOME_ROUTE
 //import com.example.loginmodule.navigation.loginGraph
 import tandapp.navigationmodule.LOGIN_ROUTE
 import tandapp.navigationmodule.WELCOME_ROUTE
+import tandapp.navigationmodule.destinations.MainDestinations
 
 @Composable
 fun MainNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    startDestination: String = WELCOME_ROUTE,
-    startRoute: String = WELCOME_ROUTE,
+    startDestination: String = HOME_ROUTE,
+    startRoute: String = HOME_ROUTE,
     onLogged: () -> Unit,
 //    sharedHomeViewModel: HomeViewModel
 ) {
@@ -36,6 +39,16 @@ fun MainNavHost(
             loginGraph(
                 navController = navController,
                 onLogged = onLogged,
+            )
+        }
+
+        navigation(
+            startDestination = MainDestinations.HOME.destination,
+            route = HOME_ROUTE
+        ) {
+            homeGraph(
+                navController = navController,
+                onLogged = onLogged
             )
         }
     }

@@ -15,7 +15,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.rememberNavController
 import com.example.tandaapp.MainNavHost
 import com.example.tandaapp.ui.theme.TandaAppTheme
+import tandapp.navigationmodule.HOME_ROUTE
 import tandapp.navigationmodule.LOGIN_ROUTE
+import tandapp.navigationmodule.destinations.MainDestinations
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,7 +62,7 @@ private fun MyTandaApp() {
                 modifier = Modifier
                     .fillMaxSize(),
                 navController = navController,
-                startRoute = LOGIN_ROUTE,
+                startRoute = HOME_ROUTE,
 //                startDestination = getStartDestination(registered),
                 onLogged = {}
 //                    onLogged()

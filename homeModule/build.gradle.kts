@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    namespace = "tandapp.navigationmodule"
+    namespace = "tandapp.homemodule"
     compileSdk = 34
 
     defaultConfig {
         minSdk = 24
-        targetSdk = 34
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -39,14 +39,18 @@ android {
 }
 
 dependencies {
-    implementation(projects.icons)
     implementation(projects.utillibrary)
+    implementation(projects.navigationModule)
+    implementation(projects.icons)
 
     implementation(libs.androidx.ktx)
     implementation(libs.appcompat)
-    implementation(libs.material)
     implementation(libs.androidx.navigation.compose)
-    testImplementation(libs.junit)
+    implementation(libs.material)
+    implementation(libs.compose.ui)
+    implementation(libs.koin.compose)
+//    testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    testImplementation("org.testng:testng:6.9.6")
 }

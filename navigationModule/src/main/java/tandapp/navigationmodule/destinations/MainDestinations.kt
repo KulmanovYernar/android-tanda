@@ -1,15 +1,16 @@
 package tandapp.navigationmodule.destinations
 
 import androidx.annotation.StringRes
-import tandapp.navigationmodule.R
+import tandapp.icons.R
 
-enum class MainDestinations(@StringRes val title: Int, val destination: String, val icon: Int = 0) {
-//    HOME(R.string.home_page, "home", R.drawable.ic_home),
-//    OPERATIONS(R.string.operations, "payments", R.drawable.ic_home_payments),
-//    SERVICES(R.string.bottom_bar_services, "services", R.drawable.ic_services_new),
-//    CHAT(R.string.messages, "chat", R.drawable.ic_chat),
-//    PROFILE(R.string.empty, destination = "profile"),
-//    MORE(R.string.more, "more",),
-//    MAIN(R.string.empty, destination = "main"),
-//    BACK(R.string.empty, destination = "back")
+enum class MainDestinations(
+    @StringRes val title: Int,
+    val destination: String,
+    val icon: Int = 0
+) {
+    HOME(tandapp.utillibrary.R.string.main, "main", R.drawable.ic_home),
+    CATALOG(tandapp.utillibrary.R.string.catalog, "catalog", R.drawable.ic_catalog),
+    CHAT(tandapp.utillibrary.R.string.chat, "chat", R.drawable.ic_chat),
+    BACKET(tandapp.utillibrary.R.string.backet, "backet", R.drawable.ic_backet),
+    PROFILE(tandapp.utillibrary.R.string.profile, "profile", R.drawable.ic_profile ),
 }

@@ -54,6 +54,7 @@ android {
         implementation(projects.navigationModule)
         implementation(projects.loginModule)
         implementation(projects.utillibrary)
+        implementation(projects.homeModule)
 //    implementation(projects.domain)
 //    implementation(projects.tandaApp)
 //    implementation(projects.app)

@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/domain/auth" />
+            <option value="$PROJECT_DIR$/homeModule" />
             <option value="$PROJECT_DIR$/icons" />
             <option value="$PROJECT_DIR$/navigationModule" />
             <option value="$PROJECT_DIR$/utillibrary" />
