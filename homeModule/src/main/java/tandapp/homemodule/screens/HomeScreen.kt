@@ -23,6 +23,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
@@ -41,6 +42,7 @@ import tandapp.utillibrary.values.cornerRadius10
 import tandapp.utillibrary.values.cornerRadius20
 import tandapp.utillibrary.values.fontSize16
 import tandapp.utillibrary.values.lineHeight22
+import tandapp.utillibrary.values.spacing12
 import tandapp.utillibrary.values.spacing16
 import tandapp.utillibrary.values.spacing20
 import tandapp.utillibrary.values.spacing4
@@ -112,7 +114,7 @@ fun HomeScreen(
 //                }
 
 //                item {
-                Spacer(modifier = Modifier.height(spacing16))
+                Spacer(modifier = Modifier.height(spacing12))
 //                }
 
 //                item {
@@ -184,6 +186,7 @@ fun HomeScreen(
                             color = Color.Black,
                             fontSize = fontSize16,
                             lineHeight = lineHeight22,
+                            fontWeight = FontWeight.Medium
                         )
                         Spacer(modifier = Modifier.height(spacing20))
 

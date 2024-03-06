@@ -5,9 +5,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -32,11 +34,13 @@ import tandapp.utillibrary.values.spacing12
 import tandapp.utillibrary.values.spacing2
 import tandapp.utillibrary.values.spacing20
 import tandapp.utillibrary.values.spacing4
+import tandapp.utillibrary.values.spacing64
 import tandapp.utillibrary.values.spacing8
 
 @Composable
 fun Recommendations() {
     LazyVerticalGrid(
+        contentPadding = PaddingValues(bottom = spacing64),
         horizontalArrangement = Arrangement.spacedBy(spacing12),
         verticalArrangement = Arrangement.spacedBy(spacing20),
         columns = GridCells.Fixed(3),
@@ -63,6 +67,7 @@ private fun RecommendationItem() {
             modifier = Modifier
                 .size(22.dp)
                 .align(Alignment.TopEnd)
+                .offset(x = (-6).dp, y = 10.dp)
                 .zIndex(1f)
         )
         Column(
