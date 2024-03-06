@@ -2,7 +2,6 @@ package tandapp.navigationmodule
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,8 +10,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ContentAlpha.medium
-import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -25,7 +22,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -35,15 +31,10 @@ import tandapp.navigationmodule.destinations.MainDestinations
 import tandapp.utillibrary.click
 import tandapp.utillibrary.values.Gray
 import tandapp.utillibrary.values.Purple
-import tandapp.utillibrary.values.Silver
-import tandapp.utillibrary.values.cornerRadius16
 import tandapp.utillibrary.values.fontSize11
-import tandapp.utillibrary.values.lineHeight13
 import tandapp.utillibrary.values.spacing12
-import tandapp.utillibrary.values.spacing16
 import tandapp.utillibrary.values.spacing2
 import tandapp.utillibrary.values.spacing20
-import tandapp.utillibrary.values.spacing4
 import tandapp.utillibrary.values.spacing8
 
 @Composable
@@ -66,7 +57,7 @@ fun CustomBottomNavigation(
     val currentRoute = navBackStackEntry?.destination?.route
 
     Column {
-        Divider(color = Silver)
+//        Divider(color = Silver)
 
         Row(
             modifier = Modifier
