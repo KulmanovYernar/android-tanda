@@ -25,6 +25,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import tandapp.utillibrary.values.Base300
 import tandapp.utillibrary.values.Base700
+import tandapp.utillibrary.values.spacing16
 import tandapp.utillibrary.values.spacing6
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -35,6 +36,7 @@ fun BannerPager(
     HorizontalPager(
         state = pagerState,
         modifier = Modifier
+            .padding(horizontal = spacing16)
             .wrapContentHeight()
             .animateContentSize(animationSpec = tween(durationMillis = 500))
     ) {
