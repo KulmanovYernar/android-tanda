@@ -30,6 +30,8 @@ import tandapp.utillibrary.values.spacing8
 fun DefaultHomeToolbar(
     title: String = "",
     city: String = "",
+    icon:Int? = null,
+    titleColor:Color = Purple,
     onCityClick: () -> Unit
 ) {
     Column(
@@ -39,25 +41,27 @@ fun DefaultHomeToolbar(
             .padding(vertical = spacing8)
     ) {
         Row(modifier = Modifier.fillMaxWidth()) {
-            Icon(
-                imageVector = ImageVector.vectorResource(tandapp.icons.R.drawable.ic_tanda),
-                contentDescription = null,
-                tint = Purple,
-                modifier = Modifier.size(24.dp)
-            )
+            if(icon != null) {
+                Icon(
+                    imageVector = ImageVector.vectorResource(icon),
+                    contentDescription = null,
+                    tint = Purple,
+                    modifier = Modifier.size(24.dp)
+                )
+                Spacer(modifier = Modifier.width(spacing8))
+            }
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = spacing8),
             ) {
                 Text(
                     text = title,
                     fontSize = fontSize22,
                     fontWeight = FontWeight.Bold,
-                    color = Purple,
+                    color = titleColor,
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 Text(

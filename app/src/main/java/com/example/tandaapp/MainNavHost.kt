@@ -1,5 +1,6 @@
 package com.example.tandaapp
 
+//import com.example.loginmodule.navigation.loginGraph
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -9,11 +10,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.navigation
 import com.example.loginmodule.navigation.loginGraph
+import tandapp.backetmodule.navigation.backetGraph
 import tandapp.homemodule.navigation.homeGraph
+import tandapp.navigationmodule.BACKET_ROUTE
 import tandapp.navigationmodule.HOME_ROUTE
-//import com.example.loginmodule.navigation.loginGraph
 import tandapp.navigationmodule.LOGIN_ROUTE
-import tandapp.navigationmodule.WELCOME_ROUTE
 import tandapp.navigationmodule.destinations.MainDestinations
 
 @Composable
@@ -51,5 +52,30 @@ fun MainNavHost(
                 onLogged = onLogged
             )
         }
+        navigation(
+            startDestination = MainDestinations.BACKET.destination,
+            route = BACKET_ROUTE
+        ) {
+            backetGraph(
+                navController = navController
+            )
+        }
+//        navigation(
+//            startDestination = ProfileDestinations.PROFILE,
+//            route = PROFILE_ROUTE
+//        ) {
+//            profileGraph(
+//                navController = navController
+//            )
+//        }
+
+//        navigation(
+//            startDestination = ChatDestinations.ChatCategories.route,
+//            route = CHAT_ROUTE
+//        ) {
+//            chatGraph(
+//                navController = navController
+//            )
+//        }
     }
 }

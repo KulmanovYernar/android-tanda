@@ -40,13 +40,15 @@ android {
 
 dependencies {
     implementation(projects.utillibrary)
+    implementation(projects.navigationModule)
+    implementation(projects.icons)
 
     implementation(libs.androidx.ktx)
     implementation(libs.appcompat)
-    implementation(libs.com.google.android.material.material)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.material)
     implementation(libs.compose.ui)
     implementation(libs.koin.compose)
-    testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }

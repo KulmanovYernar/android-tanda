@@ -7,6 +7,7 @@ val Silver = Color(0xFF979696)
 val Gray = Color(0xFF718096)
 val Silver2 = Color(0xFFEEF1F2)
 val Silver3 = Color(0xFFB5B5B5)
+val Silver4 = Color(0xFF8E8E93)
 
 
 // freedomColors
