@@ -5,7 +5,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -13,8 +14,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -37,18 +36,19 @@ import tandapp.utillibrary.values.spacing4
 import tandapp.utillibrary.values.spacing64
 import tandapp.utillibrary.values.spacing8
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun Recommendations() {
-    LazyVerticalGrid(
-        contentPadding = PaddingValues(bottom = spacing64),
+    FlowRow(
+        modifier = Modifier.padding(bottom = spacing64),
         horizontalArrangement = Arrangement.spacedBy(spacing12),
         verticalArrangement = Arrangement.spacedBy(spacing20),
-        columns = GridCells.Fixed(3),
-        content = {
-            items(16) {
-                RecommendationItem()
-            }
-        })
+        maxItemsInEachRow = 3
+    ) {
+        repeat(16) {
+            RecommendationItem()
+        }
+    }
 }
 
 @Composable

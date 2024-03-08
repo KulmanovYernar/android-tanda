@@ -52,5 +52,6 @@ dependencies {
 //    testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation ("com.google.accompanist:accompanist-flowlayout:0.32.0")
     testImplementation("org.testng:testng:6.9.6")
 }
