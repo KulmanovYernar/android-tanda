@@ -20,14 +20,18 @@ dependencyResolutionManagement {
 
 rootProject.name = "TandaApp"
 include(":app")
+include(":backetModule")
 include(":domain")
 include(":homeModule")
 include(":icons")
-include(":navigationModule")
 include(":LoginModule")
+include(":navigationModule")
+include(":profileModule")
 include(":utillibrary")
+include(":utils")
 
 
+enableFeaturePreview("VERSION_CATALOGS")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
 include(":domain:auth")
+include(":domain:retrofit")

@@ -28,7 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
-import tandapp.homemodule.Recommendations
+import tandapp.utillibrary.ui_components.Recommendations
 import tandapp.icons.R
 import tandapp.navigationmodule.CustomBottomNavigation
 import tandapp.utillibrary.buttons.CustomButton

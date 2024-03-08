@@ -1,4 +1,4 @@
-package tandapp.homemodule
+package tandapp.utillibrary.ui_components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
