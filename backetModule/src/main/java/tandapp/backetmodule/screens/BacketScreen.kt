@@ -53,14 +53,15 @@ import tandapp.utillibrary.values.spacing8
 @Composable
 fun BacketScreen(
     navController: NavController,
-    onBack: () -> Unit
+    onBack: (String?) -> Unit
 ) {
     val scope = rememberCoroutineScope()
+    val route = navController.currentBackStackEntry?.destination?.route
 //    val lazyListState = rememberForeverLazyListState(key = "main",
 //        initialData = viewModel.mainVerticalScrollState.value,
 //        scrollStateCallback = viewModel.scrollStateSaveCallback)
     BackHandler {
-        onBack()
+        onBack(route)
     }
     val pagerState = rememberPagerState(initialPage = 0, pageCount = { 6 })
 
@@ -137,7 +138,7 @@ fun BacketScreen(
                                     lineHeight = lineHeight18
                                 )
                             }) {
-                            onBack()
+                            onBack(route)
                         }
                         Spacer(modifier = Modifier.height(spacing24))
                     }

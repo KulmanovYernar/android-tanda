@@ -10,7 +10,9 @@ import tandapp.navigationmodule.navigateFromTabToHomeScreen
 fun NavGraphBuilder.backetGraph(navController: NavController){
     composable(route = MainDestinations.BACKET.destination){
         BacketScreen(navController = navController,
-            onBack = navController::navigateFromTabToHomeScreen
+            onBack = { it ->
+                navController.navigateFromTabToHomeScreen(it)
+            }
             )
     }
 }

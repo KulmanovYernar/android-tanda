@@ -8,12 +8,12 @@ fun NavController.returnToHomeScreen() {
     this.popBackStack(route = MainDestinations.HOME.destination, inclusive = true)
 }
 @SuppressLint("RestrictedApi")
-fun NavController.navigateFromTabToHomeScreen() { //TODO
+fun NavController.navigateFromTabToHomeScreen(route:String?) { //TODO
     if (this.findDestination(MainDestinations.HOME.destination) == null) {
         this.navigate(
             MainDestinations.HOME.destination, builder = {
                 launchSingleTop = true
-                popUpTo(route = MainDestinations.HOME.destination, popUpToBuilder = { inclusive = true })
+                popUpTo(route = route.orEmpty(), popUpToBuilder = { inclusive = true })
             }
         )
     } else {
