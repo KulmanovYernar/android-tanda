@@ -13,9 +13,13 @@ import com.example.loginmodule.navigation.loginGraph
 import tandapp.backetmodule.navigation.backetGraph
 import tandapp.homemodule.navigation.homeGraph
 import tandapp.navigationmodule.BACKET_ROUTE
+import tandapp.navigationmodule.CATALOG_ROUTE
+import tandapp.navigationmodule.CHAT_ROUTE
 import tandapp.navigationmodule.HOME_ROUTE
 import tandapp.navigationmodule.LOGIN_ROUTE
+import tandapp.navigationmodule.PROFILE_ROUTE
 import tandapp.navigationmodule.destinations.MainDestinations
+import tandapp.profilemodule.navigation.profileGraph
 
 @Composable
 fun MainNavHost(
@@ -60,22 +64,27 @@ fun MainNavHost(
                 navController = navController
             )
         }
-//        navigation(
-//            startDestination = ProfileDestinations.PROFILE,
-//            route = PROFILE_ROUTE
-//        ) {
-//            profileGraph(
-//                navController = navController
-//            )
-//        }
+        navigation(
+            startDestination = MainDestinations.PROFILE.destination,
+            route = PROFILE_ROUTE
+        ) {
+            profileGraph(
+                navController = navController
+            )
+        }
 
-//        navigation(
-//            startDestination = ChatDestinations.ChatCategories.route,
-//            route = CHAT_ROUTE
-//        ) {
-//            chatGraph(
-//                navController = navController
-//            )
-//        }
+        navigation(
+            startDestination = MainDestinations.CATALOG.destination,
+            route = CATALOG_ROUTE
+        ) {
+            // TODO
+        }
+
+        navigation(
+            startDestination = MainDestinations.CHAT.destination,
+            route = CHAT_ROUTE
+        ) {
+            //TODO
+        }
     }
 }

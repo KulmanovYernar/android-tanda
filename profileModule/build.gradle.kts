@@ -46,6 +46,7 @@ dependencies {
     implementation(libs.com.google.android.material.material)
     implementation(libs.compose.ui)
     implementation(libs.koin.compose)
+    implementation(project(":navigationModule"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
