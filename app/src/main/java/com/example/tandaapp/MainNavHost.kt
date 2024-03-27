@@ -11,7 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.navigation
 import com.example.loginmodule.navigation.loginGraph
 import tandapp.backetmodule.navigation.backetGraph
-import tandapp.homemodule.navigation.homeGraph
+import tandapp.homemodule.navigation.mainGraph
 import tandapp.navigationmodule.BACKET_ROUTE
 import tandapp.navigationmodule.CATALOG_ROUTE
 import tandapp.navigationmodule.CHAT_ROUTE
@@ -51,7 +51,7 @@ fun MainNavHost(
             startDestination = MainDestinations.HOME.destination,
             route = HOME_ROUTE
         ) {
-            homeGraph(
+            mainGraph(
                 navController = navController,
                 onLogged = onLogged
             )

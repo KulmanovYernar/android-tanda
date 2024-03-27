@@ -39,14 +39,12 @@ import tandapp.utillibrary.ui_components.BoxImage
 import tandapp.utillibrary.ui_components.Recommendations
 import tandapp.utillibrary.values.Purple
 import tandapp.utillibrary.values.Silver2
-import tandapp.utillibrary.values.cornerRadius10
 import tandapp.utillibrary.values.cornerRadius20
 import tandapp.utillibrary.values.fontSize16
 import tandapp.utillibrary.values.lineHeight22
 import tandapp.utillibrary.values.spacing12
 import tandapp.utillibrary.values.spacing16
 import tandapp.utillibrary.values.spacing20
-import tandapp.utillibrary.values.spacing4
 import tandapp.utillibrary.values.spacing8
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -103,14 +101,14 @@ fun HomeScreen(
                             onClick = {},
                             hint = "Поиск"
                         )
-                        Spacer(Modifier.width(spacing4))
-                        BoxImage(
-                            imageRes = R.drawable.ic_filter_white,
-                            boxSize = 40.dp,
-                            maxWidth = 16.dp,
-                            maxHeight = 16.dp,
-                            cornerRadius = cornerRadius10
-                        )
+//                        Spacer(Modifier.width(spacing4))
+//                        BoxImage(
+//                            imageRes = R.drawable.ic_filter_white,
+//                            boxSize = 40.dp,
+//                            maxWidth = 16.dp,
+//                            maxHeight = 16.dp,
+//                            cornerRadius = cornerRadius10
+//                        )
                     }
                 }
 

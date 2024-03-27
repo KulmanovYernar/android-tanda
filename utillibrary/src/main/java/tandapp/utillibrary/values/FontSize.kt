@@ -2,6 +2,8 @@ package tandapp.utillibrary.values
 
 import androidx.compose.ui.unit.sp
 
+var fontSize8 = 8.sp
+    private set
 var fontSize10 = 10.sp
     private set
 var fontSize11 = 11.sp

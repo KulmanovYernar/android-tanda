@@ -33,7 +33,7 @@ fun SearchText(text: String, hint: String, onClick: () -> Unit) {
 
     Row(
         modifier = Modifier
-            .fillMaxWidth(0.9f)
+            .fillMaxWidth()
             .clip(RoundedCornerShape(cornerRadius12))
             .click { onClick() }
             .background(color = Base200)

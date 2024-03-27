@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/LoginModule" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/backetModule" />
+            <option value="$PROJECT_DIR$/catalogModule" />
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/domain/auth" />
             <option value="$PROJECT_DIR$/domain/retrofit" />

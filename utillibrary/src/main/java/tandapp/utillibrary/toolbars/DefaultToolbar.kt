@@ -103,3 +103,32 @@ fun DefaultToolbarWithEditButton(
         }
     }
 }
+
+@Composable
+fun DefaultToolbarTitle(
+    title: String = "",
+    titleColor:Color = Color.Black,
+) {
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .background(color = Color.White)
+            .padding(vertical = spacing8)
+    ) {
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Start,
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                Text(
+                    text = title,
+                    fontSize = fontSize22,
+                    fontWeight = FontWeight.Bold,
+                    color = titleColor,
+                )
+            }
+        }
+    }
+}

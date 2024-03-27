@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -27,10 +28,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import tandapp.utillibrary.values.Silver3
 import tandapp.utillibrary.values.fontSize10
+import tandapp.utillibrary.values.fontSize8
 import tandapp.utillibrary.values.lineHeight10
 import tandapp.utillibrary.values.lineHeight13
 import tandapp.utillibrary.values.spacing12
-import tandapp.utillibrary.values.spacing2
 import tandapp.utillibrary.values.spacing20
 import tandapp.utillibrary.values.spacing4
 import tandapp.utillibrary.values.spacing64
@@ -94,18 +95,18 @@ private fun RecommendationItem() {
 
             Spacer(modifier = Modifier.height(spacing8))
 
-            Row {
+            Row(modifier = Modifier.fillMaxWidth()) {
                 Text(
                     text = "44 990 ₸",
                     color = Color.Black,
                     fontSize = fontSize10,
                     lineHeight = lineHeight13
                 )
-                Spacer(modifier = Modifier.width(spacing2))
+                Spacer(modifier = Modifier.width(spacing4))
                 Text(
                     text = "49 990 ₸",
-                    color = Color.Black,
-                    fontSize = fontSize10,
+                    color = Silver3,
+                    fontSize = fontSize8,
                     lineHeight = lineHeight13,
                     style = TextStyle(textDecoration = TextDecoration.LineThrough)
                 )
