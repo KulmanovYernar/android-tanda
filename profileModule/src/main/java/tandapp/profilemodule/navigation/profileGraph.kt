@@ -8,10 +8,6 @@ import tandapp.profilemodule.screens.ProfileScreen
 
 fun NavGraphBuilder.profileGraph(navController: NavController) {
 
-    composable(route = MainDestinations.PROFILE.destination){
-        ProfileScreen(
-            navController = navController
-        )
-    }
+
 
 }

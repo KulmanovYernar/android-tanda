@@ -42,6 +42,8 @@ dependencies {
     implementation(projects.utillibrary)
     implementation(projects.navigationModule)
     implementation(projects.icons)
+    implementation(projects.backetModule)
+    implementation(projects.profileModule)
 
     implementation(libs.androidx.ktx)
     implementation(libs.appcompat)

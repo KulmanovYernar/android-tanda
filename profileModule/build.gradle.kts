@@ -49,6 +49,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.compose.ui)
     implementation(libs.koin.compose)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

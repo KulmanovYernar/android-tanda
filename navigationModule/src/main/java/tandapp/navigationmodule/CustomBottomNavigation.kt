@@ -73,7 +73,7 @@ fun CustomBottomNavigation(
                     onClick = {
                         scope.launch {
                             navController.navigate(item.destination) {
-                                onNavClick(item.destination)
+//                                onNavClick(item.destination)
                                 navController.graph.startDestinationRoute?.let { screen_route ->
                                     popUpTo(screen_route) {
                                         saveState = true
