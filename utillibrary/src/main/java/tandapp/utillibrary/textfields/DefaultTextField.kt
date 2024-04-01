@@ -27,8 +27,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import tandapp.utillibrary.values.Silver
-import tandapp.utillibrary.values.cornerRadius16
+import tandapp.utillibrary.values.Purple
+import tandapp.utillibrary.values.Silver5
 import tandapp.utillibrary.values.cornerRadius6
 import tandapp.utillibrary.values.fontSize16
 import tandapp.utillibrary.values.lineHeight22
@@ -45,8 +45,8 @@ fun DefaultTextField(
     onDoneClick: () -> Unit = { },
     onValueChange: (String) -> Unit,
     onFocusChanged: ((FocusState) -> Unit)? = null,
-    focusedBorderColor: Color = Silver,
-    unfocusedBorderColor: Color = Silver,
+    focusedBorderColor: Color = Purple,
+    unfocusedBorderColor: Color = Silver5,
     trailingIcon: @Composable (() -> Unit)? = null,
     onTrailingIconClick: () -> Unit = { onValueChange("") },
     isError: Boolean = false,

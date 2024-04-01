@@ -6,6 +6,7 @@ import domain.retrofit.di.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import tandapp.backetmodule.di.backetFeatureModule
+import tandapp.homemodule.di.homeFeatureModule
 import tandapp.profilemodule.di.profileFeatureModule
 
 internal fun configureKoin(context: Context) {
@@ -13,10 +14,11 @@ internal fun configureKoin(context: Context) {
         androidContext(context)
 
         modules(
-            loginFeatureModule,
             networkModule,
+            loginFeatureModule,
+            homeFeatureModule,
             backetFeatureModule,
-            profileFeatureModule
+            profileFeatureModule,
         )
     }
 }

@@ -46,6 +46,7 @@ dependencies {
     implementation(projects.profileModule)
     implementation(projects.catalogModule)
     implementation(projects.chatModule)
+    implementation(projects.loginModule)
 
     implementation(libs.androidx.ktx)
     implementation(libs.appcompat)

@@ -8,6 +8,8 @@ val Gray = Color(0xFF718096)
 val Silver2 = Color(0xFFEEF1F2)
 val Silver3 = Color(0xFFB5B5B5)
 val Silver4 = Color(0xFF8E8E93)
+val Silver5 = Color(0xFF99A2AD)
+val Blue1 = Color(0xFF3466E7)
 
 
 // freedomColors

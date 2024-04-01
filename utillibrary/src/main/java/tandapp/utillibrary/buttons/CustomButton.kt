@@ -77,6 +77,7 @@ fun CustomButtonText(
     text: String,
     color: Color = Color.White,
     fontSize: TextUnit = fontSize18,
+    fontWeight: FontWeight = FontWeight.SemiBold,
     lineHeight: TextUnit = lineHeight24,
     trailingIcon: (@Composable () -> Unit)? = null,
     leadingIcon: (@Composable () -> Unit)? = null,
@@ -97,7 +98,7 @@ fun CustomButtonText(
             modifier = Modifier.weight(1f, fill = false),
             text = text,
             targetTextSizeHeight = fontSize,
-            fontWeight = FontWeight.SemiBold,
+            fontWeight = fontWeight,
             lineHeight = lineHeight,
 //            style = semiBold,
             color = color

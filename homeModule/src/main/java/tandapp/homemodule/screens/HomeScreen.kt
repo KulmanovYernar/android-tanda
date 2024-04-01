@@ -30,6 +30,7 @@ import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 import tandapp.icons.R
 import tandapp.navigationmodule.CustomBottomNavigation
+import tandapp.navigationmodule.destinations.LoginDestinations
 import tandapp.utillibrary.buttons.CustomButton
 import tandapp.utillibrary.buttons.CustomButtonText
 import tandapp.utillibrary.pagers.BannerPager
@@ -50,7 +51,8 @@ import tandapp.utillibrary.values.spacing8
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
-    navController: NavController
+    navController: NavController,
+//    viewModel:HomeViewModel = getViewModel()
 ) {
     val scope = rememberCoroutineScope()
 //    val lazyListState = rememberForeverLazyListState(key = "main",
@@ -153,7 +155,7 @@ fun HomeScreen(
                                     )
                                 ),
                             enabled = true,
-                            onButtonClicked = { },
+                            onButtonClicked = { navController.navigate(LoginDestinations.SIGN_IN) },
                             content = {
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),

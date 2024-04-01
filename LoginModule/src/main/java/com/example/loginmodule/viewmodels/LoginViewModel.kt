@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 class LoginViewModel(): ViewModel() {
     val email: MutableState<String> = mutableStateOf("")
     val password: MutableState<String> = mutableStateOf("")
+    val loginWithOtp: MutableState<Boolean> = mutableStateOf(true)
 
     fun onEmailChange(email: String) {
         this.email.value = email

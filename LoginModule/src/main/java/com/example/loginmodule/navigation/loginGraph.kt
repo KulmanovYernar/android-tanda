@@ -6,8 +6,8 @@ import androidx.navigation.compose.composable
 import com.example.loginmodule.screens.AccountSubmittingScreen
 import com.example.loginmodule.screens.LoginScreen
 import com.example.loginmodule.screens.PasswordRecoveryScreen
-import com.example.loginmodule.screens.RegistrationScreen
 import com.example.loginmodule.screens.WelcomeScreen
+import com.example.loginmodule.screens.old.RegistrationScreenOld
 import tandapp.navigationmodule.WELCOME_ROUTE
 import tandapp.navigationmodule.destinations.LoginDestinations
 
@@ -25,11 +25,12 @@ fun NavGraphBuilder.loginGraph(navController: NavController, onLogged: () -> Uni
             onRegistrationClick = {
                 navController.navigate(LoginDestinations.REGISTRATION_SCREEN)
             },
+            onBack = {navController.navigateUp()}
         )
     }
 
     composable(route = LoginDestinations.REGISTRATION_SCREEN) {
-        RegistrationScreen(
+        RegistrationScreenOld(
             onBackClick = { onBack() },
             onSubmitClick = {},
         )
