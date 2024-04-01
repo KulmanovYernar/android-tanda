@@ -16,7 +16,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import tandapp.utillibrary.click
-import tandapp.utillibrary.values.Purple
 import tandapp.utillibrary.values.fontSize18
 import tandapp.utillibrary.values.spacing16
 import tandapp.utillibrary.values.spacing6
@@ -24,7 +23,7 @@ import tandapp.utillibrary.values.spacing6
 @Composable
 fun BackButton(
     onClick: () -> Unit,
-    buttonText: String,
+    buttonText: String? = "",
 ) {
 
     Box(
@@ -44,15 +43,17 @@ fun BackButton(
                 contentDescription = null,
                 tint = Color.Blue
             )
-            Spacer(modifier = Modifier.width(spacing6))
-            Text(
-                text = buttonText,
-                fontSize = fontSize18,
-                fontWeight = FontWeight.Medium,
-                color = Color.Blue,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
+            if (buttonText?.isNotBlank() == true) {
+                Spacer(modifier = Modifier.width(spacing6))
+                Text(
+                    text = buttonText,
+                    fontSize = fontSize18,
+                    fontWeight = FontWeight.Medium,
+                    color = Color.Blue,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
         }
     }
 }

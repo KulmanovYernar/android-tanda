@@ -50,14 +50,14 @@ import tandapp.utillibrary.values.spacing8
 @Composable
 fun CatalogScreen(
     navController: NavController,
-    onBack: () -> Unit = {}
+    onBack: (String?) -> Unit = {}
 ) {
+    val route = navController.currentBackStackEntry?.destination?.route
     BackHandler {
-        onBack()
+        onBack(route)
     }
 
     val scope = rememberCoroutineScope()
-    val route = navController.currentBackStackEntry?.destination?.route
 
     Scaffold(
         backgroundColor = Color.White,

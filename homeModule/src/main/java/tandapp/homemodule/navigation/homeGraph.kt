@@ -5,6 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import tandapp.backetmodule.screens.BacketScreen
 import tandapp.catalogmodule.screens.CatalogScreen
+import tandapp.chatmodule.screens.ChatScreen
 import tandapp.homemodule.screens.HomeScreen
 import tandapp.navigationmodule.destinations.MainDestinations
 import tandapp.navigationmodule.navigateFromTabToHomeScreen
@@ -21,14 +22,19 @@ fun NavGraphBuilder.mainGraph(navController: NavController, onLogged: () -> Unit
     composable(route = MainDestinations.CATALOG.destination) {
         CatalogScreen(
             navController = navController,
-            onBack = { navController.navigateUp() }
+            onBack = {
+                navController.navigateFromTabToHomeScreen(it)
+            }
         )
     }
 
     composable(route = MainDestinations.CHAT.destination) {
-//        ProfileScreen(
-//            navController = navController
-//        )
+        ChatScreen(
+            navController = navController,
+            onBack = {
+                navController.navigateFromTabToHomeScreen(it)
+            }
+        )
     }
 
     composable(route = MainDestinations.BACKET.destination) {
@@ -41,7 +47,10 @@ fun NavGraphBuilder.mainGraph(navController: NavController, onLogged: () -> Unit
 
     composable(route = MainDestinations.PROFILE.destination) {
         ProfileScreen(
-            navController = navController
+            navController = navController,
+            onBack = {
+                navController.navigateFromTabToHomeScreen(it)
+            }
         )
     }
 

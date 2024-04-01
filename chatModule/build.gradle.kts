@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "tandapp.homemodule"
+    namespace = "tandapp.chatmodule"
     compileSdk = 34
 
     defaultConfig {
@@ -42,10 +42,7 @@ dependencies {
     implementation(projects.utillibrary)
     implementation(projects.navigationModule)
     implementation(projects.icons)
-    implementation(projects.backetModule)
-    implementation(projects.profileModule)
-    implementation(projects.catalogModule)
-    implementation(projects.chatModule)
+
 
     implementation(libs.androidx.ktx)
     implementation(libs.appcompat)
@@ -53,9 +50,6 @@ dependencies {
     implementation(libs.material)
     implementation(libs.compose.ui)
     implementation(libs.koin.compose)
-//    testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation ("com.google.accompanist:accompanist-flowlayout:0.32.0")
-    testImplementation("org.testng:testng:6.9.6")
 }
