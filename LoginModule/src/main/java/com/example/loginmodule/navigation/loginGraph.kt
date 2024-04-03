@@ -4,6 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.example.loginmodule.screens.AccountSubmittingScreen
+import com.example.loginmodule.screens.ConfirmOtpScreen
 import com.example.loginmodule.screens.LoginScreen
 import com.example.loginmodule.screens.PasswordRecoveryScreen
 import com.example.loginmodule.screens.WelcomeScreen
@@ -20,12 +21,21 @@ fun NavGraphBuilder.loginGraph(navController: NavController, onLogged: () -> Uni
     }
     composable(route = LoginDestinations.SIGN_IN) {
         LoginScreen(
-            onForgotPasswordClick = {navController.navigate(LoginDestinations.FORGOT_PASSWORD)},
-            onLoginClick = {},
-            onRegistrationClick = {
-                navController.navigate(LoginDestinations.REGISTRATION_SCREEN)
+            onForgotPasswordClick = { navController.navigate(LoginDestinations.FORGOT_PASSWORD) },
+            onLoginClick = { navController.navigate(LoginDestinations.CONFIRM_OTP_CODE) },
+            onBack = { navController.navigateUp() }
+        )
+    }
+
+    composable(route = LoginDestinations.CONFIRM_OTP_CODE) {
+        ConfirmOtpScreen(
+            onBackClick = {
+                navController.navigateUp()
             },
-            onBack = {navController.navigateUp()}
+            onSuccess = {
+
+            },
+            navController = navController
         )
     }
 
@@ -35,6 +45,7 @@ fun NavGraphBuilder.loginGraph(navController: NavController, onLogged: () -> Uni
             onSubmitClick = {},
         )
     }
+
     composable(route = LoginDestinations.FORGOT_PASSWORD) {
         PasswordRecoveryScreen(
             onBackClick = { onBack() },

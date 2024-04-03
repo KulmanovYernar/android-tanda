@@ -13,7 +13,7 @@ val Blue1 = Color(0xFF3466E7)
 
 
 // freedomColors
-
+val Green500 = Color(0xFF4EBC73)
 var Base50 = Color(0xFFFFFFFF)
     private set
 var Base100 = Color(0xFFF7F7F7)

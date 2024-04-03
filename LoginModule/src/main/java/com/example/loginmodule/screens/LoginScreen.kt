@@ -63,7 +63,6 @@ import tandapp.utillibrary.values.spacing8
 fun LoginScreen(
     onForgotPasswordClick: () -> Unit,
     onLoginClick: () -> Unit,
-    onRegistrationClick: () -> Unit,
     onBack: () -> Unit,
     viewModel: LoginViewModel = getViewModel()
 ) {
@@ -203,6 +202,9 @@ fun LoginScreen(
                             color = Color.Blue,
                             fontSize = fontSize13,
                             lineHeight = lineHeight18,
+                            modifier = Modifier.click {
+                                onForgotPasswordClick()
+                            }
                         )
                     }
                 }
@@ -213,7 +215,7 @@ fun LoginScreen(
                     modifier = Modifier
                         .fillMaxWidth(),
                     enabled = true,
-                    onButtonClicked = {},
+                    onButtonClicked = onLoginClick,
                     content = {
                         Row(
                             modifier = Modifier.fillMaxWidth(),

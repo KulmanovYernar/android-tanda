@@ -5,4 +5,5 @@ object LoginDestinations {
     const val REGISTRATION_SCREEN = "registrationScreen"
     const val FORGOT_PASSWORD = "forgotPasswordScreen"
     const val ACCOUNT_SUBMITTING = "accountSubmittingScreen"
+    const val CONFIRM_OTP_CODE = "otpScreen"
 }

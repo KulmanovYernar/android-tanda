@@ -1,5 +1,6 @@
 package com.example.loginmodule.di
 
+import com.example.loginmodule.viewmodels.ConfirmCodeViewModel
 import com.example.loginmodule.viewmodels.LoginViewModel
 import com.example.loginmodule.viewmodels.PasswordRecoveryViewModel
 import com.example.loginmodule.viewmodels.RegistrationViewModel
@@ -16,5 +17,8 @@ val loginFeatureModule = module {
     }
     viewModel {
         PasswordRecoveryViewModel()
+    }
+    viewModel {
+        ConfirmCodeViewModel()
     }
 }

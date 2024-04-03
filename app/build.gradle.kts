@@ -69,6 +69,7 @@ android {
         implementation(libs.compose.ui)
         implementation(libs.material)
         testImplementation("org.testng:testng:6.9.6")
+        implementation ("androidx.startup:startup-runtime:1.0.0")
 
 //    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
 //    implementation("androidx.activity:activity-compose:1.5.1")
