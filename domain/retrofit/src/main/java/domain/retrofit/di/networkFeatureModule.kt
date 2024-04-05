@@ -9,6 +9,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import tandapp.utils.BuildConfig
 
 internal val gsonInstanceModule = module {
     single { GsonBuilder().setLenient().create() }
@@ -37,7 +38,7 @@ val networkModule = module {
         val gsonConverterFactory = GsonConverterFactory.create(get())
 
         Retrofit.Builder()
-            .baseUrl("BuildConfig.SERVER_URL")
+            .baseUrl(BuildConfig.SERVER_URL)
             .addConverterFactory(gsonConverterFactory)
             .client(get())
             .build()

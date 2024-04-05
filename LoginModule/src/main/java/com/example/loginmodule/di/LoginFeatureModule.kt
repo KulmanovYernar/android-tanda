@@ -10,7 +10,7 @@ import org.koin.dsl.module
 val loginFeatureModule = module {
 
     viewModel {
-        LoginViewModel()
+        LoginViewModel(get())
     }
     viewModel {
         RegistrationViewModel()

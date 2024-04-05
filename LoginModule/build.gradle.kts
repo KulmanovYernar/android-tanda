@@ -45,6 +45,8 @@ dependencies {
     implementation(projects.utillibrary)
     implementation(projects.icons)
     implementation(projects.utils)
+    implementation(projects.domain.auth)
+    implementation(projects.domain.event)
 
     implementation(libs.androidx.ktx)
     implementation(libs.appcompat)

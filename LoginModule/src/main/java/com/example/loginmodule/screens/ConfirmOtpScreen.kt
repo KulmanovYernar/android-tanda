@@ -72,7 +72,6 @@ fun ConfirmOtpScreen(
 //            title = errorTitle.value,
 //            description = errorDescription.value,
 //            descriptionMaxLines = 8,
-//            positiveButtonText = stringResource(id = R.string.ok),
 //            positiveButtonColor = Green500,
 //            positiveButtonClick = {
 //                error.value = false

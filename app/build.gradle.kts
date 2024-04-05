@@ -51,6 +51,7 @@ android {
 
     dependencies {
         implementation(projects.icons)
+        implementation(projects.utils)
         implementation(projects.navigationModule)
         implementation(projects.loginModule)
         implementation(projects.utillibrary)
@@ -58,6 +59,7 @@ android {
         implementation(projects.backetModule)
         implementation(projects.profileModule)
         implementation(projects.domain.retrofit)
+        implementation(projects.domain.auth)
 //    implementation(projects.domain)
 //    implementation(projects.tandaApp)
 //    implementation(projects.app)

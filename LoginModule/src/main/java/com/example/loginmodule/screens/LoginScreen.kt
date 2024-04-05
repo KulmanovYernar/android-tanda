@@ -215,7 +215,10 @@ fun LoginScreen(
                     modifier = Modifier
                         .fillMaxWidth(),
                     enabled = true,
-                    onButtonClicked = onLoginClick,
+                    onButtonClicked = {
+                        viewModel.signUp()
+                        onLoginClick()
+                    },
                     content = {
                         Row(
                             modifier = Modifier.fillMaxWidth(),

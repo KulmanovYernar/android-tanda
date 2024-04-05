@@ -6,4 +6,5 @@
     <string name="chat">Chat</string>
     <string name="backet">Backet</string>
     <string name="profile">Profile</string>
+    <string name="app_name">TandaApp</string>
 </resources>

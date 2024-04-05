@@ -74,7 +74,6 @@ fun ConfirmCodeScreen(
 
     val invalidCode = "asd"
 
-    val phoneNumber = bundle?.getString("phoneNumber").orEmpty()
 
 //    val phone = hidePhoneNumber(phoneNumber)
     val autoOtp = remember {
@@ -139,7 +138,6 @@ fun ConfirmCodeScreen(
 //    }
 
 //    if (confirmCodeViewModel.errorCount.value > 0) {
-//        confirmCodeViewModel.errorMessage.value = stringResource(R.string.invalid_code_left_attempt_count, confirmCodeViewModel.leftAttemptCount.value)
 //        resendTotalTime.value = defaultErrorResendTime
 //    }
 //    val block = confirmCodeViewModel.errorCount.value >= 3
@@ -255,8 +253,6 @@ fun ConfirmCodeScreen(
 //    if (confirmCodeViewModel.status.value == UiStatus.LOADING) Loading()
 //    if (errorAlertDialog.value) {
 //        CustomAlertDialog(
-//            title = stringResource(id = R.string.login_too_many_auth_attempts),
-//            description = stringResource(id = R.string.login_too_many_auth_attempts_description),
 //            positiveButtonClick = {
 //                errorAlertDialog.value = false
 //                confirmCodeViewModel.error.value = true
