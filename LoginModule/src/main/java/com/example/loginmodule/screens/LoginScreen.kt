@@ -1,6 +1,7 @@
 package com.example.loginmodule.screens
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -159,56 +160,58 @@ fun LoginScreen(
 
                 Spacer(Modifier.height(spacing8))
 
-                if (!viewModel.loginWithOtp.value) {
-                    Text(
-                        text = "Пароль",
-                        fontSize = fontSize14,
-                        lineHeight = lineHeight24,
-                        color = Color.Black
-                    )
-
-                    Spacer(Modifier.height(spacing8))
-
-                    DefaultTextField(
-                        value = viewModel.password.value,
-                        hint = "Введите пароль",
-                        onValueChange = viewModel::onPasswordChange,
-                        focusRequester = passwordFocusRequester,
-                        singleLine = true,
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            keyboardType = KeyboardType.Password,
-                            imeAction = ImeAction.Done
-                        ),
-                        visualTransformation = if (showPassword.value) VisualTransformation.None else PasswordVisualTransformation(),
-                        trailingIcon = {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_password_hide),
-                                contentDescription = null,
-                                tint = Gray,
-                                modifier = Modifier
-                                    .size(24.dp)
-                                    .click {
-                                        showPassword.value = !showPassword.value
-                                    }
-                            )
-                        },
-                    )
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.End
-                    ) {
+                AnimatedVisibility(visible = !viewModel.loginWithOtp.value) {
+                    Column {
                         Text(
-                            text = "Забыли пароль?",
-                            color = Color.Blue,
-                            fontSize = fontSize13,
-                            lineHeight = lineHeight18,
-                            modifier = Modifier.click {
-                                onForgotPasswordClick()
-                            }
+                            text = "Пароль",
+                            fontSize = fontSize14,
+                            lineHeight = lineHeight24,
+                            color = Color.Black
                         )
+
+                        Spacer(Modifier.height(spacing8))
+
+                        DefaultTextField(
+                            value = viewModel.password.value,
+                            hint = "Введите пароль",
+                            onValueChange = viewModel::onPasswordChange,
+                            focusRequester = passwordFocusRequester,
+                            singleLine = true,
+                            keyboardOptions = KeyboardOptions.Default.copy(
+                                keyboardType = KeyboardType.Password,
+                                imeAction = ImeAction.Done
+                            ),
+                            visualTransformation = if (showPassword.value) VisualTransformation.None else PasswordVisualTransformation(),
+                            trailingIcon = {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_password_hide),
+                                    contentDescription = null,
+                                    tint = Gray,
+                                    modifier = Modifier
+                                        .size(24.dp)
+                                        .click {
+                                            showPassword.value = !showPassword.value
+                                        }
+                                )
+                            },
+                        )
+                        Spacer(modifier = Modifier.height(spacing8))
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.End
+                        ) {
+                            Text(
+                                text = "Забыли пароль?",
+                                color = Color.Blue,
+                                fontSize = fontSize13,
+                                lineHeight = lineHeight18,
+                                modifier = Modifier.click {
+                                    onForgotPasswordClick()
+                                }
+                            )
+                        }
                     }
                 }
-
                 Spacer(Modifier.height(spacing16))
 
                 CustomButton(
