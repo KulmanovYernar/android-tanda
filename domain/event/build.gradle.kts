@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.kotlinAndroid)
+    id("com.android.library")
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -38,6 +38,7 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.com.google.android.material.material)
     testImplementation(libs.junit)
+    testImplementation("org.testng:testng:6.9.6")
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }
