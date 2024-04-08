@@ -11,6 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.navigation
 import com.example.loginmodule.navigation.loginGraph
 import tandapp.backetmodule.navigation.backetGraph
+import tandapp.catalogmodule.navigation.catalogGraph
 import tandapp.homemodule.navigation.mainGraph
 import tandapp.navigationmodule.BACKET_ROUTE
 import tandapp.navigationmodule.CATALOG_ROUTE
@@ -18,6 +19,7 @@ import tandapp.navigationmodule.CHAT_ROUTE
 import tandapp.navigationmodule.HOME_ROUTE
 import tandapp.navigationmodule.LOGIN_ROUTE
 import tandapp.navigationmodule.PROFILE_ROUTE
+import tandapp.navigationmodule.destinations.CatalogDestinations.CATALOG_PRODUCT_CARD_ITEM
 import tandapp.navigationmodule.destinations.MainDestinations
 import tandapp.profilemodule.navigation.profileGraph
 
@@ -74,10 +76,12 @@ fun MainNavHost(
         }
 
         navigation(
-            startDestination = MainDestinations.CATALOG.destination,
+            startDestination = CATALOG_PRODUCT_CARD_ITEM,
             route = CATALOG_ROUTE
         ) {
-            // TODO
+            catalogGraph(
+                navController = navController
+            )
         }
 
         navigation(

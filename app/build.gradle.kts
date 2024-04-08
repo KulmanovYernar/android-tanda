@@ -52,6 +52,7 @@ android {
     dependencies {
         implementation(projects.icons)
         implementation(projects.utils)
+        implementation(projects.catalogModule)
         implementation(projects.navigationModule)
         implementation(projects.loginModule)
         implementation(projects.utillibrary)

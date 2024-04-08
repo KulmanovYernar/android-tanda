@@ -2,6 +2,7 @@ package tandapp.utillibrary.ui_components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -39,7 +40,7 @@ import tandapp.utillibrary.values.spacing8
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun Recommendations() {
+fun Recommendations(onClick: () -> Unit = {}) {
     FlowRow(
         modifier = Modifier.padding(bottom = spacing64),
         horizontalArrangement = Arrangement.spacedBy(spacing12),
@@ -47,19 +48,24 @@ fun Recommendations() {
         maxItemsInEachRow = 3
     ) {
         repeat(16) {
-            RecommendationItem()
+            RecommendationItem(
+                onClick = onClick
+            )
         }
     }
 }
 
 @Composable
-private fun RecommendationItem() {
+private fun RecommendationItem(onClick:() -> Unit) {
     Box(
         modifier = Modifier
             .background(color = Color.White)
             .height(180.dp)
             .width(107.dp)
             .padding(horizontal = spacing4)
+            .clickable{
+                onClick()
+            }
     ) {
         Icon(
             painter = painterResource(id = tandapp.icons.R.drawable.ic_like),

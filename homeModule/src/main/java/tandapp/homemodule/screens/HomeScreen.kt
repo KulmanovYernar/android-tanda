@@ -30,6 +30,7 @@ import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 import tandapp.icons.R
 import tandapp.navigationmodule.CustomBottomNavigation
+import tandapp.navigationmodule.destinations.CatalogDestinations
 import tandapp.navigationmodule.destinations.LoginDestinations
 import tandapp.utillibrary.buttons.CustomButton
 import tandapp.utillibrary.buttons.CustomButtonText
@@ -192,7 +193,9 @@ fun HomeScreen(
                         Spacer(modifier = Modifier.height(spacing20))
 
 
-                        Recommendations()
+                        Recommendations(onClick = {
+                            navController.navigate(CatalogDestinations.CATALOG_PRODUCT_CARD_ITEM)
+                        })
                     }
                 }
             }

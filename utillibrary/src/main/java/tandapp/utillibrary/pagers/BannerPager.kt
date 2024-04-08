@@ -1,5 +1,6 @@
 package tandapp.utillibrary.pagers
 
+import androidx.annotation.DrawableRes
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
@@ -22,34 +24,41 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import tandapp.utillibrary.values.Base300
-import tandapp.utillibrary.values.Base700
+import tandapp.utillibrary.values.Purple
 import tandapp.utillibrary.values.spacing16
 import tandapp.utillibrary.values.spacing6
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun BannerPager(
-    pagerState: PagerState
+    pagerState: PagerState,
+    modifier: Modifier = Modifier,
+    iconWidth:Dp = 343.dp,
+    iconHeight:Dp = 134.dp,
+    padding:Dp = spacing16,
+    @DrawableRes image:Int = tandapp.icons.R.drawable.img_banner_friday
 ) {
     HorizontalPager(
         state = pagerState,
         modifier = Modifier
-            .padding(horizontal = spacing16)
+            .padding(horizontal = padding)
             .wrapContentHeight()
             .animateContentSize(animationSpec = tween(durationMillis = 500))
     ) {
         Image(
-            painter = painterResource(id = tandapp.icons.R.drawable.img_banner_friday),
-            contentDescription = null
+            painter = painterResource(id = image),
+            contentDescription = null,
+            modifier = Modifier.width(iconWidth).height(iconHeight)
         )
     }
     Spacer(modifier = Modifier.height(spacing6))
 
     HorizontalPagerIndicator(
         pagerState = pagerState,
-        activeColor = Base700,
+        activeColor = Purple,
         inactiveColor = Base300,
         pageCount = 6,
     )
@@ -60,7 +69,7 @@ fun BannerPager(
 fun HorizontalPagerIndicator(
     pagerState: PagerState,
     modifier: Modifier = Modifier,
-    activeColor: Color = Base700,
+    activeColor: Color = Purple,
     inactiveColor: Color = Base300,
     pageCount: Int,
 //    pageIndexMapping: (Int) -> Int = {
