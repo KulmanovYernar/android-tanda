@@ -35,6 +35,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.auth.model.AuthModel
 import com.example.loginmodule.viewmodels.LoginViewModel
 import org.koin.androidx.compose.getViewModel
 import tandapp.icons.R
@@ -219,7 +220,13 @@ fun LoginScreen(
                         .fillMaxWidth(),
                     enabled = true,
                     onButtonClicked = {
-                        viewModel.signUp()
+                        viewModel.signUp(
+                            AuthModel(
+                                viewModel.email.value,
+                                viewModel.password.value,
+                            )
+                        )
+
                         onLoginClick()
                     },
                     content = {

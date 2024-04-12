@@ -21,7 +21,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "SERVER_URL", "\"http://91.147.105.197:9000/\"")
+            buildConfigField("String", "SERVER_URL", "\"http://91.147.105.187:9000/\"")
         }
         debug {
             isMinifyEnabled = false
@@ -29,7 +29,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "SERVER_URL", "\"http://91.147.105.197:9000/\"")
+            buildConfigField("String", "SERVER_URL", "\"http://91.147.105.187:9000/\"")
         }
     }
     compileOptions {

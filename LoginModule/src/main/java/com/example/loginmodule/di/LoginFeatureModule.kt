@@ -19,6 +19,6 @@ val loginFeatureModule = module {
         PasswordRecoveryViewModel()
     }
     viewModel {
-        ConfirmCodeViewModel()
+        ConfirmCodeViewModel(get())
     }
 }

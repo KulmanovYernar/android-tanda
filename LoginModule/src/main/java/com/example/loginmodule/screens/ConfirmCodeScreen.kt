@@ -66,13 +66,13 @@ fun ConfirmCodeScreen(
     processInstanceId: String = "",
     bundle: Bundle? = null,
     backgroundColor: Color = Base50,
-    success: (phone: String) -> Unit,
+    success: () -> Unit,
     canChangeNumber: Boolean = false,
     onChangeNumberClick: () -> Unit = {},
     confirmCodeViewModel: ConfirmCodeViewModel = getViewModel()
 ) {
 
-    val invalidCode = "asd"
+
 
 
 //    val phone = hidePhoneNumber(phoneNumber)
@@ -89,6 +89,8 @@ fun ConfirmCodeScreen(
     val errorAlertDialog = remember { mutableStateOf(false) }
 
     val scope = rememberCoroutineScope()
+    val codeConfirmed by confirmCodeViewModel.codeConfirmed.collectAsState()
+
     val isTimerRunning by confirmCodeViewModel.isTimerRunning.collectAsState()
     val currentTimerValue by confirmCodeViewModel.timerCurrentValue.collectAsState()
 
@@ -119,23 +121,17 @@ fun ConfirmCodeScreen(
 //    CommandEffect(confirmCodeViewModel.otpCodeFlow) { otpCode ->
 //        if (otpCode.isNotBlank()) {
 //            autoOtp.value = otpCode
-//            confirmCodeViewModel.checkConfirmCode(
-//                code = otpCode,
-//                otpType = otpType,
-//                processInstanceId = processInstanceId,
-//                onError = {
-//                    confirmCodeViewModel.error.value = true
-//                    confirmCodeViewModel.showErrorText.value = true
-//                }
+//            confirmCodeViewModel.signUpSubmit(
+//                otp = otpCode
 //            )
 //        }
 //    }
 
-//    if (codeConfirmed.value == true) {
-//        LaunchedEffect(key1 = scope) {
-//            success(phoneNumber)
-//        }
-//    }
+    if (codeConfirmed) {
+        LaunchedEffect(key1 = scope) {
+            success()
+        }
+    }
 
 //    if (confirmCodeViewModel.errorCount.value > 0) {
 //        resendTotalTime.value = defaultErrorResendTime
@@ -308,15 +304,6 @@ private fun CodeEntry(text: String, error: Boolean, hasFocus: Boolean) {
     } else {
         color.value = Color.Transparent
     }
-//    Box(
-//        modifier = Modifier
-//            ,
-//        contentAlignment = Alignment.Center,
-//    ) {
-//        val color = animateColorAsState(
-//            targetValue = if (text.isEmpty()) Color.Gray.copy(alpha = .8f)
-//            else Color.Blue.copy(.8f)
-//        )
     Box(
         modifier = Modifier
             .clip(RoundedCornerShape(cornerRadius16))
@@ -337,15 +324,6 @@ private fun CodeEntry(text: String, error: Boolean, hasFocus: Boolean) {
             color = Base900
         )
     }
-//        Box(
-//            Modifier
-//                .align(Alignment.BottomCenter)
-//                .padding(start = 6.dp, end = 6.dp, bottom = 8.dp)
-//                .height(2.dp)
-//                .fillMaxWidth()
-//                .background(color.value)
-//        )
-//    }
 }
 
 @Composable

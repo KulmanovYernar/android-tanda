@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.auth.AuthRepository
+import com.example.auth.model.AuthModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
@@ -25,12 +26,14 @@ class LoginViewModel(
         this.password.value = password
     }
 
-    fun signUp() {
+    fun signUp(dto:AuthModel) {
         viewModelScope.launch {
-            authRepository.signUp(email.value, password = password.value).flowOn(Dispatchers.IO)
+            authRepository.signUp(
+               dto
+            ).flowOn(Dispatchers.IO)
                 .collect{
                     it.onSuccess {
-                        Log.d("signUp", "signUp: ${it?.token}")
+                        Log.d("signUp", "signUp: ")
                     }
                 }
         }
