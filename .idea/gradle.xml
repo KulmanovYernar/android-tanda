@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/domain/auth" />
             <option value="$PROJECT_DIR$/domain/event" />
+            <option value="$PROJECT_DIR$/domain/profile" />
             <option value="$PROJECT_DIR$/domain/retrofit" />
             <option value="$PROJECT_DIR$/homeModule" />
             <option value="$PROJECT_DIR$/icons" />

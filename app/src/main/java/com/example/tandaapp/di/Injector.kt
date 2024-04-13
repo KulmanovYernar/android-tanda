@@ -3,6 +3,7 @@ package com.example.tandaapp.di
 import android.content.Context
 import com.example.auth.di.authRepositoryModule
 import com.example.loginmodule.di.loginFeatureModule
+import domain.profile.di.profileRepositoryModule
 import domain.retrofit.di.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -22,7 +23,8 @@ internal fun configureKoin(context: Context) {
             backetFeatureModule,
             profileFeatureModule,
             authRepositoryModule,
-            catalogModule
+            catalogModule,
+            profileRepositoryModule
         )
     }
 }

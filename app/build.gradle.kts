@@ -61,6 +61,7 @@ android {
         implementation(projects.profileModule)
         implementation(projects.domain.retrofit)
         implementation(projects.domain.auth)
+        implementation(projects.domain.profile)
 //    implementation(projects.domain)
 //    implementation(projects.tandaApp)
 //    implementation(projects.app)
