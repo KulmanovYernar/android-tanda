@@ -201,17 +201,11 @@ fun ConfirmCodeScreen(
 //                    confirmCodeViewModel.error.value = false
 //                    confirmCodeViewModel.showErrorText.value = false
 //                }
-//                if (it.length == otpType.size) {
-//                    confirmCodeViewModel.checkConfirmCode(
-//                        code = it,
-//                        otpType = otpType,
-//                        processInstanceId = processInstanceId,
-//                        onError = {
-//                            confirmCodeViewModel.error.value = true
-//                            confirmCodeViewModel.showErrorText.value = true
-//                        }
-//                    )
-//                }
+                if (it.length == 4) {
+                    confirmCodeViewModel.signUpSubmit(
+                        otp = it,
+                    )
+                }
             },
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
             decorationBox = {

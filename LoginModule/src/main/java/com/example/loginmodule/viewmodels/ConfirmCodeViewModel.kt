@@ -34,6 +34,7 @@ class ConfirmCodeViewModel(
                     it.onSuccess {
                         Log.d("signUp", "signUp: ")
                         _codeConfirmed.value = true
+                        stopTimer()
                     }
                 }
         }

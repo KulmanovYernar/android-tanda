@@ -25,6 +25,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import tandapp.icons.R
+import tandapp.navigationmodule.destinations.MainDestinations
 import tandapp.utillibrary.click
 import tandapp.utillibrary.values.Base100
 import tandapp.utillibrary.values.Silver5
@@ -137,7 +138,7 @@ fun ConfirmOtpScreen(
                 processInstanceId = processInstanceId,
                 description = "Введите 4-значный код из уведомления",
                 success = {
-                    loading.value = true
+                    navController.navigate(MainDestinations.HOME.destination)
                 },
                 backgroundColor = Base100
             )

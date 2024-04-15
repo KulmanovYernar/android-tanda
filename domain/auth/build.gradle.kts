@@ -47,6 +47,7 @@ dependencies {
 
     implementation(projects.domain.event)
     implementation(projects.domain.retrofit)
+    implementation(projects.utils)
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

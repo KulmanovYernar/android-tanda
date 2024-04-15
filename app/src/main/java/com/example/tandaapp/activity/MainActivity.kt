@@ -1,5 +1,6 @@
 package com.example.tandaapp.activity
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -18,7 +19,7 @@ import com.example.tandaapp.ui.theme.TandaAppTheme
 import tandapp.navigationmodule.HOME_ROUTE
 import tandapp.navigationmodule.LOGIN_ROUTE
 import tandapp.navigationmodule.destinations.MainDestinations
-
+import tandapp.utils.SharedPreferencesHelper
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
