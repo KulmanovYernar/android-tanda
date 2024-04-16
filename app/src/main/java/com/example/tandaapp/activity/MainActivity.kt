@@ -1,6 +1,5 @@
 package com.example.tandaapp.activity
 
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -8,21 +7,21 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
-import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.rememberNavController
 import com.example.tandaapp.MainNavHost
 import com.example.tandaapp.ui.theme.TandaAppTheme
 import tandapp.navigationmodule.HOME_ROUTE
-import tandapp.navigationmodule.LOGIN_ROUTE
-import tandapp.navigationmodule.destinations.MainDestinations
 import tandapp.utils.SharedPreferencesHelper
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val registered = SharedPreferencesHelper.getRegistered()
 
         setContent {
             TandaAppTheme {
@@ -32,7 +31,7 @@ class MainActivity : ComponentActivity() {
                         .background(Color.Gray), color = Color.Gray
                 ) {
                     MyTandaApp(
-//                        registered = registered,
+                        registered = registered,
 //                        loginState = loginState.value,
 //                        intent = intent,
 //                        onDeepLinkNavigationComplete = { intent.data = null },
@@ -49,7 +48,9 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun MyTandaApp() {
+private fun MyTandaApp(
+    registered: Boolean
+) {
     val navController = rememberNavController()
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -63,6 +64,7 @@ private fun MyTandaApp() {
                 modifier = Modifier
                     .fillMaxSize(),
                 navController = navController,
+                registered = registered,
                 startRoute = HOME_ROUTE,
 //                startDestination = getStartDestination(registered),
                 onLogged = {}

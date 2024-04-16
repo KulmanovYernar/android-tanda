@@ -28,6 +28,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.getViewModel
+import tandapp.homemodule.viewmodels.HomeViewModel
 import tandapp.icons.R
 import tandapp.navigationmodule.CustomBottomNavigation
 import tandapp.navigationmodule.destinations.CatalogDestinations
@@ -53,7 +55,8 @@ import tandapp.utillibrary.values.spacing8
 @Composable
 fun HomeScreen(
     navController: NavController,
-//    viewModel:HomeViewModel = getViewModel()
+    registered: Boolean,
+    viewModel: HomeViewModel = getViewModel()
 ) {
     val scope = rememberCoroutineScope()
 //    val lazyListState = rememberForeverLazyListState(key = "main",
@@ -78,7 +81,8 @@ fun HomeScreen(
                         .fillMaxWidth(),
                     contentAlignment = Alignment.Center
                 ) {
-                    DefaultHomeToolbar(title = "tandapp",
+                    DefaultHomeToolbar(
+                        title = "tandapp",
                         onCityClick = {},
                         icon = R.drawable.ic_tanda
                     )

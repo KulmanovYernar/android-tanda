@@ -11,11 +11,16 @@ import tandapp.navigationmodule.destinations.MainDestinations
 import tandapp.navigationmodule.navigateFromTabToHomeScreen
 import tandapp.profilemodule.screens.ProfileScreen
 
-fun NavGraphBuilder.mainGraph(navController: NavController, onLogged: () -> Unit) {
+fun NavGraphBuilder.mainGraph(
+    navController: NavController,
+    registered: Boolean,
+    onLogged: () -> Unit
+) {
 
     composable(route = MainDestinations.HOME.destination) {
         HomeScreen(
-            navController = navController
+            navController = navController,
+            registered = registered
         )
     }
 

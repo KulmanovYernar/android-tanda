@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
+import tandapp.utils.SharedPreferencesHelper
 import tandapp.utils.countDownTimer.CountDownTimerImpl
 
 class ConfirmCodeViewModel(
@@ -34,6 +35,7 @@ class ConfirmCodeViewModel(
                     it.onSuccess {
                         Log.d("signUp", "signUp: ")
                         _codeConfirmed.value = true
+                        SharedPreferencesHelper.saveRegistered(true)
                         stopTimer()
                     }
                 }

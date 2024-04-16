@@ -1,6 +1,5 @@
 package com.example.tandaapp
 
-//import com.example.loginmodule.navigation.loginGraph
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -27,6 +26,7 @@ import tandapp.profilemodule.navigation.profileGraph
 fun MainNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController,
+    registered: Boolean,
     startDestination: String = HOME_ROUTE,
     startRoute: String = HOME_ROUTE,
     onLogged: () -> Unit,
@@ -55,7 +55,8 @@ fun MainNavHost(
         ) {
             mainGraph(
                 navController = navController,
-                onLogged = onLogged
+                onLogged = onLogged,
+                registered = registered
             )
         }
         navigation(
