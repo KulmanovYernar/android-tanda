@@ -42,7 +42,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    testImplementation("junit:junit:4.14-SNAPSHOT")
 
     //retrofit
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")

@@ -1,6 +1,6 @@
 package tandapp.profilemodule.screens
 
-import androidx.activity.compose.BackHandler
+import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -22,6 +22,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,11 +31,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 import tandapp.navigationmodule.CustomBottomNavigation
+import tandapp.navigationmodule.destinations.LoginDestinations
+import tandapp.utillibrary.buttons.CustomButton
+import tandapp.utillibrary.buttons.CustomButtonText
 import tandapp.utillibrary.click
 import tandapp.utillibrary.toolbars.DefaultToolbarWithEditButton
 import tandapp.utillibrary.ui_components.BoxImage
@@ -50,19 +58,25 @@ import tandapp.utillibrary.values.spacing16
 import tandapp.utillibrary.values.spacing2
 import tandapp.utillibrary.values.spacing20
 import tandapp.utillibrary.values.spacing24
+import tandapp.utillibrary.values.spacing28
 import tandapp.utillibrary.values.spacing32
 import tandapp.utillibrary.values.spacing4
+import tandapp.utillibrary.values.spacing52
 import tandapp.utillibrary.values.spacing8
+import tandapp.utils.SharedPreferencesHelper
 
 @Composable
 fun ProfileScreen(
     navController: NavController,
     onBack: (String?) -> Unit = {}
 ) {
+    val registered by SharedPreferencesHelper.onLogged.collectAsStateWithLifecycle()
+
+    Log.d("TAG", "ProfileScreen: $registered")
     val route = navController.currentBackStackEntry?.destination?.route
-    BackHandler {
-        onBack(route)
-    }
+//    BackHandler {
+//        onBack(route)
+//    }
 
     val scope = rememberCoroutineScope()
 
@@ -71,94 +85,187 @@ fun ProfileScreen(
         modifier = Modifier
             .fillMaxSize(),
         topBar = {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = spacing8, start = spacing16, end = spacing16)
-                    .background(Color.White)
-            ) {
-                Box(
+            if (registered == true) {
+                Column(
                     modifier = Modifier
-                        .fillMaxWidth(),
-                    contentAlignment = Alignment.Center
+                        .fillMaxWidth()
+                        .padding(top = spacing8, start = spacing16, end = spacing16)
+                        .background(Color.White)
                 ) {
-                    DefaultToolbarWithEditButton(
-                        title = "Профиль",
-                        titleColor = Color.Black,
-                        onEditClick = {}
-                    )
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        DefaultToolbarWithEditButton(
+                            title = "Профиль",
+                            titleColor = Color.Black,
+                            onEditClick = {}
+                        )
+                    }
                 }
             }
         },
         content = {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(
-                        top = spacing8,
-                        bottom = it.calculateBottomPadding(),
-                        start = spacing16,
-                        end = spacing16
-                    )
-            ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Start,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Image(
-                        painter = painterResource(id = tandapp.icons.R.drawable.circle_photo),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(50.dp)
-                            .clip(CircleShape)
-                            .click {
-
-                            }
-                    )
-                    Spacer(modifier = Modifier.width(spacing4))
-                    Column(verticalArrangement = Arrangement.spacedBy(spacing2)) {
-                        Text(
-                            text = "Murat Altynay",
-                            fontSize = fontSize16,
-                            lineHeight = lineHeight24,
-                            color = Color.Black,
-                            fontWeight = FontWeight.Medium
+            if (registered == true) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(
+                            top = spacing8,
+                            bottom = it.calculateBottomPadding(),
+                            start = spacing16,
+                            end = spacing16
                         )
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Start,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Image(
+                            painter = painterResource(id = tandapp.icons.R.drawable.circle_photo),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(50.dp)
+                                .clip(CircleShape)
+                                .click {
 
-                        Text(
-                            text = "murat@moinak.kz",
-                            fontSize = fontSize13,
-                            lineHeight = lineHeight20,
-                            color = Color.Blue,
-                            fontWeight = FontWeight.Normal
+                                }
+                        )
+                        Spacer(modifier = Modifier.width(spacing4))
+                        Column(verticalArrangement = Arrangement.spacedBy(spacing2)) {
+                            Text(
+                                text = "Murat Altynay",
+                                fontSize = fontSize16,
+                                lineHeight = lineHeight24,
+                                color = Color.Black,
+                                fontWeight = FontWeight.Medium
+                            )
+
+                            Text(
+                                text = "murat@moinak.kz",
+                                fontSize = fontSize13,
+                                lineHeight = lineHeight20,
+                                color = Color.Blue,
+                                fontWeight = FontWeight.Normal
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(spacing24))
+                    Column(verticalArrangement = Arrangement.spacedBy(spacing20)) {
+                        ChangeProfilePhoto(onClick = {})
+                        DefaultRowItem(
+                            icon = tandapp.icons.R.drawable.language,
+                            title = "Язык",
+                            hint = "Русский",
+                            onClick = {}
+                        )
+                        DefaultRowItem(
+                            icon = tandapp.icons.R.drawable.ic_favorite,
+                            title = "Избранные",
+                            hint = "24",
+                            onClick = {}
+                        )
+                        DefaultRowItem(
+                            icon = tandapp.icons.R.drawable.ic_faq,
+                            title = "Tanda App FAQ",
+                            onClick = {}
                         )
                     }
+                    Spacer(modifier = Modifier.weight(1f))
+                    LogOut(onLogOutClick = {
+                        SharedPreferencesHelper.clear()
+                    })
+                    Spacer(modifier = Modifier.height(spacing32))
                 }
-                Spacer(modifier = Modifier.height(spacing24))
-                Column(verticalArrangement = Arrangement.spacedBy(spacing20)) {
-                    ChangeProfilePhoto(onClick = {})
-                    DefaultRowItem(
-                        icon = tandapp.icons.R.drawable.language,
-                        title = "Язык",
-                        hint = "Русский",
-                        onClick = {}
+            } else {
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(
+                            spacing20
+                        )
+                        .padding(top = spacing52)
+                ) {
+                    Image(
+                        painter = painterResource(id = tandapp.icons.R.drawable.img_profile_not_registered),
+                        contentDescription = null,
+                        modifier = Modifier.size(70.dp)
                     )
-                    DefaultRowItem(
-                        icon = tandapp.icons.R.drawable.ic_favorite,
-                        title = "Избранные",
-                        hint = "24",
-                        onClick = {}
+                    Spacer(modifier = Modifier.height(spacing28))
+
+                    Text(
+                        text = "Войдите в свой профиль",
+                        style = TextStyle(
+                            fontSize = 20.sp,
+                            lineHeight = 22.sp,
+                            fontWeight = FontWeight(500),
+                            color = Color.Black,
+                        )
                     )
-                    DefaultRowItem(
-                        icon = tandapp.icons.R.drawable.ic_faq,
-                        title = "Tanda App FAQ",
-                        onClick = {}
+                    Spacer(modifier = Modifier.height(spacing16))
+                    Text(
+                        text = "После входа вам будут доступны товары с персональными скидками",
+                        style = TextStyle(
+                            fontSize = fontSize13,
+                            lineHeight = 18.sp,
+                            fontWeight = FontWeight(400),
+                            color = Silver3,
+                            textAlign = TextAlign.Center,
+                        )
+                    )
+                    Spacer(modifier = Modifier.height(spacing24))
+
+                    CustomButton(
+                        modifier = Modifier.fillMaxWidth(),
+                        content = {
+                            CustomButtonText(
+                                text = "Войти в профиль",
+                                fontSize = 16.sp,
+                                lineHeight = 24.sp,
+                                fontWeight = FontWeight(500),
+                                color = Color.White,
+                            )
+                        }
+                    ) {
+                        navController.navigate(LoginDestinations.SIGN_IN)
+                    }
+
+                    Spacer(modifier = Modifier.height(160.dp))
+
+                    Text(
+                        text = "О приложении",
+                        style = TextStyle(
+                            fontSize = fontSize13,
+                            lineHeight = 18.sp,
+                            fontWeight = FontWeight(400),
+                            color = Color(0xFF8D68F0),
+                            textAlign = TextAlign.Center,
+                        ),
+                        modifier = Modifier.click {
+
+                        }
+                    )
+
+                    Spacer(modifier = Modifier.height(spacing16))
+
+                    Text(
+                        text = "Информация для клиентов",
+                        style = TextStyle(
+                            fontSize = fontSize13,
+                            lineHeight = 18.sp,
+                            fontWeight = FontWeight(400),
+                            color = Color(0xFF8D68F0),
+                            textAlign = TextAlign.Center,
+                        ),
+                        modifier = Modifier.click {
+
+                        }
                     )
                 }
-                Spacer(modifier = Modifier.weight(1f))
-                LogOut(onLogOutClick = {})
-                Spacer(modifier = Modifier.height(spacing32))
             }
         },
         bottomBar = {
@@ -173,11 +280,10 @@ fun ProfileScreen(
             )
         }
     )
-
 }
 
 @Composable
-fun ChangeProfilePhoto(onClick: () -> Unit){
+fun ChangeProfilePhoto(onClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -208,6 +314,7 @@ fun ChangeProfilePhoto(onClick: () -> Unit){
         )
     }
 }
+
 @Composable
 fun DefaultRowItem(
     @DrawableRes icon: Int,
@@ -265,7 +372,7 @@ fun DefaultRowItem(
 }
 
 @Composable
-fun LogOut(onLogOutClick:() -> Unit) {
+fun LogOut(onLogOutClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -274,7 +381,8 @@ fun LogOut(onLogOutClick:() -> Unit) {
                     cornerRadius10
                 )
             )
-            .padding(horizontal = spacing16, vertical = spacing10),
+            .padding(horizontal = spacing16, vertical = spacing10)
+            .click { onLogOutClick() },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {

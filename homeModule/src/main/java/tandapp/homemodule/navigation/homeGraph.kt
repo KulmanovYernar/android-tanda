@@ -16,11 +16,9 @@ fun NavGraphBuilder.mainGraph(
     registered: Boolean,
     onLogged: () -> Unit
 ) {
-
     composable(route = MainDestinations.HOME.destination) {
         HomeScreen(
             navController = navController,
-            registered = registered
         )
     }
 

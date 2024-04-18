@@ -42,6 +42,7 @@ dependencies {
     implementation(projects.utillibrary)
     implementation(projects.navigationModule)
     implementation(projects.icons)
+    implementation(projects.utils)
 
     implementation(libs.androidx.ktx)
     implementation(libs.appcompat)
@@ -51,6 +52,6 @@ dependencies {
     implementation(libs.koin.compose)
 
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
 }

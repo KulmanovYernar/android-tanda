@@ -47,6 +47,7 @@ dependencies {
     implementation(projects.catalogModule)
     implementation(projects.chatModule)
     implementation(projects.loginModule)
+    implementation(projects.utils)
 
     implementation(libs.androidx.ktx)
     implementation(libs.appcompat)
@@ -59,4 +60,5 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation ("com.google.accompanist:accompanist-flowlayout:0.32.0")
     testImplementation("org.testng:testng:6.9.6")
+    implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
 }

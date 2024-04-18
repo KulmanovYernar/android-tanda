@@ -1,5 +1,6 @@
 package tandapp.homemodule.screens
 
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -20,12 +21,14 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
@@ -50,14 +53,16 @@ import tandapp.utillibrary.values.spacing12
 import tandapp.utillibrary.values.spacing16
 import tandapp.utillibrary.values.spacing20
 import tandapp.utillibrary.values.spacing8
+import tandapp.utils.SharedPreferencesHelper
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
     navController: NavController,
-    registered: Boolean,
     viewModel: HomeViewModel = getViewModel()
 ) {
+    val registered by SharedPreferencesHelper.onLogged.collectAsStateWithLifecycle()
+    Log.d("TAG", "HomeScreen: $registered")
     val scope = rememberCoroutineScope()
 //    val lazyListState = rememberForeverLazyListState(key = "main",
 //        initialData = viewModel.mainVerticalScrollState.value,
@@ -134,7 +139,7 @@ fun HomeScreen(
                 item {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center,
+                        horizontalArrangement = Arrangement.Start,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = spacing16),
@@ -145,35 +150,38 @@ fun HomeScreen(
                             cornerRadius = cornerRadius20
                         )
                         Spacer(modifier = Modifier.width(spacing8))
-
-                        CustomButton(
-                            buttonColors = ButtonDefaults.buttonColors(
-                                backgroundColor = Color.Transparent,
-                                contentColor = Purple
-                            ),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(40.dp)
-                                .border(
-                                    1.dp, color = Purple, shape = RoundedCornerShape(
-                                        cornerRadius20
-                                    )
+                        if (registered != true) {
+                            CustomButton(
+                                buttonColors = ButtonDefaults.buttonColors(
+                                    backgroundColor = Color.Transparent,
+                                    contentColor = Purple
                                 ),
-                            enabled = true,
-                            onButtonClicked = { navController.navigate(LoginDestinations.SIGN_IN) },
-                            content = {
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.Center
-                                ) {
-                                    CustomButtonText(
-                                        text = "Войдите или зарегистрируйтесь ->",
-                                        color = Purple
-                                    )
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(40.dp)
+                                    .border(
+                                        1.dp, color = Purple, shape = RoundedCornerShape(
+                                            cornerRadius20
+                                        )
+                                    ),
+                                enabled = true,
+                                onButtonClicked = { navController.navigate(LoginDestinations.SIGN_IN) },
+                                content = {
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.Center
+                                    ) {
+                                        CustomButtonText(
+                                            text = "Войдите или зарегистрируйтесь ->",
+                                            color = Purple
+                                        )
+                                    }
                                 }
-                            }
-                        )
+                            )
+                        } else {
+                            Text(text = "Admin")
+                        }
                     }
                 }
                 item {
