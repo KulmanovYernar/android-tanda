@@ -1,6 +1,7 @@
 package domain.retrofit
 
 import com.chuckerteam.chucker.api.ChuckerInterceptor
+import domain.retrofit.interceptors.AuthInterceptor
 import domain.retrofit.interceptors.ExceptionInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -9,7 +10,8 @@ import java.util.concurrent.TimeUnit
 class OkHttpBuilder(
     private val httpLoggingInterceptor: HttpLoggingInterceptor,
     private val exceptionInterceptor: ExceptionInterceptor,
-    private val chuckerInterceptor: ChuckerInterceptor
+    private val chuckerInterceptor: ChuckerInterceptor,
+    private val authInterceptor: AuthInterceptor,
 ) {
     fun buildOkHttpClient(): OkHttpClient {
         val builder: OkHttpClient.Builder = OkHttpClient.Builder()
@@ -20,6 +22,7 @@ class OkHttpBuilder(
         builder.addInterceptor(httpLoggingInterceptor)
         builder.addInterceptor(exceptionInterceptor)
         builder.addInterceptor(chuckerInterceptor)
+        builder.addInterceptor(authInterceptor)
         builder.retryOnConnectionFailure(true)
 
         return builder.build()

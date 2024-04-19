@@ -42,7 +42,7 @@ class ProfileRepositoryImpl(private val dataSource: ProfileService): ProfileRepo
         else emit(Event.error(response.message()))
     }
 
-    override suspend fun getProfileImage(id: String): Flow<Event<ProfileImageModel>> = flow {
+    override suspend fun getProfileImage(id: Int): Flow<Event<ProfileImageModel>> = flow {
         emit(Event.loading())
 
         val response = dataSource.getProfileImage(id)

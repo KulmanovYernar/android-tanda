@@ -4,8 +4,10 @@ import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.google.gson.GsonBuilder
 import domain.retrofit.OkHttpBuilder
+import domain.retrofit.interceptors.AuthInterceptor
 import domain.retrofit.interceptors.ExceptionInterceptor
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -18,6 +20,7 @@ internal val gsonInstanceModule = module {
 internal val interceptorsModule = module {
     factory { HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY) }
     factory { ExceptionInterceptor() }
+    factory { AuthInterceptor(context = androidContext()) }
     factory {
         ChuckerInterceptor.Builder(get())
             .collector(ChuckerCollector(get()))
@@ -27,7 +30,7 @@ internal val interceptorsModule = module {
 
 internal val okHttpBuilderInstance = module {
     includes(interceptorsModule)
-    single { OkHttpBuilder(get(), get(), get()).buildOkHttpClient() }
+    single { OkHttpBuilder(get(), get(), get(), get()).buildOkHttpClient() }
 }
 
 val networkModule = module {

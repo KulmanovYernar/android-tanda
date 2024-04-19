@@ -23,5 +23,5 @@ interface ProfileService {
     suspend fun getProfileInfo(): Response<ProfileModel>
 
     @GET("customer/blobs/get_by_id/{id}")
-    suspend fun getProfileImage(@Path("id") id:String): Response<ProfileImageModel>
+    suspend fun getProfileImage(@Path("id") id:Int): Response<ProfileImageModel>
 }

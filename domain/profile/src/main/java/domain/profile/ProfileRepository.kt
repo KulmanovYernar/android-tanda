@@ -14,6 +14,6 @@ interface ProfileRepository {
 
     suspend fun getProfileInfo(): Flow<Event<ProfileModel>>
 
-    suspend fun getProfileImage(id:String): Flow<Event<ProfileImageModel>>
+    suspend fun getProfileImage(id:Int): Flow<Event<ProfileImageModel>>
 
 }
