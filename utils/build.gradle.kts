@@ -57,4 +57,16 @@ dependencies {
     implementation(libs.material)
     testImplementation("org.testng:testng:6.9.6")
     implementation ("androidx.startup:startup-runtime:1.0.0")
+
+    //Permission
+    implementation ("com.google.accompanist:accompanist-permissions:0.32.0")
+
+    //System UI
+    implementation ("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
+
+    //Coil for load image
+    implementation("io.coil-kt:coil-compose:2.6.0")
+
+
+    implementation ("com.google.code.gson:gson:2.9.0")
 }

@@ -1,6 +1,9 @@
 package tandapp.profilemodule.screens
 
 import android.util.Log
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -23,6 +26,8 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,8 +44,10 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.getViewModel
 import tandapp.navigationmodule.CustomBottomNavigation
 import tandapp.navigationmodule.destinations.LoginDestinations
+import tandapp.profilemodule.viewmodels.ProfileViewModel
 import tandapp.utillibrary.buttons.CustomButton
 import tandapp.utillibrary.buttons.CustomButtonText
 import tandapp.utillibrary.click
@@ -64,11 +71,13 @@ import tandapp.utillibrary.values.spacing4
 import tandapp.utillibrary.values.spacing52
 import tandapp.utillibrary.values.spacing8
 import tandapp.utils.SharedPreferencesHelper
+import tandapp.utils.permissions.RequestMediaPermission
 
 @Composable
 fun ProfileScreen(
     navController: NavController,
-    onBack: (String?) -> Unit = {}
+    onBack: (String?) -> Unit = {},
+    viewModel: ProfileViewModel = getViewModel()
 ) {
     val registered by SharedPreferencesHelper.onLogged.collectAsStateWithLifecycle()
 
@@ -79,6 +88,36 @@ fun ProfileScreen(
 //    }
 
     val scope = rememberCoroutineScope()
+
+    val showBottomSheet = remember {
+        mutableStateOf(false)
+    }
+    val uploadImageClick = remember {
+        mutableStateOf(false)
+    }
+
+    val imagePickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickVisualMedia(),
+        onResult = { result ->
+            result?.let { uri ->
+                Log.d("imagePickerLauncher", "URI: $uri")
+                viewModel.uploadProfileImage(
+                    file = uri.toString()
+                )
+            }
+            uploadImageClick.value = false
+            showBottomSheet.value = false
+        }
+    )
+
+    if (uploadImageClick.value) {
+        RequestMediaPermission(
+            onPermissionDenied = {},
+            onPermissionGranted = {
+                imagePickerLauncher.launch(PickVisualMediaRequest(mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly))
+            }
+        )
+    }
 
     Scaffold(
         backgroundColor = Color.White,
@@ -154,7 +193,9 @@ fun ProfileScreen(
                     }
                     Spacer(modifier = Modifier.height(spacing24))
                     Column(verticalArrangement = Arrangement.spacedBy(spacing20)) {
-                        ChangeProfilePhoto(onClick = {})
+                        ChangeProfilePhoto(onClick = {
+                            uploadImageClick.value = true
+                        })
                         DefaultRowItem(
                             icon = tandapp.icons.R.drawable.language,
                             title = "Язык",
