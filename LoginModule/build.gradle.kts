@@ -10,7 +10,6 @@ android {
     defaultConfig {
         minSdk = 24
         targetSdk = 34
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
 
@@ -56,10 +55,8 @@ dependencies {
     implementation(libs.koin.compose)
 //    implementation(libs.koin.android)
 //    implementation(libs.koin.core)
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     //koin
-    testImplementation ("io.insert-koin:koin-test-junit4:3.2.1")
 //    implementation ("io.insert-koin:koin-androidx-compose:3.2.1")
 
 

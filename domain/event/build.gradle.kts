@@ -37,7 +37,6 @@ dependencies {
     implementation(libs.androidx.ktx)
     implementation(libs.appcompat)
     implementation(libs.com.google.android.material.material)
-    testImplementation(libs.junit)
     testImplementation("org.testng:testng:6.9.6")
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

@@ -53,7 +53,6 @@ dependencies {
     implementation(libs.compose.ui)
     implementation(libs.koin.compose)
 
-    testImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)
     implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
 }

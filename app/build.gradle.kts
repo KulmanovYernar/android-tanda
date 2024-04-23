@@ -14,7 +14,6 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -62,6 +61,7 @@ android {
         implementation(projects.domain.retrofit)
         implementation(projects.domain.auth)
         implementation(projects.domain.profile)
+        implementation(projects.domain.catalog)
 //    implementation(projects.domain)
 //    implementation(projects.tandaApp)
 //    implementation(projects.app)
