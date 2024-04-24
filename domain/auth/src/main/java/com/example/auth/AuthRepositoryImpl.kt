@@ -9,7 +9,7 @@ import tandapp.utils.SharedPreferencesHelper
 
 class AuthRepositoryImpl(private val dataSource: AuthService) : AuthRepository {
     override suspend fun signUp(dto: AuthModel): Flow<Event<Unit>> = flow {
-        val response = dataSource.signUp(dto)
+        val response = dataSource.login(dto)
         if (response.isSuccessful) {
             emit(Event.success(response.body()))
             return@flow
@@ -26,11 +26,11 @@ class AuthRepositoryImpl(private val dataSource: AuthService) : AuthRepository {
         }
     }
 
-    override suspend fun signIn(email: String, password: String): Flow<Event<AuthToken>> = flow {
-        val response = dataSource.signIn(email, password)
-        if (response.isSuccessful && response.body() != null) {
-            emit(Event.success(response.body()))
-            return@flow
-        }
-    }
+//    override suspend fun signIn(email: String, password: String): Flow<Event<AuthToken>> = flow {
+//        val response = dataSource.signIn(email, password)
+//        if (response.isSuccessful && response.body() != null) {
+//            emit(Event.success(response.body()))
+//            return@flow
+//        }
+//    }
 }

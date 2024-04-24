@@ -9,8 +9,8 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface AuthService {
-    @POST("auth/signup")
-    suspend fun signUp(@Body model: AuthModel): Response<Unit>
+    @POST("auth/login")
+    suspend fun login(@Body model: AuthModel): Response<Unit>
 
     @GET("auth/confirm-account")
     suspend fun signUpConfirmation(@Query("token") token:String): Response<AuthToken>

@@ -1,10 +1,12 @@
 package tandapp.profilemodule.screens
 
+import android.os.Build
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -34,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
@@ -73,6 +76,7 @@ import tandapp.utillibrary.values.spacing8
 import tandapp.utils.SharedPreferencesHelper
 import tandapp.utils.permissions.RequestMediaPermission
 
+@RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 fun ProfileScreen(
     navController: NavController,
@@ -86,7 +90,7 @@ fun ProfileScreen(
 //    BackHandler {
 //        onBack(route)
 //    }
-
+    val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
     val showBottomSheet = remember {
@@ -100,9 +104,15 @@ fun ProfileScreen(
         contract = ActivityResultContracts.PickVisualMedia(),
         onResult = { result ->
             result?.let { uri ->
+//                val file = File(uri.path.orEmpty())
+//                val inputData = context.contentResolver.openInputStream(uri)?.readBytes()
+//                val base = Base64.encodeToString(inputData, Base64.NO_WRAP)
+                // to file
+                // to base64
+                val s = viewModel.fileFromContentUri(context, uri)
                 Log.d("imagePickerLauncher", "URI: $uri")
                 viewModel.uploadProfileImage(
-                    file = uri.toString()
+                    file = s
                 )
             }
             uploadImageClick.value = false

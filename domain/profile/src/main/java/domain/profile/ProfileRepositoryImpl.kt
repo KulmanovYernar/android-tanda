@@ -4,7 +4,11 @@ import domain.profile.models.ProfileImageModel
 import domain.profile.models.ProfileModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import tandapp.domain.event.Event
+import java.io.File
 
 class ProfileRepositoryImpl(private val dataSource: ProfileService): ProfileRepository {
 
@@ -17,10 +21,15 @@ class ProfileRepositoryImpl(private val dataSource: ProfileService): ProfileRepo
         else emit(Event.error(response.message()))
     }
 
-    override suspend fun uploadProfileImage(file: String): Flow<Event<Unit>> = flow {
+    override suspend fun uploadProfileImage(file: File): Flow<Event<Unit>> = flow {
         emit(Event.loading())
+        val requestFile =
+            file.asRequestBody(contentType = "multipart/form-data".toMediaTypeOrNull())
 
-        val response = dataSource.uploadProfileImage(file)
+        val fileRequestBody: MultipartBody.Part =
+            MultipartBody.Part.createFormData("file", file.name, requestFile)
+
+        val response = dataSource.uploadProfileImage(fileRequestBody)
 
         if (response.isSuccessful) emit(Event.success(response.body()))
         else emit(Event.error(response.message()))

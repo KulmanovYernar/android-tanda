@@ -2,6 +2,7 @@ package domain.profile
 
 import domain.profile.models.ProfileImageModel
 import domain.profile.models.ProfileModel
+import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -14,7 +15,7 @@ interface ProfileService {
     suspend fun changeProfileImage(@Query("id") id:Int, @Query("file") file:String): Response<Unit>
 
     @POST("customer/blobs/upload")
-    suspend fun uploadProfileImage(@Query("file") file:String): Response<Unit>
+    suspend fun uploadProfileImage(@Query("file") file: MultipartBody.Part): Response<Unit>
 
     @GET("customer/update_info/{firstName}/{lastName}")
     suspend fun updateProfileInfo(@Path("firstName") firstName:String, @Path("lastName") lastName:String): Response<Unit>
