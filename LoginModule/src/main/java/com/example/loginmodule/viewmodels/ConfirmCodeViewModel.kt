@@ -26,9 +26,9 @@ class ConfirmCodeViewModel(
         }
     }
 
-    fun signUpSubmit(otp: String) {
+    fun confirmAccount(otp: String) {
         viewModelScope.launch {
-            authRepository.signUpConfirmation(
+            authRepository.confirmAccount(
                 token = otp
             ).flowOn(Dispatchers.IO)
                 .collect{

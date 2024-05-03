@@ -28,7 +28,7 @@ class LoginViewModel(
 
     fun signUp(dto:AuthModel) {
         viewModelScope.launch {
-            authRepository.signUp(
+            authRepository.signIn(
                dto
             ).flowOn(Dispatchers.IO)
                 .collect{

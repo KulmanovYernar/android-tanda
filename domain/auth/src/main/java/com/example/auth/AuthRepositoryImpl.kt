@@ -8,7 +8,7 @@ import tandapp.domain.event.Event
 import tandapp.utils.SharedPreferencesHelper
 
 class AuthRepositoryImpl(private val dataSource: AuthService) : AuthRepository {
-    override suspend fun signUp(dto: AuthModel): Flow<Event<Unit>> = flow {
+    override suspend fun signIn(dto: AuthModel): Flow<Event<Unit>> = flow {
         val response = dataSource.login(dto)
         if (response.isSuccessful) {
             emit(Event.success(response.body()))
@@ -16,7 +16,7 @@ class AuthRepositoryImpl(private val dataSource: AuthService) : AuthRepository {
         }
     }
 
-    override suspend fun signUpConfirmation(token: String): Flow<Event<AuthToken>> = flow {
+    override suspend fun confirmAccount(token: String): Flow<Event<AuthToken>> = flow {
         val response = dataSource.signUpConfirmation(token)
         if (response.isSuccessful && response.body() != null) {
             val data = response.body()
@@ -25,12 +25,4 @@ class AuthRepositoryImpl(private val dataSource: AuthService) : AuthRepository {
             return@flow
         }
     }
-
-//    override suspend fun signIn(email: String, password: String): Flow<Event<AuthToken>> = flow {
-//        val response = dataSource.signIn(email, password)
-//        if (response.isSuccessful && response.body() != null) {
-//            emit(Event.success(response.body()))
-//            return@flow
-//        }
-//    }
 }

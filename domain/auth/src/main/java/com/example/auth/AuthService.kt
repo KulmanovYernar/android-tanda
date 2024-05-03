@@ -15,7 +15,4 @@ interface AuthService {
     @GET("auth/confirm-account")
     suspend fun signUpConfirmation(@Query("token") token:String): Response<AuthToken>
 
-    @POST("auth/signin")
-    suspend fun signIn(@Query("email") email:String, @Query("password") password:String): Response<AuthToken>
-
 }

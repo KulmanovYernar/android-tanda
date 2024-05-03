@@ -202,7 +202,7 @@ fun ConfirmCodeScreen(
 //                    confirmCodeViewModel.showErrorText.value = false
 //                }
                 if (it.length == 4) {
-                    confirmCodeViewModel.signUpSubmit(
+                    confirmCodeViewModel.confirmAccount(
                         otp = it,
                     )
                 }
