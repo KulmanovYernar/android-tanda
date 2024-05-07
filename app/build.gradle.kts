@@ -60,6 +60,7 @@ android {
         implementation(projects.profileModule)
         implementation(projects.domain.retrofit)
         implementation(projects.domain.auth)
+        implementation(projects.domain.backet)
         implementation(projects.domain.profile)
         implementation(projects.domain.catalog)
 //    implementation(projects.domain)

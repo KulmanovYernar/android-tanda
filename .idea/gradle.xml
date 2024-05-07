@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/chatModule" />
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/domain/auth" />
+            <option value="$PROJECT_DIR$/domain/backet" />
             <option value="$PROJECT_DIR$/domain/catalog" />
             <option value="$PROJECT_DIR$/domain/event" />
             <option value="$PROJECT_DIR$/domain/profile" />
