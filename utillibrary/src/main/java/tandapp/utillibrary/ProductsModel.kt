@@ -1,28 +1,28 @@
-package domain.profile.models
+package tandapp.utillibrary
 
 import androidx.annotation.Keep
 
 @Keep
-data class WishListModel(
+data class ProductsModel(
     val products: List<ProductModel>
 )
 
 
 @Keep
 data class ProductModel(
+    val id: Int?,
+    val title: String?,
     val brand: String?,
+    val price: Int?,
+    val previewImage: Int?,
     val color: String?,
     val colors: List<Color>?,
     val description: String?,
-    val id: Int?,
-    val images: List<Int>?,
+    val images: List<Int>? = null,
     val onWishList: Boolean?,
-    val previewImage: Int?,
-    val price: Int?,
     val quantity: Int?,
     val size: String?,
     val sizes: List<Size>?,
-    val title: String?
 )
 
 @Keep

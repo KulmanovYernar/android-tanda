@@ -3,8 +3,7 @@ package domain.profile
 import domain.profile.models.FileModel
 import domain.profile.models.ProfileImageModel
 import domain.profile.models.ProfileModel
-import domain.profile.models.WishListModel
-import okhttp3.MultipartBody
+import tandapp.utillibrary.ProductsModel
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -30,5 +29,5 @@ interface ProfileService {
     suspend fun getProfileImage(@Path("id") id:Int): Response<ProfileImageModel>
 
     @GET("customer/wish_list")
-    suspend fun getWishList(): Response<WishListModel>
+    suspend fun getWishList(): Response<ProductsModel>
 }

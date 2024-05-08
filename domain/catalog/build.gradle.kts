@@ -39,6 +39,8 @@ dependencies {
     implementation(libs.androidx.ktx)
     implementation(libs.appcompat)
     implementation(libs.com.google.android.material.material)
+    implementation(project(":domain:profile"))
+    implementation(project(":utillibrary"))
     androidTestImplementation(libs.espresso.core)
 
     //retrofit

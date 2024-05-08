@@ -111,9 +111,9 @@ fun ProfileScreen(
                 // to base64
                 val s = viewModel.fileFromContentUri(context, uri)
                 Log.d("imagePickerLauncher", "URI: $uri")
-                viewModel.uploadProfileImage(
-                    file = s
-                )
+//                viewModel.uploadProfileImage(
+//                    file = s
+//                )
             }
             uploadImageClick.value = false
             showBottomSheet.value = false

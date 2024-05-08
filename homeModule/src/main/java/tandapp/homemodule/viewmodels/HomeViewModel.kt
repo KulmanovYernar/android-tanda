@@ -5,15 +5,23 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import domain.catalog.ProductRepository
 import domain.profile.ProfileRepository
+import tandapp.utillibrary.ProductModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    private val profileRepository: ProfileRepository
-) : ViewModel() {
+    private val profileRepository: ProfileRepository,
+    private val productRepository: ProductRepository,
+
+    ) : ViewModel() {
     val imageId: MutableState<Int?> = mutableStateOf(null)
+
+
+    val products: MutableState<List<ProductModel>?> = mutableStateOf(null)
+
     init {
         refreshAll()
     }
@@ -24,9 +32,9 @@ class HomeViewModel(
                 .flowOn(Dispatchers.IO)
                 .collect {
                     it.onSuccess {
-                        val result = it
-                        imageId.value = result?.blobId ?: 2
-                        Log.d("Profile", "getProfileInfo: asd")
+//                        val result = it
+//                        imageId.value = result?.blobId ?: 2
+//                        Log.d("Profile", "getProfileInfo: asd")
                     }
                 }
         }
@@ -44,8 +52,23 @@ class HomeViewModel(
         }
     }
 
-    fun refreshAll(){
-        getProfileInfo()
-        getProfileImage()
+
+    fun getProductsPreview() {
+        viewModelScope.launch {
+            productRepository.getProductsPreview()
+                .flowOn(Dispatchers.IO)
+                .collect {
+                    it.onSuccess {
+                        val result = it
+                        products.value = result
+                    }
+                }
+        }
+    }
+
+    fun refreshAll() {
+//        getProfileInfo()
+//        getProfileImage()
+        getProductsPreview()
     }
 }

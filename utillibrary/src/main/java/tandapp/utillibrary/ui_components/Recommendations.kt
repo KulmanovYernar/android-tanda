@@ -27,6 +27,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import coil.compose.AsyncImage
+import tandapp.utillibrary.BuildConfig
+import tandapp.utillibrary.ProductModel
+import tandapp.utillibrary.click
 import tandapp.utillibrary.values.Silver3
 import tandapp.utillibrary.values.fontSize10
 import tandapp.utillibrary.values.fontSize8
@@ -40,30 +44,37 @@ import tandapp.utillibrary.values.spacing8
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun Recommendations(onClick: () -> Unit = {}) {
+fun Recommendations(
+    products: List<ProductModel>? = null,
+    onClick: () -> Unit = {}
+) {
     FlowRow(
         modifier = Modifier.padding(bottom = spacing64),
         horizontalArrangement = Arrangement.spacedBy(spacing12),
         verticalArrangement = Arrangement.spacedBy(spacing20),
         maxItemsInEachRow = 3
     ) {
-        repeat(16) {
+        repeat(products?.size ?: 0) {
             RecommendationItem(
-                onClick = onClick
+                onClick = onClick,
+                product = products?.get(it)
             )
         }
     }
 }
 
 @Composable
-private fun RecommendationItem(onClick:() -> Unit) {
+private fun RecommendationItem(
+    product: ProductModel? = null,
+    onClick:() -> Unit,
+) {
     Box(
         modifier = Modifier
             .background(color = Color.White)
             .height(180.dp)
             .width(107.dp)
             .padding(horizontal = spacing4)
-            .clickable{
+            .click{
                 onClick()
             }
     ) {
@@ -82,18 +93,25 @@ private fun RecommendationItem(onClick:() -> Unit) {
             verticalArrangement = Arrangement.Center,
             modifier = Modifier.padding(horizontal = spacing4)
         ) {
-            Image(
-                painter = painterResource(id = tandapp.icons.R.drawable.img_sneakers),
+            AsyncImage(
+                model = "http://91.147.105.187:9000/product/get_image/${product?.previewImage}",
                 contentDescription = null,
                 modifier = Modifier
                     .width(90.dp)
                     .height(120.dp)
             )
+//            Image(
+//                painter = painterResource(id = tandapp.icons.R.drawable.img_sneakers),
+//                contentDescription = null,
+//                modifier = Modifier
+//                    .width(90.dp)
+//                    .height(120.dp)
+//            )
 
             Spacer(modifier = Modifier.height(spacing4))
 
             Text(
-                text = "Кроссовки Pierre Cardin",
+                text = product?.brand.orEmpty() + " " + product?.title.orEmpty(),
                 color = Color.Black,
                 fontSize = fontSize10,
                 lineHeight = lineHeight10
@@ -101,21 +119,22 @@ private fun RecommendationItem(onClick:() -> Unit) {
 
             Spacer(modifier = Modifier.height(spacing8))
 
+
             Row(modifier = Modifier.fillMaxWidth()) {
                 Text(
-                    text = "44 990 ₸",
+                    text = "${product?.price} ₸",
                     color = Color.Black,
                     fontSize = fontSize10,
                     lineHeight = lineHeight13
                 )
-                Spacer(modifier = Modifier.width(spacing4))
-                Text(
-                    text = "49 990 ₸",
-                    color = Silver3,
-                    fontSize = fontSize8,
-                    lineHeight = lineHeight13,
-                    style = TextStyle(textDecoration = TextDecoration.LineThrough)
-                )
+//                Spacer(modifier = Modifier.width(spacing4))
+//                Text(
+//                    text = "49 990 ₸",
+//                    color = Silver3,
+//                    fontSize = fontSize8,
+//                    lineHeight = lineHeight13,
+//                    style = TextStyle(textDecoration = TextDecoration.LineThrough)
+//                )
             }
         }
     }

@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import domain.profile.ProfileRepository
+import domain.profile.models.FileModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
@@ -22,7 +23,7 @@ class ProfileViewModel(
     private val profileRepository: ProfileRepository
 ):ViewModel() {
 
-    fun uploadProfileImage(file: File){
+    fun uploadProfileImage(file: FileModel){
         viewModelScope.launch {
             profileRepository.uploadProfileImage(file)
                 .flowOn(Dispatchers.IO)

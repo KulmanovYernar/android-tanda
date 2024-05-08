@@ -49,6 +49,7 @@ dependencies {
     implementation(projects.utils)
     implementation(projects.domain.profile)
     implementation(projects.domain.event)
+    implementation(projects.domain.catalog)
 
     implementation(libs.androidx.ktx)
     implementation(libs.appcompat)

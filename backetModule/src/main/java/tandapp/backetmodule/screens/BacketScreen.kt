@@ -29,7 +29,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.getViewModel
+import tandapp.backetmodule.viewmodels.BacketViewModel
 import tandapp.navigationmodule.CustomBottomNavigation
+import tandapp.navigationmodule.destinations.CatalogDestinations
 import tandapp.utillibrary.buttons.CustomButton
 import tandapp.utillibrary.buttons.CustomButtonText
 import tandapp.utillibrary.toolbars.DefaultHomeToolbar
@@ -53,6 +56,7 @@ import tandapp.utillibrary.values.spacing8
 @Composable
 fun BacketScreen(
     navController: NavController,
+    viewModel: BacketViewModel = getViewModel(),
     onBack: (String?) -> Unit
 ) {
     val scope = rememberCoroutineScope()
@@ -162,7 +166,11 @@ fun BacketScreen(
                         Spacer(modifier = Modifier.height(spacing20))
 
 
-                        Recommendations()
+                        Recommendations(
+                            products = viewModel.products.value,
+                            onClick = {
+                                navController.navigate(CatalogDestinations.CATALOG_PRODUCT_CARD_ITEM)
+                            })
                     }
                 }
             }

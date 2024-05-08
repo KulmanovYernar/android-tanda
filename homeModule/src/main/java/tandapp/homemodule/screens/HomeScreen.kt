@@ -205,9 +205,11 @@ fun HomeScreen(
                         Spacer(modifier = Modifier.height(spacing20))
 
 
-                        Recommendations(onClick = {
-                            navController.navigate(CatalogDestinations.CATALOG_PRODUCT_CARD_ITEM)
-                        })
+                        Recommendations(
+                            products = viewModel.products.value,
+                            onClick = {
+                                navController.navigate(CatalogDestinations.CATALOG_PRODUCT_CARD_ITEM)
+                            })
                     }
                 }
             }
