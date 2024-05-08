@@ -11,9 +11,9 @@ interface ProductService {
     suspend fun getProductsPreview(): Response<List<ProductModel>>
 
     @GET("product/get_product/{id}")
-    suspend fun addProduct(@Path("id") id: Int): Response<Unit>
+    suspend fun getProduct(@Path("id") id: Int): Response<ProductModel>
 
 
     @GET("product/get_image/{id}")
-    suspend fun getProduct(@Path("id") id:Int): Response<Unit>
+    suspend fun getImage(@Path("id") id:Int): Response<Unit>
 }

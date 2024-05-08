@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import tandapp.utillibrary.values.Base300
 import tandapp.utillibrary.values.Purple
 import tandapp.utillibrary.values.spacing16
@@ -39,7 +40,7 @@ fun BannerPager(
     iconWidth:Dp = 343.dp,
     iconHeight:Dp = 134.dp,
     padding:Dp = spacing16,
-    @DrawableRes image:Int = tandapp.icons.R.drawable.img_banner_friday
+    image:String
 ) {
     HorizontalPager(
         state = pagerState,
@@ -48,10 +49,12 @@ fun BannerPager(
             .wrapContentHeight()
             .animateContentSize(animationSpec = tween(durationMillis = 500))
     ) {
-        Image(
-            painter = painterResource(id = image),
+        AsyncImage(
+            model = image,
             contentDescription = null,
-            modifier = Modifier.width(iconWidth).height(iconHeight)
+            modifier = Modifier
+                .width(iconWidth)
+                .height(iconHeight)
         )
     }
     Spacer(modifier = Modifier.height(spacing6))

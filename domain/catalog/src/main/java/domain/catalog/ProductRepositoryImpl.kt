@@ -10,7 +10,7 @@ class ProductRepositoryImpl(private val dataSource: ProductService) : ProductRep
         TODO("Not yet implemented")
     }
 
-    override suspend fun getProductsPreview(): Flow<Event<List<tandapp.utillibrary.ProductModel>>> = flow {
+    override suspend fun getProductsPreview(): Flow<Event<List<ProductModel>>> = flow {
         emit(Event.loading())
 
         val response = dataSource.getProductsPreview()
@@ -19,8 +19,13 @@ class ProductRepositoryImpl(private val dataSource: ProductService) : ProductRep
         else emit(Event.error(response.message()))
     }
 
-    override suspend fun getProduct(id: Int): Flow<Event<Unit>> {
-        TODO("Not yet implemented")
+    override suspend fun getProduct(id: Int) = flow {
+        emit(Event.loading())
+
+        val response = dataSource.getProduct(id)
+
+        if (response.isSuccessful) emit(Event.success(response.body()))
+        else emit(Event.error(response.message()))
     }
 
 }

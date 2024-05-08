@@ -129,7 +129,10 @@ fun HomeScreen(
                 }
 
                 item {
-                    BannerPager(pagerState = pagerState)
+                    BannerPager(
+                        pagerState = pagerState,
+                        image = "http://91.147.105.187:9000/product/get_image/1"
+                    )
                 }
 
                 item {
@@ -207,7 +210,11 @@ fun HomeScreen(
 
                         Recommendations(
                             products = viewModel.products.value,
-                            onClick = {
+                            onClick = { id ->
+                                navController.currentBackStackEntry?.savedStateHandle?.set(
+                                    "productId",
+                                    id
+                                )
                                 navController.navigate(CatalogDestinations.CATALOG_PRODUCT_CARD_ITEM)
                             })
                     }

@@ -8,8 +8,10 @@ import tandapp.catalogmodule.screens.ProductCardItem
 
 fun NavGraphBuilder.catalogGraph(navController: NavController) {
     composable(route = CatalogDestinations.CATALOG_PRODUCT_CARD_ITEM) {
+        val id = navController.previousBackStackEntry?.savedStateHandle?.get<Int>("productId")
         ProductCardItem(
-            onBackClick = { navController.navigateUp() }
+            onBackClick = { navController.navigateUp() },
+            id = id ?: 0
         )
     }
 }

@@ -168,7 +168,11 @@ fun BacketScreen(
 
                         Recommendations(
                             products = viewModel.products.value,
-                            onClick = {
+                            onClick = { id ->
+                                navController.currentBackStackEntry?.savedStateHandle?.set(
+                                    "productId",
+                                    id
+                                )
                                 navController.navigate(CatalogDestinations.CATALOG_PRODUCT_CARD_ITEM)
                             })
                     }

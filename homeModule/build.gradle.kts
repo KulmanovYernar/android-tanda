@@ -58,7 +58,10 @@ dependencies {
     implementation(libs.compose.ui)
     implementation(libs.koin.compose)
     androidTestImplementation(libs.espresso.core)
-    implementation ("com.google.accompanist:accompanist-flowlayout:0.32.0")
+    implementation("com.google.accompanist:accompanist-flowlayout:0.32.0")
     testImplementation("org.testng:testng:6.9.6")
-    implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
+
+    //Navigation
+    implementation("androidx.navigation:navigation-compose:2.7.7")
 }

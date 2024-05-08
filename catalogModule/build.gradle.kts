@@ -42,6 +42,7 @@ dependencies {
     implementation(projects.utillibrary)
     implementation(projects.navigationModule)
     implementation(projects.icons)
+    implementation(projects.domain.event)
 
     implementation(libs.androidx.ktx)
     implementation(libs.appcompat)
@@ -49,6 +50,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.compose.ui)
     implementation(libs.koin.compose)
+    implementation(project(":domain:catalog"))
 
     androidTestImplementation(libs.espresso.core)
 }
