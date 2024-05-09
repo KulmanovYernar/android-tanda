@@ -63,7 +63,7 @@ fun BannerPager(
         pagerState = pagerState,
         activeColor = Purple,
         inactiveColor = Base300,
-        pageCount = 6,
+        pageCount = 3,
     )
 }
 
