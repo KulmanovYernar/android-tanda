@@ -2,6 +2,7 @@ package tandapp.utillibrary.toolbars
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -16,6 +17,7 @@ import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -24,12 +26,19 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import tandapp.utillibrary.buttons.BackButton
+import tandapp.utillibrary.click
+import tandapp.utillibrary.values.Blue1
 import tandapp.utillibrary.values.Purple
 import tandapp.utillibrary.values.fontSize16
+import tandapp.utillibrary.values.fontSize18
 import tandapp.utillibrary.values.fontSize22
+import tandapp.utillibrary.values.fontSize28
+import tandapp.utillibrary.values.fontSize32
 import tandapp.utillibrary.values.lineHeight22
 import tandapp.utillibrary.values.spacing12
 import tandapp.utillibrary.values.spacing4
+import tandapp.utillibrary.values.spacing6
 import tandapp.utillibrary.values.spacing8
 
 @Composable
@@ -115,21 +124,32 @@ fun DefaultChatToolbar(
     ) {
         Spacer(modifier = Modifier.windowInsetsTopHeight(WindowInsets.statusBars))
 
-        Row(modifier = Modifier.fillMaxWidth()) {
-//            BackButton(onClick = onBackClick)
-            Spacer(modifier = Modifier.width(spacing8))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
             Icon(
-                painter = painterResource(id = icon),
+                painter = painterResource(id = tandapp.icons.R.drawable.ic_back_blue),
                 contentDescription = null,
-                modifier = Modifier.size(24.dp),
-                tint = Color.White
+                tint = Color.Blue,
+                modifier = Modifier.click {
+                    onBackClick()
+                }
             )
+
+            Spacer(modifier = Modifier.width(spacing8))
+//            Icon(
+//                painter = painterResource(id = icon),
+//                contentDescription = null,
+//                modifier = Modifier.size(24.dp),
+//                tint = Color.White
+//            )
             Spacer(modifier = Modifier.width(spacing12))
             if (title.isNotEmpty()) {
                 Text(
                     text = title,
-                    fontSize = fontSize22,
-                    fontWeight = FontWeight.Medium,
+                    fontSize = fontSize28,
+                    fontWeight = FontWeight.SemiBold,
                     color = Color.Black,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis

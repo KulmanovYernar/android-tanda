@@ -89,7 +89,7 @@ fun MainNavHost(
             startDestination = MainDestinations.CHAT.destination,
             route = CHAT_ROUTE
         ) {
-            //TODO
+
         }
     }
 }

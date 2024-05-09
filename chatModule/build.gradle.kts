@@ -42,6 +42,8 @@ dependencies {
     implementation(projects.utillibrary)
     implementation(projects.navigationModule)
     implementation(projects.icons)
+    implementation(projects.domain.chat)
+    implementation(projects.domain.event)
 
 
     implementation(libs.androidx.ktx)
