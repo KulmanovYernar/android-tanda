@@ -10,5 +10,5 @@ import tandapp.utillibrary.ProductModel
 interface ChatService {
 
     @POST("chat/query")
-    suspend fun requestChatQuery(@Body data: ChatModel): Response<ProductModel>
+    suspend fun requestChatQuery(@Body data: ChatModel): Response<Any>
 }
