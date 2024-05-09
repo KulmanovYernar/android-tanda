@@ -1,6 +1,7 @@
 package tandapp.chatmodule.screens
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -11,10 +12,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -24,6 +27,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -36,7 +40,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import domain.chat.models.MessageBox
+import domain.chat.models.MessageType
 import org.koin.androidx.compose.getViewModel
 import tandapp.chatmodule.MessageItem
 import tandapp.chatmodule.R
@@ -76,6 +83,8 @@ fun ChatScreen(
         mutableStateOf(TextFieldValue())
     }
 
+    val messages by viewModel.conversation.collectAsStateWithLifecycle()
+    Log.d("ChatScreen", "LazyColumn recomposed. Messages: $messages")
     val scope = rememberCoroutineScope()
 //    val lazyListState = rememberForeverLazyListState(key = "main",
 //        initialData = viewModel.mainVerticalScrollState.value,
@@ -114,11 +123,15 @@ fun ChatScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(Silver3)
-                    .padding(spacing16)
+                    .padding(spacing16),
+                reverseLayout = true
             ) {
-
-                item {
-                    MessageItem(viewModel.receivedMessage.value?.message.orEmpty())
+                Log.d("ChatScreen", "LazyColumn recomposed. Messages: $messages")
+                items(messages?.size ?: 0) {
+                    Log.d("MessageItem", "ChatScreen: $it -- -- ${messages?.get(it)}")
+                    MessageItem(messages?.get(it))
+                    Log.d("ChatScreen", "LazyColumn recomposed. Messages: $messages")
+                    Spacer(modifier = Modifier.height(spacing12))
                 }
 
             }
@@ -131,20 +144,6 @@ fun ChatScreen(
                         .padding(vertical = spacing12, horizontal = spacing16),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-//                    Icon(
-//                        painter = painterResource(id = R.drawable.ic_attach_file),
-//                        contentDescription = null,
-//                        modifier = Modifier
-//                            .size(40.dp)
-//                            .click {
-////                                focusManager.clearFocus()
-////                                showBottomSheet.value = true
-//                            }
-//                            .padding(
-//                                spacing8
-//                            ),
-//                        tint = Base500
-//                    )
                     TextField(
                         value = textFieldValue.value,
                         onValueChange = {

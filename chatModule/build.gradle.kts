@@ -54,4 +54,12 @@ dependencies {
     implementation(libs.koin.compose)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+
+    //Coil for load image
+    implementation("io.coil-kt:coil-compose:2.6.0")
+
+    implementation ("androidx.compose.ui:ui-util:1.6.1")
+
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
 }
