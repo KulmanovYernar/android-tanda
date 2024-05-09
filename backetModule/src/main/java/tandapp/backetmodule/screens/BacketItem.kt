@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ButtonColors
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Divider
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
@@ -101,11 +102,11 @@ fun BacketItem(
                         color = Color.Black
                     )
                 )
-                Spacer(modifier = Modifier.height(spacing2))
+                Spacer(modifier = Modifier.height(spacing4))
 
                 Row {
                     Text(
-                        text = "- ${product?.quantity} +",
+                        text = "Количество: ${product?.quantity}",
                         style = TextStyle(
                             fontSize = fontSize13,
                             lineHeight = lineHeight10,
@@ -171,6 +172,8 @@ fun BacketItem(
                         fontSize = fontSize13
                     )
                 }) {
+
+                // TODO Buy
             }
         }
 

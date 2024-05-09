@@ -119,13 +119,14 @@ fun BacketScreen(
                         Spacer(modifier = Modifier.height(spacing16))
                     }
                     item {
-                        Column(modifier = Modifier.fillMaxWidth()) {
+                        Spacer(modifier = Modifier.height(spacing24))
+                    }
+                    item {
+                        Column(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalArrangement = Arrangement.Bottom
+                        ) {
 
-//                            CustomButton(content = {
-//                                CustomButtonText(text = "Оформить заказ")
-//                            },
-//                                onButtonClicked = {}
-//                            )
                             Row(modifier = Modifier.fillMaxWidth()) {
                                 Text(
                                     text = "Total Payment",
@@ -147,6 +148,17 @@ fun BacketScreen(
                                     )
                                 )
                             }
+
+                            Spacer(modifier = Modifier.height(spacing24))
+
+                            CustomButton(
+                                modifier = Modifier
+                                    .height(40.dp),
+                                content = {
+                                    CustomButtonText(text = "Оформить заказ")
+                                },
+                                onButtonClicked = {}
+                            )
                         }
                     }
                 } else {
