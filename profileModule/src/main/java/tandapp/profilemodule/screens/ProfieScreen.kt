@@ -261,7 +261,7 @@ fun ProfileScreen(
                             Spacer(modifier = Modifier.width(spacing4))
                             Column(verticalArrangement = Arrangement.spacedBy(spacing2)) {
                                 Text(
-                                    text = viewModel.profileInfo.value?.firstName.orEmpty() + " " + viewModel.profileInfo.value?.lastName,
+                                    text = viewModel.profileInfo.value?.firstName.orEmpty() + " " + viewModel.profileInfo.value?.lastName.orEmpty(),
                                     fontSize = fontSize16,
                                     lineHeight = lineHeight24,
                                     color = Color.Black,

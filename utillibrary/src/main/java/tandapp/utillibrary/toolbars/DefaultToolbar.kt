@@ -113,16 +113,16 @@ fun DefaultToolbarWithRightIcon(
                 )
             }
 
-            if (icon != null) {
-                Spacer(modifier = Modifier.weight(1f))
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_like),
-                    contentDescription = null,
-                    tint = Silver3,
-                    modifier = Modifier
-                        .size(24.dp)
-                )
-            }
+//            if (icon != null) {
+//                Spacer(modifier = Modifier.weight(1f))
+//                Icon(
+//                    painter = painterResource(id = R.drawable.ic_like),
+//                    contentDescription = null,
+//                    tint = Silver3,
+//                    modifier = Modifier
+//                        .size(24.dp)
+//                )
+//            }
         }
     }
 }

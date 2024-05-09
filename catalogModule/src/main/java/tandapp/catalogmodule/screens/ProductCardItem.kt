@@ -41,6 +41,7 @@ import tandapp.utillibrary.buttons.CustomButton
 import tandapp.utillibrary.buttons.CustomButtonText
 import tandapp.utillibrary.click
 import tandapp.utillibrary.pagers.BannerPager
+import tandapp.utillibrary.pagers.CardPager
 import tandapp.utillibrary.toolbars.DefaultToolbarWithRightIcon
 import tandapp.utillibrary.values.Base100
 import tandapp.utillibrary.values.Purple
@@ -89,7 +90,7 @@ fun ProductCardItem(
                 DefaultToolbarWithRightIcon(
                     onBackClick = onBackClick,
                     buttonText = "Назад",
-                    icon = tandapp.icons.R.drawable.ic_like
+//                    icon = tandapp.icons.R.drawable.ic_like
                 )
             }
         },
@@ -135,7 +136,7 @@ fun ProductCardItem(
                         cornerRadius = cornerRadius8,
                         content = {
                             CustomButtonText(
-                                text = "Добавить в корзину",
+                                text = "В корзину",
                                 fontSize = fontSize16,
                                 lineHeight = lineHeight18
                             )
@@ -151,18 +152,20 @@ fun ProductCardItem(
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(horizontal = spacing16, vertical = spacing8),
+                    .padding(vertical = spacing8),
             ) {
                 item {
                     Spacer(modifier = Modifier.height(spacing12))
                 }
                 item {
-                    BannerPager(
-                        pagerState = pagerState,
-                        image = "http://91.147.105.187:9000/product/get_image/${product?.previewImage}",
-                        iconHeight = 235.dp,
-                        iconWidth = 290.dp,
-                    )
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        CardPager(
+                            pagerState = pagerState,
+                            iconWidth = 306.dp,
+                            iconHeight = 306.dp,
+                            image = "http://91.147.105.187:9000/product/get_image/${product?.previewImage}",
+                        )
+                    }
 
                     Spacer(modifier = Modifier.height(spacing16))
                     Divider()
@@ -171,131 +174,137 @@ fun ProductCardItem(
                     Spacer(modifier = Modifier.height(spacing24))
                 }
                 item {
-                    Text(
-                        text = product?.brand.orEmpty(),
-                        style = TextStyle(
-                            fontSize = 16.sp,
-                            lineHeight = 22.sp,
-                            fontWeight = FontWeight(400),
-                            color = Color.Black,
+                    Column(modifier = Modifier.padding(horizontal = spacing16)) {
+                        Text(
+                            text = product?.brand.orEmpty(),
+                            style = TextStyle(
+                                fontSize = fontSize20,
+                                lineHeight = 22.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                color = Color.Black,
+                            )
                         )
-                    )
-                    Spacer(modifier = Modifier.height(spacing8))
-                    Text(
-                        text = product?.title.orEmpty(),
-                        style = TextStyle(
-                            fontSize = 13.sp,
-                            lineHeight = 18.sp,
-                            fontWeight = FontWeight(400),
-                            color = Color.Black,
+                        Spacer(modifier = Modifier.height(spacing8))
+                        Text(
+                            text = product?.title.orEmpty(),
+                            style = TextStyle(
+                                fontSize = fontSize18,
+                                lineHeight = 22.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                color = Color.Black,
+                            )
                         )
-                    )
-                    Spacer(modifier = Modifier.height(spacing8))
-                    Text(
-                        text = "Размер: ${viewModel.selectedSize.value}",
-                        style = TextStyle(
-                            fontSize = 14.sp,
-                            lineHeight = 18.sp,
-                            fontWeight = FontWeight(400),
-                            color = Color.Black,
+                        Spacer(modifier = Modifier.height(spacing8))
+                        Text(
+                            text = "Размер: ${viewModel.selectedSize.value}",
+                            style = TextStyle(
+                                fontSize = 14.sp,
+                                lineHeight = 18.sp,
+                                fontWeight = FontWeight(400),
+                                color = Color.Black,
+                            )
                         )
-                    )
-                    Spacer(modifier = Modifier.height(spacing8))
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        repeat(viewModel.shoesSizes.size) {
-                            val selected = viewModel.selectedSize.value == viewModel.shoesSizes[it]
-                            Box(
-                                modifier = Modifier
-                                    .size(36.dp)
-                                    .clip(RoundedCornerShape(cornerRadius4))
-                                    .background(
-                                        if (selected)
-                                            Purple else Base100
+                        Spacer(modifier = Modifier.height(spacing8))
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            repeat(viewModel.shoesSizes.size) {
+                                val selected =
+                                    viewModel.selectedSize.value == viewModel.shoesSizes[it]
+                                Box(
+                                    modifier = Modifier
+                                        .size(36.dp)
+                                        .clip(RoundedCornerShape(cornerRadius4))
+                                        .background(
+                                            if (selected)
+                                                Purple else Base100
+                                        )
+                                        .padding(horizontal = spacing8, vertical = spacing2)
+                                        .click {
+                                            viewModel.selectedSize.value = viewModel.shoesSizes[it]
+                                        },
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        text = viewModel.shoesSizes.get(it),
+                                        color = if (selected) Color.White else Color.Black,
+                                        fontSize = fontSize14,
+                                        lineHeight = lineHeight24,
+                                        fontWeight = FontWeight.Normal,
+                                        textAlign = TextAlign.Center
                                     )
-                                    .padding(horizontal = spacing8, vertical = spacing2)
-                                    .click {
-                                        viewModel.selectedSize.value = viewModel.shoesSizes[it]
-                                    },
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Text(
-                                    text = viewModel.shoesSizes.get(it),
-                                    color = if (selected) Color.White else Color.Black,
-                                    fontSize = fontSize14,
-                                    lineHeight = lineHeight24,
-                                    fontWeight = FontWeight.Normal,
-                                    textAlign = TextAlign.Center
-                                )
+                                }
+                                Spacer(modifier = Modifier.width(spacing4))
                             }
-                            Spacer(modifier = Modifier.width(spacing4))
                         }
-                    }
-                    Spacer(modifier = Modifier.height(spacing8))
-                    Text(
-                        text = "Цвет: ${viewModel.shoesColors.get(viewModel.selectedColor.value).title}",
-                        style = TextStyle(
-                            fontSize = 14.sp,
-                            lineHeight = 18.sp,
-                            fontWeight = FontWeight(400),
-                            color = Color.Black,
+                        Spacer(modifier = Modifier.height(spacing8))
+                        Text(
+                            text = "Цвет: ${viewModel.shoesColors.get(viewModel.selectedColor.value).title}",
+                            style = TextStyle(
+                                fontSize = 14.sp,
+                                lineHeight = 18.sp,
+                                fontWeight = FontWeight(400),
+                                color = Color.Black,
+                            )
                         )
-                    )
-                    Spacer(modifier = Modifier.height(spacing8))
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        repeat(viewModel.shoesColors.size) {
-                            val selected =
-                                viewModel.selectedColor.value == viewModel.shoesColors[it].id
-                            Box(
-                                modifier = Modifier
-                                    .size(36.dp)
-                                    .clip(RoundedCornerShape(cornerRadius8))
-                                    .border(
-                                        1.dp, color = if (selected) Purple else Silver4,
-                                        shape = RoundedCornerShape(cornerRadius8)
-                                    )
-                                    .background(
-                                        viewModel.shoesColors[it].color,
-                                    )
-                                    .click {
-                                        viewModel.selectedColor.value = viewModel.shoesColors[it].id
-                                    },
-                                contentAlignment = Alignment.Center
-                            ) {
+                        Spacer(modifier = Modifier.height(spacing8))
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            repeat(viewModel.shoesColors.size) {
+                                val selected =
+                                    viewModel.selectedColor.value == viewModel.shoesColors[it].id
+                                Box(
+                                    modifier = Modifier
+                                        .size(36.dp)
+                                        .clip(RoundedCornerShape(cornerRadius8))
+                                        .border(
+                                            1.dp, color = if (selected) Purple else Silver4,
+                                            shape = RoundedCornerShape(cornerRadius8)
+                                        )
+                                        .background(
+                                            viewModel.shoesColors[it].color,
+                                        )
+                                        .click {
+                                            viewModel.selectedColor.value =
+                                                viewModel.shoesColors[it].id
+                                        },
+                                    contentAlignment = Alignment.Center
+                                ) {
 
+                                }
+                                Spacer(modifier = Modifier.width(spacing4))
                             }
-                            Spacer(modifier = Modifier.width(spacing4))
                         }
                     }
                 }
 
                 item {
-                    Spacer(modifier = Modifier.height(spacing16))
+                    Column(modifier = Modifier.padding(horizontal = spacing16)) {
+                        Spacer(modifier = Modifier.height(spacing16))
 
-                    Text(
-                        text = "Описание",
-                        fontWeight = FontWeight.SemiBold,
-                        color = Color.Black,
-                        fontSize = fontSize18,
-                        lineHeight = lineHeight24
-                    )
-
-                    Spacer(modifier = Modifier.height(spacing8))
-
-                    Text(
-                        text = product?.description.orEmpty(),
-                        style = TextStyle(
-                            fontSize = fontSize13,
-                            lineHeight = lineHeight18,
-                            fontWeight = FontWeight.Normal,
+                        Text(
+                            text = "Описание",
+                            fontWeight = FontWeight.SemiBold,
                             color = Color.Black,
+                            fontSize = fontSize18,
+                            lineHeight = lineHeight24
                         )
-                    )
+
+                        Spacer(modifier = Modifier.height(spacing8))
+
+                        Text(
+                            text = product?.description.orEmpty(),
+                            style = TextStyle(
+                                fontSize = fontSize13,
+                                lineHeight = lineHeight18,
+                                fontWeight = FontWeight.Normal,
+                                color = Color.Black,
+                            )
+                        )
+                    }
                 }
                 item {
                     Spacer(modifier = Modifier.height(spacing24))
@@ -305,7 +314,8 @@ fun ProductCardItem(
                         fontSize = fontSize20,
                         lineHeight = lineHeight28,
                         color = Color.Black,
-                        fontWeight = FontWeight.SemiBold
+                        fontWeight = FontWeight.SemiBold,
+                        modifier = Modifier.padding(start = spacing16)
                     )
                 }
             }

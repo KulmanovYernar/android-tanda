@@ -135,10 +135,12 @@ fun HomeScreen(
                 }
 
                 item {
-                    BannerPager(
-                        pagerState = pagerState,
-                        image = "http://91.147.105.187:9000/product/get_image/1"
-                    )
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        BannerPager(
+                            pagerState = pagerState,
+                            image = "http://91.147.105.187:9000/product/get_image/1"
+                        )
+                    }
                 }
 
                 item {
@@ -190,7 +192,7 @@ fun HomeScreen(
                             )
                         } else {
                             Text(
-                                text = "${profileInfo?.firstName} ${profileInfo?.lastName}",
+                                text = "${profileInfo?.firstName.orEmpty()} ${profileInfo?.lastName.orEmpty()}",
                                 fontSize = fontSize16,
                                 lineHeight = lineHeight24,
                                 color = Color.Black,

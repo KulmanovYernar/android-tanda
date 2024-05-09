@@ -22,8 +22,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
@@ -33,9 +35,11 @@ import tandapp.utillibrary.ProductModel
 import tandapp.utillibrary.click
 import tandapp.utillibrary.values.Silver3
 import tandapp.utillibrary.values.fontSize10
+import tandapp.utillibrary.values.fontSize13
 import tandapp.utillibrary.values.fontSize8
 import tandapp.utillibrary.values.lineHeight10
 import tandapp.utillibrary.values.lineHeight13
+import tandapp.utillibrary.values.lineHeight18
 import tandapp.utillibrary.values.spacing12
 import tandapp.utillibrary.values.spacing20
 import tandapp.utillibrary.values.spacing4
@@ -53,7 +57,7 @@ fun Recommendations(
         modifier = Modifier.padding(bottom = spacing64),
         horizontalArrangement = Arrangement.spacedBy(spacing12),
         verticalArrangement = Arrangement.spacedBy(spacing20),
-        maxItemsInEachRow = 3
+        maxItemsInEachRow = 2
     ) {
         repeat(products?.size ?: 0) {
             RecommendationItem(
@@ -74,26 +78,25 @@ private fun RecommendationItem(
     Box(
         modifier = Modifier
             .background(color = Color.White)
-            .height(180.dp)
-            .width(107.dp)
+            .size(170.dp)
             .padding(horizontal = spacing4)
-            .click{
+            .click {
                 onClick(product?.id)
             }
     ) {
-        Icon(
-            painter = painterResource(id = tandapp.icons.R.drawable.ic_like),
-            contentDescription = null,
-            tint = Silver3,
-            modifier = Modifier
-                .size(22.dp)
-                .align(Alignment.TopEnd)
-                .offset(x = (-6).dp, y = 10.dp)
-                .zIndex(1f)
-                .click {
-                    onAddProductToBacket(product?.id)
-                }
-        )
+//        Icon(
+//            painter = painterResource(id = tandapp.icons.R.drawable.ic_like),
+//            contentDescription = null,
+//            tint = Silver3,
+//            modifier = Modifier
+//                .size(22.dp)
+//                .align(Alignment.TopEnd)
+//                .offset(x = (-6).dp, y = 10.dp)
+//                .zIndex(1f)
+//                .click {
+//                    onAddProductToBacket(product?.id)
+//                }
+//        )
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
@@ -103,8 +106,9 @@ private fun RecommendationItem(
                 model = "http://91.147.105.187:9000/product/get_image/${product?.previewImage}",
                 contentDescription = null,
                 modifier = Modifier
-                    .width(90.dp)
-                    .height(120.dp)
+                    .width(115.dp)
+                    .height(120.dp),
+                contentScale = ContentScale.Crop
             )
 //            Image(
 //                painter = painterResource(id = tandapp.icons.R.drawable.img_sneakers),
@@ -119,8 +123,9 @@ private fun RecommendationItem(
             Text(
                 text = product?.brand.orEmpty() + " " + product?.title.orEmpty(),
                 color = Color.Black,
-                fontSize = fontSize10,
-                lineHeight = lineHeight10
+                fontSize = fontSize13,
+                lineHeight = lineHeight18,
+                fontWeight = FontWeight.Medium
             )
 
             Spacer(modifier = Modifier.height(spacing8))
@@ -130,8 +135,8 @@ private fun RecommendationItem(
                 Text(
                     text = "${product?.price} ₸",
                     color = Color.Black,
-                    fontSize = fontSize10,
-                    lineHeight = lineHeight13
+                    fontSize = fontSize13,
+                    lineHeight = lineHeight18
                 )
 //                Spacer(modifier = Modifier.width(spacing4))
 //                Text(
