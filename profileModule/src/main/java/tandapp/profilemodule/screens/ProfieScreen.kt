@@ -7,6 +7,7 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -23,6 +24,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -34,6 +36,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
@@ -41,6 +44,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -48,18 +55,22 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
+import tandapp.icons.R
 import tandapp.navigationmodule.CustomBottomNavigation
 import tandapp.navigationmodule.destinations.LoginDestinations
 import tandapp.profilemodule.viewmodels.ProfileViewModel
 import tandapp.utillibrary.buttons.CustomButton
 import tandapp.utillibrary.buttons.CustomButtonText
 import tandapp.utillibrary.click
+import tandapp.utillibrary.textfields.DefaultTextField
 import tandapp.utillibrary.toolbars.DefaultToolbarWithEditButton
 import tandapp.utillibrary.ui_components.BoxImage
+import tandapp.utillibrary.values.Gray
 import tandapp.utillibrary.values.Silver3
 import tandapp.utillibrary.values.Silver4
 import tandapp.utillibrary.values.cornerRadius10
 import tandapp.utillibrary.values.fontSize13
+import tandapp.utillibrary.values.fontSize14
 import tandapp.utillibrary.values.fontSize16
 import tandapp.utillibrary.values.lineHeight20
 import tandapp.utillibrary.values.lineHeight24
@@ -98,6 +109,17 @@ fun ProfileScreen(
     }
     val uploadImageClick = remember {
         mutableStateOf(false)
+    }
+    val onChangeData = remember {
+        mutableStateOf(false)
+    }
+
+    val firstNameFocusReq = remember {
+        mutableStateOf(FocusRequester())
+    }
+
+    val lastNameFocusReq = remember {
+        mutableStateOf(FocusRequester())
     }
 
     val imagePickerLauncher = rememberLauncherForActivityResult(
@@ -148,8 +170,16 @@ fun ProfileScreen(
                     ) {
                         DefaultToolbarWithEditButton(
                             title = "Профиль",
+                            buttonText = if (onChangeData.value) "Готово" else "Изменить",
                             titleColor = Color.Black,
-                            onEditClick = {}
+                            onEditClick = {
+                                onChangeData.value = true
+                            },
+                            onCompleteClick = {
+                                onChangeData.value = false
+                                viewModel.updateProfileInfo()
+                            },
+                            onChangeData = onChangeData.value,
                         )
                     }
                 }
@@ -157,78 +187,126 @@ fun ProfileScreen(
         },
         content = {
             if (registered == true) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(
-                            top = spacing8,
-                            bottom = it.calculateBottomPadding(),
-                            start = spacing16,
-                            end = spacing16
-                        )
-                ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Start,
-                        verticalAlignment = Alignment.CenterVertically
+                if (onChangeData.value) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = spacing16)
                     ) {
-                        Image(
-                            painter = painterResource(id = tandapp.icons.R.drawable.circle_photo),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .size(50.dp)
-                                .clip(CircleShape)
-                                .click {
-
-                                }
+                        Text(
+                            text = "First Name",
+                            fontSize = fontSize14,
+                            lineHeight = lineHeight24,
+                            color = Color.Black
                         )
-                        Spacer(modifier = Modifier.width(spacing4))
-                        Column(verticalArrangement = Arrangement.spacedBy(spacing2)) {
-                            Text(
-                                text = "Murat Altynay",
-                                fontSize = fontSize16,
-                                lineHeight = lineHeight24,
-                                color = Color.Black,
-                                fontWeight = FontWeight.Medium
-                            )
 
-                            Text(
-                                text = "murat@moinak.kz",
-                                fontSize = fontSize13,
-                                lineHeight = lineHeight20,
-                                color = Color.Blue,
-                                fontWeight = FontWeight.Normal
+                        Spacer(Modifier.height(spacing8))
+
+                        DefaultTextField(
+                            value = viewModel.firstName.value,
+                            hint = "First Name",
+                            onValueChange = viewModel::onFirstNameChange,
+                            singleLine = true,
+                            keyboardOptions = KeyboardOptions.Default.copy(
+                                keyboardType = KeyboardType.Email,
+                                imeAction = ImeAction.Next
+                            ),
+                            focusRequester = firstNameFocusReq.value
+                        )
+
+                        Spacer(Modifier.height(spacing8))
+
+                        Text(
+                            text = "Last Name",
+                            fontSize = fontSize14,
+                            lineHeight = lineHeight24,
+                            color = Color.Black
+                        )
+
+                        Spacer(Modifier.height(spacing8))
+
+                        DefaultTextField(
+                            value = viewModel.lastName.value.orEmpty(),
+                            hint = "Last Name",
+                            onValueChange = viewModel::onLastNameChange,
+                            focusRequester = lastNameFocusReq.value,
+                            singleLine = true,
+                        )
+                    }
+                } else {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(
+                                top = spacing8,
+                                bottom = it.calculateBottomPadding(),
+                                start = spacing16,
+                                end = spacing16
+                            )
+                    ) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Start,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Image(
+                                painter = painterResource(id = tandapp.icons.R.drawable.circle_photo),
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .size(50.dp)
+                                    .clip(CircleShape)
+                                    .click {
+
+                                    }
+                            )
+                            Spacer(modifier = Modifier.width(spacing4))
+                            Column(verticalArrangement = Arrangement.spacedBy(spacing2)) {
+                                Text(
+                                    text = viewModel.profileInfo.value?.firstName.orEmpty() + " " + viewModel.profileInfo.value?.lastName,
+                                    fontSize = fontSize16,
+                                    lineHeight = lineHeight24,
+                                    color = Color.Black,
+                                    fontWeight = FontWeight.Medium
+                                )
+
+                                Text(
+                                    text = viewModel.profileInfo.value?.email.orEmpty(),
+                                    fontSize = fontSize13,
+                                    lineHeight = lineHeight20,
+                                    color = Color.Blue,
+                                    fontWeight = FontWeight.Normal
+                                )
+                            }
+                        }
+                        Spacer(modifier = Modifier.height(spacing24))
+                        Column(verticalArrangement = Arrangement.spacedBy(spacing20)) {
+                            ChangeProfilePhoto(onClick = {
+                                uploadImageClick.value = true
+                            })
+                            DefaultRowItem(
+                                icon = tandapp.icons.R.drawable.language,
+                                title = "Язык",
+                                hint = "Русский",
+                                onClick = {}
+                            )
+                            DefaultRowItem(
+                                icon = tandapp.icons.R.drawable.ic_favorite,
+                                title = "Избранные",
+                                hint = "24",
+                                onClick = {}
+                            )
+                            DefaultRowItem(
+                                icon = tandapp.icons.R.drawable.ic_faq,
+                                title = "Tanda App FAQ",
+                                onClick = {}
                             )
                         }
-                    }
-                    Spacer(modifier = Modifier.height(spacing24))
-                    Column(verticalArrangement = Arrangement.spacedBy(spacing20)) {
-                        ChangeProfilePhoto(onClick = {
-                            uploadImageClick.value = true
+                        Spacer(modifier = Modifier.weight(1f))
+                        LogOut(onLogOutClick = {
+                            SharedPreferencesHelper.clear()
                         })
-                        DefaultRowItem(
-                            icon = tandapp.icons.R.drawable.language,
-                            title = "Язык",
-                            hint = "Русский",
-                            onClick = {}
-                        )
-                        DefaultRowItem(
-                            icon = tandapp.icons.R.drawable.ic_favorite,
-                            title = "Избранные",
-                            hint = "24",
-                            onClick = {}
-                        )
-                        DefaultRowItem(
-                            icon = tandapp.icons.R.drawable.ic_faq,
-                            title = "Tanda App FAQ",
-                            onClick = {}
-                        )
+                        Spacer(modifier = Modifier.height(spacing32))
                     }
-                    Spacer(modifier = Modifier.weight(1f))
-                    LogOut(onLogOutClick = {
-                        SharedPreferencesHelper.clear()
-                    })
-                    Spacer(modifier = Modifier.height(spacing32))
                 }
             } else {
                 Column(

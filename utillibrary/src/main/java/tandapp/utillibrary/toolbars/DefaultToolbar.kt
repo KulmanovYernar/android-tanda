@@ -130,8 +130,11 @@ fun DefaultToolbarWithRightIcon(
 @Composable
 fun DefaultToolbarWithEditButton(
     title: String = "",
+    buttonText: String = "",
     titleColor: Color = Color.Black,
-    onEditClick: () -> Unit
+    onEditClick: () -> Unit,
+    onCompleteClick: () -> Unit,
+    onChangeData: Boolean? = false
 ) {
     Column(
         Modifier
@@ -154,12 +157,16 @@ fun DefaultToolbarWithEditButton(
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 Text(
-                    text = "Изменить",
+                    text = buttonText,
                     fontSize = fontSize16,
                     lineHeight = lineHeight22,
                     color = Color.Blue,
                     modifier = Modifier.click {
-                        onEditClick()
+                        if(onChangeData == true){
+                            onCompleteClick()
+                        }else{
+                            onEditClick()
+                        }
                     }
                 )
             }
