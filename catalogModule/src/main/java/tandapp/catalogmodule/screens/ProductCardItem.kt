@@ -161,8 +161,6 @@ fun ProductCardItem(
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         CardPager(
                             pagerState = pagerState,
-                            iconWidth = 306.dp,
-                            iconHeight = 306.dp,
                             image = "http://91.147.105.187:9000/product/get_image/${product?.previewImage}",
                         )
                     }

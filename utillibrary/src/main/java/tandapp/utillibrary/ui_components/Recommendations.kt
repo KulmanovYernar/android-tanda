@@ -26,6 +26,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
@@ -106,9 +107,8 @@ private fun RecommendationItem(
                 model = "http://91.147.105.187:9000/product/get_image/${product?.previewImage}",
                 contentDescription = null,
                 modifier = Modifier
-                    .width(115.dp)
                     .height(120.dp),
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.FillWidth
             )
 //            Image(
 //                painter = painterResource(id = tandapp.icons.R.drawable.img_sneakers),
@@ -125,18 +125,21 @@ private fun RecommendationItem(
                 color = Color.Black,
                 fontSize = fontSize13,
                 lineHeight = lineHeight18,
-                fontWeight = FontWeight.Medium
+                fontWeight = FontWeight.Medium,
+                textAlign = TextAlign.Center
             )
 
             Spacer(modifier = Modifier.height(spacing8))
 
 
-            Row(modifier = Modifier.fillMaxWidth()) {
+            Row(modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center) {
                 Text(
                     text = "${product?.price} ₸",
                     color = Color.Black,
                     fontSize = fontSize13,
-                    lineHeight = lineHeight18
+                    lineHeight = lineHeight18,
+                    fontWeight = FontWeight.Medium,
                 )
 //                Spacer(modifier = Modifier.width(spacing4))
 //                Text(

@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -67,12 +68,14 @@ fun BacketItem(
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically
         ) {
+            Spacer(modifier = Modifier.width(spacing16))
             AsyncImage(
                 model = "http://91.147.105.187:9000/product/get_image/${product?.previewImage}",
                 contentDescription = null,
                 modifier = Modifier
-                    .height(153.dp)
-                    .width(148.dp)
+                    .width(150.dp)
+                    .height(153.dp),
+                contentScale = ContentScale.FillWidth
             )
             Spacer(modifier = Modifier.width(spacing40))
             Column(

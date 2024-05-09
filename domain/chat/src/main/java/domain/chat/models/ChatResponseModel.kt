@@ -6,5 +6,5 @@ import tandapp.utillibrary.ProductModel
 @Keep
 data class ChatResponseModel(
     val product: ProductModel?,
-    val message: String?
+    val message: List<String>?
 )
