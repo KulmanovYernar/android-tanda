@@ -173,7 +173,7 @@ fun LoginScreen(
                         Spacer(Modifier.height(spacing8))
 
                         DefaultTextField(
-                            value = viewModel.password.value,
+                            value = viewModel.password.value.orEmpty(),
                             hint = "Введите пароль",
                             onValueChange = viewModel::onPasswordChange,
                             focusRequester = passwordFocusRequester,

@@ -15,7 +15,7 @@ class LoginViewModel(
     private val authRepository: AuthRepository
 ) : ViewModel() {
     val email: MutableState<String> = mutableStateOf("")
-    val password: MutableState<String> = mutableStateOf("")
+    val password: MutableState<String?> = mutableStateOf(null)
     val loginWithOtp: MutableState<Boolean> = mutableStateOf(true)
 
     fun onEmailChange(email: String) {

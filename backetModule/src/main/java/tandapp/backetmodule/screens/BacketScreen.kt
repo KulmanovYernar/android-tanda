@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,12 +20,14 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -42,6 +45,7 @@ import tandapp.utillibrary.values.Silver2
 import tandapp.utillibrary.values.Silver4
 import tandapp.utillibrary.values.cornerRadius8
 import tandapp.utillibrary.values.fontSize11
+import tandapp.utillibrary.values.fontSize14
 import tandapp.utillibrary.values.fontSize16
 import tandapp.utillibrary.values.lineHeight18
 import tandapp.utillibrary.values.lineHeight22
@@ -66,6 +70,10 @@ fun BacketScreen(
 //        scrollStateCallback = viewModel.scrollStateSaveCallback)
     BackHandler {
         onBack(route)
+    }
+
+    LaunchedEffect(key1 = Unit) {
+        viewModel.getProducts()
     }
     val pagerState = rememberPagerState(initialPage = 0, pageCount = { 6 })
 
@@ -97,84 +105,128 @@ fun BacketScreen(
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = spacing8, bottom = spacing8)
+                    .padding(top = spacing8, bottom = spacing8, start = spacing16, end = spacing16)
             ) {
-                item {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = spacing24),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Icon(
-                            imageVector = ImageVector.vectorResource(tandapp.icons.R.drawable.ic_backet),
-                            contentDescription = null,
-                            tint = Gray.copy(0.8f),
-                            modifier = Modifier.size(40.dp)
+                if ((viewModel.productsForBacket.value?.productsSelected?.size ?: 0) > 0) {
+                    items(viewModel.productsForBacket.value?.productsSelected?.size ?: 0) {
+                        val product = viewModel.productsForBacket.value?.productsSelected?.get(it)
+                        BacketItem(
+                            product = product,
+                            onDeleteProduct = {
+                                viewModel.deleteProduct(product?.id ?: 0)
+                            }
                         )
-                        Spacer(modifier = Modifier.height(spacing2))
-                        Text(
-                            text = "Корзина пуста",
-                            color = Color.Black,
-                            fontSize = fontSize16,
-                            lineHeight = lineHeight22,
-                            fontWeight = FontWeight.Medium
-                        )
-                        Spacer(modifier = Modifier.height(spacing4))
-                        Text(
-                            text = "Воспользуйтесь чатом, чтобы найти все, что нужно.",
-                            color = Silver4,
-                            fontSize = fontSize11,
-                            lineHeight = lineHeight18,
-                            fontWeight = FontWeight.Normal
-                        )
-                        Spacer(modifier = Modifier.height(spacing8))
-                        CustomButton(
-                            modifier = Modifier
-                                .width(118.dp)
-                                .height(40.dp),
-                            cornerRadius = cornerRadius8,
-                            content = {
-                                CustomButtonText(
-                                    text = "На главную",
-                                    fontSize = fontSize16,
-                                    lineHeight = lineHeight18
-                                )
-                            }) {
-                            onBack(route)
-                        }
-                        Spacer(modifier = Modifier.height(spacing24))
+                        Spacer(modifier = Modifier.height(spacing16))
                     }
-                }
+                    item {
+                        Column(modifier = Modifier.fillMaxWidth()) {
 
-
-                item {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(Silver2.copy(alpha = 0.8f))
-                            .padding(horizontal = spacing16, vertical = spacing8),
-                    ) {
-                        Text(
-                            text = "Рекомендуем",
-                            color = Color.Black,
-                            fontSize = fontSize16,
-                            lineHeight = lineHeight22,
-                            fontWeight = FontWeight.Medium
-                        )
-                        Spacer(modifier = Modifier.height(spacing20))
-
-
-                        Recommendations(
-                            products = viewModel.products.value,
-                            onClick = { id ->
-                                navController.currentBackStackEntry?.savedStateHandle?.set(
-                                    "productId",
-                                    id
+//                            CustomButton(content = {
+//                                CustomButtonText(text = "Оформить заказ")
+//                            },
+//                                onButtonClicked = {}
+//                            )
+                            Row(modifier = Modifier.fillMaxWidth()) {
+                                Text(
+                                    text = "Total Payment",
+                                    style = TextStyle(
+                                        fontSize = fontSize14,
+                                        lineHeight = lineHeight22,
+                                        fontWeight = FontWeight(500),
+                                        color = Color.Black,
+                                    )
                                 )
-                                navController.navigate(CatalogDestinations.CATALOG_PRODUCT_CARD_ITEM)
-                            })
+                                Spacer(modifier = Modifier.weight(1f))
+                                Text(
+                                    text = "${viewModel.productsForBacket.value?.totalPrice} ₸",
+                                    style = TextStyle(
+                                        fontSize = fontSize14,
+                                        lineHeight = lineHeight22,
+                                        fontWeight = FontWeight(500),
+                                        color = Color.Black,
+                                    )
+                                )
+                            }
+                        }
+                    }
+                } else {
+                    item {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = spacing24),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Icon(
+                                imageVector = ImageVector.vectorResource(tandapp.icons.R.drawable.ic_backet),
+                                contentDescription = null,
+                                tint = Gray.copy(0.8f),
+                                modifier = Modifier.size(40.dp)
+                            )
+                            Spacer(modifier = Modifier.height(spacing2))
+                            Text(
+                                text = "Корзина пуста",
+                                color = Color.Black,
+                                fontSize = fontSize16,
+                                lineHeight = lineHeight22,
+                                fontWeight = FontWeight.Medium
+                            )
+                            Spacer(modifier = Modifier.height(spacing4))
+                            Text(
+                                text = "Воспользуйтесь чатом, чтобы найти все, что нужно.",
+                                color = Silver4,
+                                fontSize = fontSize11,
+                                lineHeight = lineHeight18,
+                                fontWeight = FontWeight.Normal
+                            )
+                            Spacer(modifier = Modifier.height(spacing8))
+                            CustomButton(
+                                modifier = Modifier
+                                    .width(118.dp)
+                                    .height(40.dp),
+                                cornerRadius = cornerRadius8,
+                                content = {
+                                    CustomButtonText(
+                                        text = "На главную",
+                                        fontSize = fontSize16,
+                                        lineHeight = lineHeight18
+                                    )
+                                }) {
+                                onBack(route)
+                            }
+                            Spacer(modifier = Modifier.height(spacing24))
+                        }
+                    }
+
+
+                    item {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .background(Silver2.copy(alpha = 0.8f))
+                                .padding(vertical = spacing8),
+                        ) {
+                            Text(
+                                text = "Рекомендуем",
+                                color = Color.Black,
+                                fontSize = fontSize16,
+                                lineHeight = lineHeight22,
+                                fontWeight = FontWeight.Medium
+                            )
+                            Spacer(modifier = Modifier.height(spacing20))
+
+
+                            Recommendations(
+                                products = viewModel.previewProducts.value,
+                                onClick = { id ->
+                                    navController.currentBackStackEntry?.savedStateHandle?.set(
+                                        "productId",
+                                        id
+                                    )
+                                    navController.navigate(CatalogDestinations.CATALOG_PRODUCT_CARD_ITEM)
+                                })
+                        }
                     }
                 }
             }

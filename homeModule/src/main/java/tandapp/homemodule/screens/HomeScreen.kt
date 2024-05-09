@@ -87,7 +87,6 @@ fun HomeScreen(
                     contentAlignment = Alignment.Center
                 ) {
                     DefaultHomeToolbar(
-                        title = "tandapp",
                         onCityClick = {},
                         icon = R.drawable.ic_tanda
                     )
@@ -210,6 +209,9 @@ fun HomeScreen(
 
                         Recommendations(
                             products = viewModel.products.value,
+                            onAddProductToBacket = {
+
+                            },
                             onClick = { id ->
                                 navController.currentBackStackEntry?.savedStateHandle?.set(
                                     "productId",

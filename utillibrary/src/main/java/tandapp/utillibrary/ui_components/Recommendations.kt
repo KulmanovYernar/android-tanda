@@ -46,7 +46,8 @@ import tandapp.utillibrary.values.spacing8
 @Composable
 fun Recommendations(
     products: List<ProductModel>? = null,
-    onClick: (id: Int?) -> Unit = {}
+    onClick: (id: Int?) -> Unit = {},
+    onAddProductToBacket: (id: Int?) -> Unit = {},
 ) {
     FlowRow(
         modifier = Modifier.padding(bottom = spacing64),
@@ -57,6 +58,7 @@ fun Recommendations(
         repeat(products?.size ?: 0) {
             RecommendationItem(
                 onClick = onClick,
+                onAddProductToBacket = onAddProductToBacket,
                 product = products?.get(it)
             )
         }
@@ -67,6 +69,7 @@ fun Recommendations(
 private fun RecommendationItem(
     product: ProductModel? = null,
     onClick: (id: Int?) -> Unit,
+    onAddProductToBacket: (id: Int?) -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -87,6 +90,9 @@ private fun RecommendationItem(
                 .align(Alignment.TopEnd)
                 .offset(x = (-6).dp, y = 10.dp)
                 .zIndex(1f)
+                .click {
+                    onAddProductToBacket(product?.id)
+                }
         )
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,

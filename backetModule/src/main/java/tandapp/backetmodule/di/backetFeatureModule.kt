@@ -7,6 +7,7 @@ import tandapp.backetmodule.viewmodels.BacketViewModel
 val backetFeatureModule = module {
 
     viewModel {
-        BacketViewModel(productRepository = get())
+        BacketViewModel(productRepository = get(),
+            backetRepository = get())
     }
 }

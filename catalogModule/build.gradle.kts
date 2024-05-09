@@ -51,6 +51,7 @@ dependencies {
     implementation(libs.compose.ui)
     implementation(libs.koin.compose)
     implementation(project(":domain:catalog"))
+    implementation(project(":domain:backet"))
 
     androidTestImplementation(libs.espresso.core)
 }

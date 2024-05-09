@@ -104,7 +104,7 @@ fun ProductCardItem(
                             lineHeight = lineHeight18
                         )
                     }) {
-
+                    viewModel.addProductToBacket(id)
 
                 }
             }

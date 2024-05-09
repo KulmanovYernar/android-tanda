@@ -5,6 +5,8 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import domain.backet.BacketRepository
+import domain.backet.models.BacketItemModel
 import domain.catalog.ProductRepository
 import domain.profile.ProfileRepository
 import tandapp.utillibrary.ProductModel
@@ -15,6 +17,7 @@ import kotlinx.coroutines.launch
 class HomeViewModel(
     private val profileRepository: ProfileRepository,
     private val productRepository: ProductRepository,
+    private val backetRepository: BacketRepository,
 
     ) : ViewModel() {
     val imageId: MutableState<Int?> = mutableStateOf(null)
@@ -65,6 +68,8 @@ class HomeViewModel(
                 }
         }
     }
+
+
 
     fun refreshAll() {
 //        getProfileInfo()

@@ -1,6 +1,7 @@
 package domain.backet
 
-import domain.backet.models.BacketItem
+import domain.backet.models.BacketItemModel
+import domain.backet.models.BacketProductsModel
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -10,20 +11,20 @@ import retrofit2.http.Query
 
 interface BacketService {
 
-    @POST("backet/delete/{id}")
-    suspend fun deleteProduct(@Path("id") id: Int): Response<Unit>
+    @POST("basket/delete/{id}")
+    suspend fun deleteProduct(@Path("id") id: Int): Response<BacketProductsModel>
 
-    @POST("backet/append")
-    suspend fun addProductToBacket(@Body backet: BacketItem): Response<Unit>
+    @POST("basket/append")
+    suspend fun addProductToBacket(@Body backet: BacketItemModel): Response<Unit>
 
-    @GET("backet/unselect/{id}")
+    @GET("basket/unselect/{id}")
     suspend fun unSelectProduct(@Path("id") id: Int): Response<Unit>
 
-    @GET("backet/select/{id}")
+    @GET("basket/select/{id}")
     suspend fun selectProduct(@Path("id") id: Int): Response<Unit>
 
-    @GET("backet/get")
-    suspend fun getBacket(): Response<Unit> // TODO add Model
+    @GET("basket/get")
+    suspend fun getBacket(): Response<BacketProductsModel>
 
     @GET("backet/decrease")
     suspend fun decreaseBacket(@Query("productId") productId: Int, @Query("decreaseBy") decreaseBy: Int): Response<Unit>

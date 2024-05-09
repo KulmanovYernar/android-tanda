@@ -6,6 +6,7 @@ import tandapp.catalogmodule.viewmodels.ProductCardViewModel
 
 val catalogModule = module {
     viewModel {
-        ProductCardViewModel(productRepository = get())
+        ProductCardViewModel(productRepository = get(),
+            backetRepository = get())
     }
 }

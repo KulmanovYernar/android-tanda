@@ -25,7 +25,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import tandapp.utillibrary.values.Purple
+import tandapp.utillibrary.values.fontSize16
 import tandapp.utillibrary.values.fontSize22
+import tandapp.utillibrary.values.lineHeight22
 import tandapp.utillibrary.values.spacing12
 import tandapp.utillibrary.values.spacing4
 import tandapp.utillibrary.values.spacing8
@@ -61,12 +63,24 @@ fun DefaultHomeToolbar(
 //                modifier = Modifier
 //                    .fillMaxWidth()
 //            ) {
+            if (title.isNotEmpty()) {
+                Text(
+                    text = title,
+                    fontSize = fontSize16,
+                    lineHeight = lineHeight22,
+                    color = Color.Black,
+                    fontWeight = FontWeight.SemiBold
+                )
+            } else {
                 Icon(
                     imageVector = ImageVector.vectorResource(tandapp.icons.R.drawable.ic_tanda_app),
                     contentDescription = null,
                     tint = Purple,
-                    modifier = Modifier.width(99.dp).height(24.dp)
+                    modifier = Modifier
+                        .width(99.dp)
+                        .height(24.dp)
                 )
+            }
 //                Spacer(modifier = Modifier.weight(1f))
 //                Text(
 //                    text = "Алматы",

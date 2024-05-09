@@ -5,6 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import domain.backet.BacketRepository
+import domain.backet.models.BacketItemModel
 import domain.catalog.ProductRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
@@ -13,7 +15,8 @@ import tandapp.catalogmodule.models.ShoeColorModel
 import tandapp.utillibrary.ProductModel
 
 class ProductCardViewModel(
-    private val productRepository: ProductRepository
+    private val productRepository: ProductRepository,
+    private val backetRepository: BacketRepository,
 ) : ViewModel() {
 
     val product:MutableState<ProductModel?> = mutableStateOf(null)
@@ -56,4 +59,16 @@ class ProductCardViewModel(
         }
     }
 
+
+    fun addProductToBacket(id: Int) {
+        viewModelScope.launch {
+            backetRepository.addProductToBacket(BacketItemModel(id))
+                .flowOn(Dispatchers.IO)
+                .collect {
+                    it.onSuccess {
+
+                    }
+                }
+        }
+    }
 }

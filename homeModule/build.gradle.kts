@@ -57,6 +57,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.compose.ui)
     implementation(libs.koin.compose)
+    implementation(project(":domain:backet"))
     androidTestImplementation(libs.espresso.core)
     implementation("com.google.accompanist:accompanist-flowlayout:0.32.0")
     testImplementation("org.testng:testng:6.9.6")

@@ -6,7 +6,10 @@ import tandapp.homemodule.viewmodels.HomeViewModel
 
 val homeFeatureModule = module {
     viewModel {
-        HomeViewModel(profileRepository = get(),
-            productRepository = get())
+        HomeViewModel(
+            profileRepository = get(),
+            productRepository = get(),
+            backetRepository = get()
+        )
     }
 }

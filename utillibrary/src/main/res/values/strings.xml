@@ -4,7 +4,7 @@
     <string name="main">Main</string>
     <string name="catalog">Catalog</string>
     <string name="chat">Chat</string>
-    <string name="backet">Backet</string>
+    <string name="basket">Basket</string>
     <string name="profile">Profile</string>
     <string name="app_name">TandaApp</string>
 </resources>
