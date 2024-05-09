@@ -2,6 +2,7 @@ package com.example.auth
 
 import com.example.auth.model.AuthModel
 import com.example.auth.model.AuthToken
+import com.example.auth.model.ConfirmModel
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -12,7 +13,9 @@ interface AuthService {
     @POST("auth/login")
     suspend fun login(@Body model: AuthModel): Response<Unit>
 
-    @GET("auth/confirm-account")
-    suspend fun signUpConfirmation(@Query("token") token:String): Response<AuthToken>
+    @POST("auth/confirm-account")
+    suspend fun signUpConfirmation(
+        @Body dto: ConfirmModel
+    ): Response<AuthToken>
 
 }

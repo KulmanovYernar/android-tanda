@@ -62,6 +62,7 @@ private const val defaultErrorResendTime = 1800000L
 @Composable
 fun ConfirmCodeScreen(
     title: String = "",
+    email: String = "",
     description: String = "",
     processInstanceId: String = "",
     bundle: Bundle? = null,
@@ -71,8 +72,6 @@ fun ConfirmCodeScreen(
     onChangeNumberClick: () -> Unit = {},
     confirmCodeViewModel: ConfirmCodeViewModel = getViewModel()
 ) {
-
-
 
 
 //    val phone = hidePhoneNumber(phoneNumber)
@@ -96,6 +95,7 @@ fun ConfirmCodeScreen(
 
     LaunchedEffect(key1 = true, block = {
         confirmCodeViewModel.startTimer()
+        confirmCodeViewModel.email.value = email
     })
 
 //    confirmCodeViewModel.errorMessage.value = invalidCode
@@ -209,7 +209,7 @@ fun ConfirmCodeScreen(
             },
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
             decorationBox = {
-                CodeInputDecoration(autoOtp.value, 4, error = false)
+                CodeInputDecoration(autoOtp.value, 4, error = confirmCodeViewModel.codeError.value && autoOtp.value.length == 4)
             },
             enabled = true,
             modifier = Modifier.focusRequester(focusRequester = focusRequester)
@@ -291,10 +291,8 @@ private fun CodeEntry(text: String, error: Boolean, hasFocus: Boolean) {
     val localDensity = LocalDensity.current
     val focusManager = LocalFocusManager.current
     if (error) {
-//        color.value = Red700
+        color.value = Color.Red
         focusManager.clearFocus(true)
-    } else if (hasFocus) {
-//        color.value = Green500
     } else {
         color.value = Color.Transparent
     }
@@ -302,7 +300,7 @@ private fun CodeEntry(text: String, error: Boolean, hasFocus: Boolean) {
         modifier = Modifier
             .clip(RoundedCornerShape(cornerRadius16))
             .background(color = Base200)
-            .border(1.dp, color.value, RoundedCornerShape(cornerRadius8))
+            .border(1.dp, color.value, RoundedCornerShape(cornerRadius16))
             .padding(4.dp)
             .widthIn(max = 58.dp, min = 44.dp)
             .height(height = height.value)

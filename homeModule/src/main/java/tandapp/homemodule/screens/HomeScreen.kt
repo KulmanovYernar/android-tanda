@@ -49,6 +49,7 @@ import tandapp.utillibrary.values.Silver2
 import tandapp.utillibrary.values.cornerRadius20
 import tandapp.utillibrary.values.fontSize16
 import tandapp.utillibrary.values.lineHeight22
+import tandapp.utillibrary.values.lineHeight24
 import tandapp.utillibrary.values.spacing12
 import tandapp.utillibrary.values.spacing16
 import tandapp.utillibrary.values.spacing20
@@ -68,7 +69,9 @@ fun HomeScreen(
 //        initialData = viewModel.mainVerticalScrollState.value,
 //        scrollStateCallback = viewModel.scrollStateSaveCallback)
 
-    val pagerState = rememberPagerState(initialPage = 0, pageCount = { 6 })
+    val pagerState = rememberPagerState(initialPage = 0, pageCount = { 3 })
+
+    val profileInfo by viewModel.profileInfo
 
     Scaffold(
         backgroundColor = Color.White,
@@ -182,7 +185,13 @@ fun HomeScreen(
                                 }
                             )
                         } else {
-                            Text(text = "Admin")
+                            Text(
+                                text = "${profileInfo?.firstName} ${profileInfo?.lastName}",
+                                fontSize = fontSize16,
+                                lineHeight = lineHeight24,
+                                color = Color.Black,
+                                fontWeight = FontWeight.Medium
+                            )
                         }
                     }
                 }

@@ -64,7 +64,7 @@ import tandapp.utillibrary.values.spacing8
 @Composable
 fun LoginScreen(
     onForgotPasswordClick: () -> Unit,
-    onLoginClick: () -> Unit,
+    onLoginClick: (email: String) -> Unit,
     onBack: () -> Unit,
     viewModel: LoginViewModel = getViewModel()
 ) {
@@ -227,7 +227,7 @@ fun LoginScreen(
                             )
                         )
 
-                        onLoginClick()
+                        onLoginClick(viewModel.email.value)
                     },
                     content = {
                         Row(

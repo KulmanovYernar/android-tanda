@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -48,6 +49,7 @@ import org.koin.androidx.compose.getViewModel
 import tandapp.chatmodule.MessageItem
 import tandapp.chatmodule.R
 import tandapp.chatmodule.viewmodels.ChatViewModel
+import tandapp.navigationmodule.destinations.CatalogDestinations
 import tandapp.utillibrary.click
 import tandapp.utillibrary.toolbars.DefaultChatToolbar
 import tandapp.utillibrary.ui_components.BoxImage
@@ -57,6 +59,7 @@ import tandapp.utillibrary.values.Base500
 import tandapp.utillibrary.values.Base900
 import tandapp.utillibrary.values.Green500
 import tandapp.utillibrary.values.Purple
+import tandapp.utillibrary.values.Silver2
 import tandapp.utillibrary.values.Silver3
 import tandapp.utillibrary.values.Silver4
 import tandapp.utillibrary.values.cornerRadius20
@@ -122,22 +125,38 @@ fun ChatScreen(
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Silver3)
-                    .padding(spacing16),
-                reverseLayout = true
+                    .background(Silver2)
+                    .padding(
+                        start = spacing16,
+                        end = spacing16,
+                        top = spacing16,
+                        bottom = it.calculateBottomPadding()
+                    ),
+                verticalArrangement = Arrangement.spacedBy(spacing16, Alignment.Bottom)
             ) {
                 Log.d("ChatScreen", "LazyColumn recomposed. Messages: $messages")
                 items(messages?.size ?: 0) {
-                    Log.d("MessageItem", "ChatScreen: $it -- -- ${messages?.get(it)}")
-                    MessageItem(messages?.get(it))
-                    Log.d("ChatScreen", "LazyColumn recomposed. Messages: $messages")
-                    Spacer(modifier = Modifier.height(spacing12))
+                    MessageItem(
+                        model = messages?.get(it),
+                        onClickProduct = {
+                            navController.currentBackStackEntry?.savedStateHandle?.set(
+                                "productId",
+                                messages?.get(it)?.product?.id
+                            )
+                            navController.navigate(CatalogDestinations.CATALOG_PRODUCT_CARD_ITEM)
+                        }
+                    )
                 }
 
             }
         },
         bottomBar = {
-            Column(modifier = Modifier.background(Color.White)) {
+            Column(
+                modifier = Modifier
+                    .imePadding()
+                    .padding(top = spacing16)
+                    .background(Color.White)
+            ) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()

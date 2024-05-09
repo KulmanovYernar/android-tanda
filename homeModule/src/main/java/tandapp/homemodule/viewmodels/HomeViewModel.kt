@@ -9,8 +9,10 @@ import domain.backet.BacketRepository
 import domain.backet.models.BacketItemModel
 import domain.catalog.ProductRepository
 import domain.profile.ProfileRepository
+import domain.profile.models.ProfileModel
 import tandapp.utillibrary.ProductModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 
@@ -25,6 +27,8 @@ class HomeViewModel(
 
     val products: MutableState<List<ProductModel>?> = mutableStateOf(null)
 
+    val profileInfo: MutableState<ProfileModel?> = mutableStateOf(null)
+
     init {
         refreshAll()
     }
@@ -35,7 +39,8 @@ class HomeViewModel(
                 .flowOn(Dispatchers.IO)
                 .collect {
                     it.onSuccess {
-//                        val result = it
+                        val result = it
+                        profileInfo.value = result
 //                        imageId.value = result?.blobId ?: 2
 //                        Log.d("Profile", "getProfileInfo: asd")
                     }
@@ -70,9 +75,8 @@ class HomeViewModel(
     }
 
 
-
     fun refreshAll() {
-//        getProfileInfo()
+        getProfileInfo()
 //        getProfileImage()
         getProductsPreview()
     }

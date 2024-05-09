@@ -69,6 +69,8 @@ import tandapp.utillibrary.values.Gray
 import tandapp.utillibrary.values.Silver3
 import tandapp.utillibrary.values.Silver4
 import tandapp.utillibrary.values.cornerRadius10
+import tandapp.utillibrary.values.cornerRadius20
+import tandapp.utillibrary.values.cornerRadius24
 import tandapp.utillibrary.values.fontSize13
 import tandapp.utillibrary.values.fontSize14
 import tandapp.utillibrary.values.fontSize16
@@ -249,15 +251,12 @@ fun ProfileScreen(
                             horizontalArrangement = Arrangement.Start,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Image(
-                                painter = painterResource(id = tandapp.icons.R.drawable.circle_photo),
-                                contentDescription = null,
-                                modifier = Modifier
-                                    .size(50.dp)
-                                    .clip(CircleShape)
-                                    .click {
-
-                                    }
+                            BoxImage(
+                                imageRes = R.drawable.ic_profile,
+                                boxSize = 45.dp,
+                                cornerRadius = cornerRadius24,
+                                maxHeight = 25.dp,
+                                maxWidth = 25.dp
                             )
                             Spacer(modifier = Modifier.width(spacing4))
                             Column(verticalArrangement = Arrangement.spacedBy(spacing2)) {

@@ -22,13 +22,18 @@ fun NavGraphBuilder.loginGraph(navController: NavController, onLogged: () -> Uni
     composable(route = LoginDestinations.SIGN_IN) {
         LoginScreen(
             onForgotPasswordClick = { navController.navigate(LoginDestinations.FORGOT_PASSWORD) },
-            onLoginClick = { navController.navigate(LoginDestinations.CONFIRM_OTP_CODE) },
+            onLoginClick = { email ->
+                navController.currentBackStackEntry?.savedStateHandle?.set("email", email)
+                navController.navigate(LoginDestinations.CONFIRM_OTP_CODE)
+            },
             onBack = { navController.navigateUp() }
         )
     }
 
     composable(route = LoginDestinations.CONFIRM_OTP_CODE) {
+        val email = navController.previousBackStackEntry?.savedStateHandle?.get<String>("email")
         ConfirmOtpScreen(
+            email = email.orEmpty(),
             onBackClick = {
                 navController.navigateUp()
             },

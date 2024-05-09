@@ -78,20 +78,11 @@ fun BacketItem(
                         color = Color.Black
                     )
                 )
-                Spacer(modifier = Modifier.height(spacing2))
-                Text(
-                    text = "Women s Medium support",
-                    style = TextStyle(
-                        fontSize = fontSize13,
-                        lineHeight = lineHeight10,
-                        fontWeight = FontWeight.Normal,
-                        color = Color.Black
-                    )
-                )
+
                 Spacer(modifier = Modifier.height(spacing2))
 
                 Text(
-                    text = "Цвет: Белый",
+                    text = "Цвет: ${product?.color}",
                     style = TextStyle(
                         fontSize = fontSize13,
                         lineHeight = lineHeight10,

@@ -43,6 +43,7 @@ fun ConfirmOtpScreen(
     navController: NavController,
     confirmType: String = "",
     processInstanceId: String = "",
+    email: String = "",
     onBackClick: () -> Unit,
     onSuccess: () -> Unit,
 ) {
@@ -134,6 +135,7 @@ fun ConfirmOtpScreen(
             )
 
             ConfirmCodeScreen(
+                email = email,
                 title = "Код-подтверждения",
                 processInstanceId = processInstanceId,
                 description = "Введите 4-значный код из уведомления",
