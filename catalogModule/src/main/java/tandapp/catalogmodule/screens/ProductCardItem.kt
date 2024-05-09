@@ -18,7 +18,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Divider
+import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -43,11 +45,16 @@ import tandapp.utillibrary.toolbars.DefaultToolbarWithRightIcon
 import tandapp.utillibrary.values.Base100
 import tandapp.utillibrary.values.Purple
 import tandapp.utillibrary.values.Silver4
+import tandapp.utillibrary.values.cornerRadius12
 import tandapp.utillibrary.values.cornerRadius4
 import tandapp.utillibrary.values.cornerRadius8
+import tandapp.utillibrary.values.fontSize10
+import tandapp.utillibrary.values.fontSize13
 import tandapp.utillibrary.values.fontSize14
 import tandapp.utillibrary.values.fontSize16
+import tandapp.utillibrary.values.fontSize18
 import tandapp.utillibrary.values.fontSize20
+import tandapp.utillibrary.values.lineHeight13
 import tandapp.utillibrary.values.lineHeight18
 import tandapp.utillibrary.values.lineHeight24
 import tandapp.utillibrary.values.lineHeight28
@@ -93,20 +100,49 @@ fun ProductCardItem(
                     .padding(bottom = spacing16, end = spacing16),
                 horizontalArrangement = Arrangement.End,
             ) {
-                CustomButton(
-                    modifier = Modifier
-                        .width(125.dp)
-                        .height(55.dp),
-                    cornerRadius = cornerRadius8,
-                    content = {
-                        CustomButtonText(
-                            text = "Добавить в корзину",
-                            fontSize = fontSize16,
-                            lineHeight = lineHeight18
-                        )
-                    }) {
-                    viewModel.addProductToBacket(id)
 
+                if (product?.onBasket == true) {
+                    OutlinedButton(
+                        colors = ButtonDefaults.buttonColors(
+                            contentColor = Color.White,
+                            backgroundColor = Color.White,
+                        ),
+                        modifier = Modifier
+                            .width(140.dp)
+                            .height(55.dp)
+                            .clip(shape = RoundedCornerShape(cornerRadius12))
+                            .background(
+                                shape = RoundedCornerShape(cornerRadius12),
+                                color = Color.White
+                            )
+                            .border(1.dp, Purple, RoundedCornerShape(cornerRadius12)),
+                        content = {
+                            CustomButtonText(
+                                text = "Добавлено в корзину",
+                                fontSize = fontSize16,
+                                lineHeight = lineHeight18,
+                                color = Purple
+                            )
+                        },
+                        onClick = {
+//                            viewModel.deleteProduct(id)
+                        })
+                } else {
+                    CustomButton(
+                        modifier = Modifier
+                            .width(125.dp)
+                            .height(55.dp),
+                        cornerRadius = cornerRadius8,
+                        content = {
+                            CustomButtonText(
+                                text = "Добавить в корзину",
+                                fontSize = fontSize16,
+                                lineHeight = lineHeight18
+                            )
+                        }) {
+                        viewModel.addProductToBacket(id)
+
+                    }
                 }
             }
         },
@@ -236,8 +272,33 @@ fun ProductCardItem(
                             Spacer(modifier = Modifier.width(spacing4))
                         }
                     }
+                }
 
-                    Spacer(modifier = Modifier.height(spacing40))
+                item {
+                    Spacer(modifier = Modifier.height(spacing16))
+
+                    Text(
+                        text = "Описание",
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color.Black,
+                        fontSize = fontSize18,
+                        lineHeight = lineHeight24
+                    )
+
+                    Spacer(modifier = Modifier.height(spacing8))
+
+                    Text(
+                        text = product?.description.orEmpty(),
+                        style = TextStyle(
+                            fontSize = fontSize13,
+                            lineHeight = lineHeight18,
+                            fontWeight = FontWeight.Normal,
+                            color = Color.Black,
+                        )
+                    )
+                }
+                item {
+                    Spacer(modifier = Modifier.height(spacing24))
 
                     Text(
                         text = "Цена: ${product?.price} ₸",

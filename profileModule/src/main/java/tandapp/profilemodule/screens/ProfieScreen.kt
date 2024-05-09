@@ -196,7 +196,7 @@ fun ProfileScreen(
                             .padding(horizontal = spacing16)
                     ) {
                         Text(
-                            text = "First Name",
+                            text = "Имя",
                             fontSize = fontSize14,
                             lineHeight = lineHeight24,
                             color = Color.Black
@@ -206,7 +206,7 @@ fun ProfileScreen(
 
                         DefaultTextField(
                             value = viewModel.firstName.value,
-                            hint = "First Name",
+                            hint = "Иван",
                             onValueChange = viewModel::onFirstNameChange,
                             singleLine = true,
                             keyboardOptions = KeyboardOptions.Default.copy(
@@ -219,7 +219,7 @@ fun ProfileScreen(
                         Spacer(Modifier.height(spacing8))
 
                         Text(
-                            text = "Last Name",
+                            text = "Фамилия",
                             fontSize = fontSize14,
                             lineHeight = lineHeight24,
                             color = Color.Black
@@ -229,7 +229,7 @@ fun ProfileScreen(
 
                         DefaultTextField(
                             value = viewModel.lastName.value.orEmpty(),
-                            hint = "Last Name",
+                            hint = "Иванов",
                             onValueChange = viewModel::onLastNameChange,
                             focusRequester = lastNameFocusReq.value,
                             singleLine = true,
@@ -277,29 +277,29 @@ fun ProfileScreen(
                                 )
                             }
                         }
-                        Spacer(modifier = Modifier.height(spacing24))
-                        Column(verticalArrangement = Arrangement.spacedBy(spacing20)) {
-                            ChangeProfilePhoto(onClick = {
-                                uploadImageClick.value = true
-                            })
-                            DefaultRowItem(
-                                icon = tandapp.icons.R.drawable.language,
-                                title = "Язык",
-                                hint = "Русский",
-                                onClick = {}
-                            )
-                            DefaultRowItem(
-                                icon = tandapp.icons.R.drawable.ic_favorite,
-                                title = "Избранные",
-                                hint = "24",
-                                onClick = {}
-                            )
-                            DefaultRowItem(
-                                icon = tandapp.icons.R.drawable.ic_faq,
-                                title = "Tanda App FAQ",
-                                onClick = {}
-                            )
-                        }
+//                        Spacer(modifier = Modifier.height(spacing24))
+//                        Column(verticalArrangement = Arrangement.spacedBy(spacing20)) {
+//                            ChangeProfilePhoto(onClick = {
+//                                uploadImageClick.value = true
+//                            })
+//                            DefaultRowItem(
+//                                icon = tandapp.icons.R.drawable.language,
+//                                title = "Язык",
+//                                hint = "Русский",
+//                                onClick = {}
+//                            )
+//                            DefaultRowItem(
+//                                icon = tandapp.icons.R.drawable.ic_favorite,
+//                                title = "Избранные",
+//                                hint = "24",
+//                                onClick = {}
+//                            )
+//                            DefaultRowItem(
+//                                icon = tandapp.icons.R.drawable.ic_faq,
+//                                title = "Tanda App FAQ",
+//                                onClick = {}
+//                            )
+//                        }
                         Spacer(modifier = Modifier.weight(1f))
                         LogOut(onLogOutClick = {
                             SharedPreferencesHelper.clear()

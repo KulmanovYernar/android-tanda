@@ -20,6 +20,7 @@ data class ProductModel(
     val description: String?,
     val images: List<Int>? = null,
     val onWishList: Boolean?,
+    val onBasket: Boolean?,
     val quantity: Int?,
     val size: String?,
     val sizes: List<Size>?,

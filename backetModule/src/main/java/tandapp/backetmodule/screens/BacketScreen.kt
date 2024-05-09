@@ -50,6 +50,7 @@ import tandapp.utillibrary.values.fontSize16
 import tandapp.utillibrary.values.lineHeight18
 import tandapp.utillibrary.values.lineHeight22
 import tandapp.utillibrary.values.spacing16
+import tandapp.utillibrary.values.spacing18
 import tandapp.utillibrary.values.spacing2
 import tandapp.utillibrary.values.spacing20
 import tandapp.utillibrary.values.spacing24
@@ -105,7 +106,12 @@ fun BacketScreen(
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = spacing8, bottom = spacing8, start = spacing16, end = spacing16)
+                    .padding(
+                        top = spacing8,
+                        bottom = it.calculateBottomPadding(),
+                        start = spacing16,
+                        end = spacing16
+                    )
             ) {
                 if ((viewModel.productsForBacket.value?.productsSelected?.size ?: 0) > 0) {
                     items(viewModel.productsForBacket.value?.productsSelected?.size ?: 0) {
@@ -159,6 +165,7 @@ fun BacketScreen(
                                 },
                                 onButtonClicked = {}
                             )
+                            Spacer(modifier = Modifier.height(spacing18))
                         }
                     }
                 } else {

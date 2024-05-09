@@ -66,7 +66,7 @@ class ProductCardViewModel(
                 .flowOn(Dispatchers.IO)
                 .collect {
                     it.onSuccess {
-
+                        getProductInfo(id)
                     }
                 }
         }

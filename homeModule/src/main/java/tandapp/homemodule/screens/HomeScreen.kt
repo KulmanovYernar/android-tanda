@@ -21,6 +21,7 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -71,6 +72,9 @@ fun HomeScreen(
 
     val pagerState = rememberPagerState(initialPage = 0, pageCount = { 3 })
 
+    LaunchedEffect(key1 = Unit) {
+        viewModel.getProfileInfo()
+    }
     val profileInfo by viewModel.profileInfo
 
     Scaffold(

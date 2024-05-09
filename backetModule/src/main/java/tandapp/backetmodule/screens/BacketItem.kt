@@ -3,6 +3,7 @@ package tandapp.backetmodule.screens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -24,21 +25,29 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import org.jetbrains.annotations.Async
 import tandapp.utillibrary.ProductModel
 import tandapp.utillibrary.buttons.CustomButton
 import tandapp.utillibrary.buttons.CustomButtonText
+import tandapp.utillibrary.click
 import tandapp.utillibrary.values.Purple
 import tandapp.utillibrary.values.Silver4
 import tandapp.utillibrary.values.cornerRadius12
+import tandapp.utillibrary.values.cornerRadius20
 import tandapp.utillibrary.values.fontSize13
+import tandapp.utillibrary.values.fontSize16
+import tandapp.utillibrary.values.fontSize18
 import tandapp.utillibrary.values.lineHeight10
+import tandapp.utillibrary.values.lineHeight22
 import tandapp.utillibrary.values.spacing16
 import tandapp.utillibrary.values.spacing2
 import tandapp.utillibrary.values.spacing20
+import tandapp.utillibrary.values.spacing24
 import tandapp.utillibrary.values.spacing4
+import tandapp.utillibrary.values.spacing40
 import tandapp.utillibrary.values.spacing8
 
 @Composable
@@ -51,11 +60,11 @@ fun BacketItem(
             .fillMaxWidth()
             .clip(shape = RoundedCornerShape(cornerRadius12))
             .border(1.dp, Silver4, shape = RoundedCornerShape(cornerRadius12))
-            .padding(vertical = spacing4)
+            .padding(vertical = spacing4, horizontal = spacing4)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center,
+            horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically
         ) {
             AsyncImage(
@@ -65,7 +74,7 @@ fun BacketItem(
                     .height(153.dp)
                     .width(148.dp)
             )
-            Spacer(modifier = Modifier.width(spacing20))
+            Spacer(modifier = Modifier.width(spacing40))
             Column(
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier.padding(vertical = spacing8)
@@ -102,19 +111,7 @@ fun BacketItem(
                         color = Color.Black
                     )
                 )
-                Spacer(modifier = Modifier.height(spacing4))
 
-                Row {
-                    Text(
-                        text = "Количество: ${product?.quantity}",
-                        style = TextStyle(
-                            fontSize = fontSize13,
-                            lineHeight = lineHeight10,
-                            fontWeight = FontWeight.Normal,
-                            color = Color.Black
-                        )
-                    )
-                }
 
                 Spacer(modifier = Modifier.height(spacing8))
 
@@ -158,22 +155,64 @@ fun BacketItem(
             }
 
             Spacer(modifier = Modifier.weight(1f))
+            Row(horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically) {
+                Box(
+                    modifier = Modifier
+                        .size(28.dp)
+                        .clip(RoundedCornerShape(cornerRadius20))
+                        .background(Color.White)
+                        .border(
+                            1.dp, Purple, shape = RoundedCornerShape(
+                                cornerRadius20
+                            )
+                        )
+                        .click {
 
-
-            CustomButton(
-                cornerRadius = 0.dp,
-                modifier = Modifier
-                    .width(80.dp)
-                    .height(35.dp),
-                content = {
-                    CustomButtonText(
-                        text = "Купить",
-                        color = Color.White,
-                        fontSize = fontSize13
+                        },
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "-",
+                        textAlign = TextAlign.Center,
+                        color = Purple,
+                        fontSize = fontSize18,
                     )
-                }) {
+                }
+                Spacer(modifier = Modifier.width(spacing8))
+                Box(contentAlignment = Alignment.Center) {
+                    Text(
+                        text = "${product?.quantity}",
+                        style = TextStyle(
+                            fontSize = fontSize16,
+                            lineHeight = lineHeight22,
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color.Black,
+                        )
+                    )
+                }
+                Spacer(modifier = Modifier.width(spacing8))
+                Box(
+                    modifier = Modifier
+                        .size(28.dp)
+                        .clip(RoundedCornerShape(cornerRadius20))
+                        .background(Purple)
+                        .border(
+                            1.dp, Purple, shape = RoundedCornerShape(
+                                cornerRadius20
+                            )
+                        )
+                        .click {
 
-                // TODO Buy
+                        },
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "+",
+                        color = Color.White,
+                        fontSize = fontSize18,
+                    )
+                }
             }
         }
 
