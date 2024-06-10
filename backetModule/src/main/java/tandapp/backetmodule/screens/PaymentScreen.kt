@@ -37,6 +37,7 @@ import tandapp.utillibrary.buttons.CustomButton
 import tandapp.utillibrary.buttons.CustomButtonText
 import tandapp.utillibrary.toolbars.DefaultToolbarWithRightIcon
 import tandapp.utillibrary.values.Base100
+import tandapp.utillibrary.values.Base200
 import tandapp.utillibrary.values.Base50
 import tandapp.utillibrary.values.Green500
 import tandapp.utillibrary.values.cornerRadius12
@@ -60,27 +61,33 @@ fun PaymentScreen(
 
     Scaffold(
         modifier = Modifier
-            .padding(horizontal = spacing16)
-            .background(Base100),
+            .fillMaxSize()
+            .padding(spacing16)
+            .background(Base200),
         topBar = {
-            DefaultToolbarWithRightIcon(onBackClick = onBackClick, buttonText = "Назад")
+//            Column(modifier = Modifier.padding(top = spacing12)) {
+            DefaultToolbarWithRightIcon(
+                onBackClick = onBackClick,
+                buttonText = "Назад",
+                fontSize = fontSize13
+            )
+//            }
         },
         bottomBar = {
             CustomButton(
                 modifier = Modifier
-                    .height(40.dp),
+                    .height(52.dp),
                 content = {
-                    CustomButtonText(text = "Перейти к оплате")
+                    CustomButtonText(text = "Оформить заказ")
                 },
                 onButtonClicked = {}
             )
-            Spacer(modifier = Modifier.height(spacing24))
         }
     ) {
         it.calculateBottomPadding()
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             item {
-                Spacer(modifier = Modifier.height(spacing24))
+                Spacer(modifier = Modifier.height(spacing12))
             }
             item {
                 DeliveryItem()
@@ -97,13 +104,15 @@ fun PaymentScreen(
 
 @Composable
 fun DeliveryItem() {
-    Column(modifier = Modifier
-        .fillMaxWidth()
-        .background(
-            Base50, shape = RoundedCornerShape(
-                cornerRadius12
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(
+                Base50, shape = RoundedCornerShape(
+                    cornerRadius12
+                )
             )
-        )) {
+    ) {
         Text(
             text = "Пункт выдачи",
             fontSize = fontSize16,
@@ -125,7 +134,7 @@ fun DeliveryItem() {
             Spacer(modifier = Modifier.width(spacing12))
             Column(verticalArrangement = Arrangement.SpaceBetween) {
                 Text(
-                    text = "Алматы, Байтурсынова 42/1",
+                    text = "г. Алматы, Байтурсынова 42/1",
                     fontSize = fontSize13,
                     lineHeight = lineHeight18,
                     fontWeight = FontWeight(500),
@@ -159,6 +168,6 @@ fun DeliveryItem() {
 
 @Composable
 @Preview(showSystemUi = true)
-fun PaymentPreview(){
+fun PaymentPreview() {
     PaymentScreen(onBackClick = { /*TODO*/ })
 }

@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import tandapp.icons.R
 import tandapp.utillibrary.buttons.BackButton
@@ -80,6 +81,7 @@ fun DefaultToolbar(
 fun DefaultToolbarWithRightIcon(
     onBackClick: () -> Unit,
     buttonText: String,
+    fontSize: TextUnit = fontSize18,
     title: String = "",
     @DrawableRes icon: Int? = null,
     onIconClick: () -> Unit = {},
@@ -97,6 +99,7 @@ fun DefaultToolbarWithRightIcon(
                 .click {
                     onBackClick()
                 },
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 painter = painterResource(id = tandapp.icons.R.drawable.ic_back_blue),
@@ -107,7 +110,7 @@ fun DefaultToolbarWithRightIcon(
                 Spacer(modifier = Modifier.width(spacing6))
                 Text(
                     text = buttonText,
-                    fontSize = fontSize18,
+                    fontSize = fontSize,
                     fontWeight = FontWeight.Medium,
                     color = Blue1,
                     maxLines = 1,
