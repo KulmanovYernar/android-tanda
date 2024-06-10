@@ -37,10 +37,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.koin.androidx.compose.getViewModel
 import tandapp.catalogmodule.viewmodels.ProductCardViewModel
+import tandapp.utillibrary.Loading
 import tandapp.utillibrary.buttons.CustomButton
 import tandapp.utillibrary.buttons.CustomButtonText
 import tandapp.utillibrary.click
-import tandapp.utillibrary.pagers.BannerPager
 import tandapp.utillibrary.pagers.CardPager
 import tandapp.utillibrary.toolbars.DefaultToolbarWithRightIcon
 import tandapp.utillibrary.values.Base100
@@ -49,13 +49,11 @@ import tandapp.utillibrary.values.Silver4
 import tandapp.utillibrary.values.cornerRadius12
 import tandapp.utillibrary.values.cornerRadius4
 import tandapp.utillibrary.values.cornerRadius8
-import tandapp.utillibrary.values.fontSize10
 import tandapp.utillibrary.values.fontSize13
 import tandapp.utillibrary.values.fontSize14
 import tandapp.utillibrary.values.fontSize16
 import tandapp.utillibrary.values.fontSize18
 import tandapp.utillibrary.values.fontSize20
-import tandapp.utillibrary.values.lineHeight13
 import tandapp.utillibrary.values.lineHeight18
 import tandapp.utillibrary.values.lineHeight24
 import tandapp.utillibrary.values.lineHeight28
@@ -64,7 +62,6 @@ import tandapp.utillibrary.values.spacing16
 import tandapp.utillibrary.values.spacing2
 import tandapp.utillibrary.values.spacing24
 import tandapp.utillibrary.values.spacing4
-import tandapp.utillibrary.values.spacing40
 import tandapp.utillibrary.values.spacing8
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -75,6 +72,7 @@ fun ProductCardItem(
     viewModel: ProductCardViewModel = getViewModel()
 ) {
     val pagerState = rememberPagerState(initialPage = 0, pageCount = { 3 })
+
     BackHandler {
         onBackClick()
     }
@@ -90,7 +88,11 @@ fun ProductCardItem(
                 DefaultToolbarWithRightIcon(
                     onBackClick = onBackClick,
                     buttonText = "Назад",
-//                    icon = tandapp.icons.R.drawable.ic_like
+                    icon = if(product?.onWishList == true) tandapp.icons.R.drawable.ic_like_red else tandapp.icons.R.drawable.ic_like,
+                    onIconClick = {
+                        viewModel.addOrDeleteItemWishList(product?.id ?: 1)
+                    },
+                    inWishList = product?.onWishList == true
                 )
             }
         },
@@ -212,7 +214,7 @@ fun ProductCardItem(
                                     viewModel.selectedSize.value == viewModel.shoesSizes[it]
                                 Box(
                                     modifier = Modifier
-                                        .size(36.dp)
+                                        .size(40.dp)
                                         .clip(RoundedCornerShape(cornerRadius4))
                                         .background(
                                             if (selected)
@@ -319,4 +321,6 @@ fun ProductCardItem(
             }
         }
     )
+
+    if(viewModel.isLoading.value) Loading()
 }

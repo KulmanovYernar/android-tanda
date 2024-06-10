@@ -7,7 +7,6 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -22,7 +21,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
@@ -35,7 +33,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -46,8 +43,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -65,11 +60,9 @@ import tandapp.utillibrary.click
 import tandapp.utillibrary.textfields.DefaultTextField
 import tandapp.utillibrary.toolbars.DefaultToolbarWithEditButton
 import tandapp.utillibrary.ui_components.BoxImage
-import tandapp.utillibrary.values.Gray
 import tandapp.utillibrary.values.Silver3
 import tandapp.utillibrary.values.Silver4
 import tandapp.utillibrary.values.cornerRadius10
-import tandapp.utillibrary.values.cornerRadius20
 import tandapp.utillibrary.values.cornerRadius24
 import tandapp.utillibrary.values.fontSize13
 import tandapp.utillibrary.values.fontSize14
@@ -277,29 +270,29 @@ fun ProfileScreen(
                                 )
                             }
                         }
-//                        Spacer(modifier = Modifier.height(spacing24))
-//                        Column(verticalArrangement = Arrangement.spacedBy(spacing20)) {
+                        Spacer(modifier = Modifier.height(spacing24))
+                        Column(verticalArrangement = Arrangement.spacedBy(spacing20)) {
 //                            ChangeProfilePhoto(onClick = {
 //                                uploadImageClick.value = true
 //                            })
-//                            DefaultRowItem(
-//                                icon = tandapp.icons.R.drawable.language,
-//                                title = "Язык",
-//                                hint = "Русский",
-//                                onClick = {}
-//                            )
-//                            DefaultRowItem(
-//                                icon = tandapp.icons.R.drawable.ic_favorite,
-//                                title = "Избранные",
-//                                hint = "24",
-//                                onClick = {}
-//                            )
-//                            DefaultRowItem(
-//                                icon = tandapp.icons.R.drawable.ic_faq,
-//                                title = "Tanda App FAQ",
-//                                onClick = {}
-//                            )
-//                        }
+                            DefaultRowItem(
+                                icon = tandapp.icons.R.drawable.language,
+                                title = "Язык",
+                                hint = "Русский",
+                                onClick = {}
+                            )
+                            DefaultRowItem(
+                                icon = tandapp.icons.R.drawable.ic_favorite,
+                                title = "Избранные",
+                                hint = "24",
+                                onClick = {}
+                            )
+                            DefaultRowItem(
+                                icon = tandapp.icons.R.drawable.ic_faq,
+                                title = "Tanda App FAQ",
+                                onClick = {}
+                            )
+                        }
                         Spacer(modifier = Modifier.weight(1f))
                         LogOut(onLogOutClick = {
                             SharedPreferencesHelper.clear()

@@ -10,12 +10,14 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -28,6 +30,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import coil.compose.AsyncImage
@@ -42,6 +45,7 @@ import tandapp.utillibrary.values.lineHeight10
 import tandapp.utillibrary.values.lineHeight13
 import tandapp.utillibrary.values.lineHeight18
 import tandapp.utillibrary.values.spacing12
+import tandapp.utillibrary.values.spacing16
 import tandapp.utillibrary.values.spacing20
 import tandapp.utillibrary.values.spacing4
 import tandapp.utillibrary.values.spacing64
@@ -56,8 +60,8 @@ fun Recommendations(
 ) {
     FlowRow(
         modifier = Modifier.padding(bottom = spacing64),
-        horizontalArrangement = Arrangement.spacedBy(spacing12),
-        verticalArrangement = Arrangement.spacedBy(spacing20),
+        horizontalArrangement = Arrangement.spacedBy(spacing16),
+        verticalArrangement = Arrangement.spacedBy(spacing16),
         maxItemsInEachRow = 2
     ) {
         repeat(products?.size ?: 0) {
@@ -78,8 +82,9 @@ private fun RecommendationItem(
 ) {
     Box(
         modifier = Modifier
+            .width(160.dp)
+            .height(175.dp)
             .background(color = Color.White)
-            .size(170.dp)
             .padding(horizontal = spacing4)
             .click {
                 onClick(product?.id)
@@ -126,7 +131,9 @@ private fun RecommendationItem(
                 fontSize = fontSize13,
                 lineHeight = lineHeight18,
                 fontWeight = FontWeight.Medium,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1
             )
 
             Spacer(modifier = Modifier.height(spacing8))

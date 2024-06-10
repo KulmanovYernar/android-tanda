@@ -44,13 +44,14 @@ class ProductCardViewModel(
     val selectedSize: MutableState<String> = mutableStateOf(shoesSizes[0])
     val selectedColor: MutableState<Int> = mutableStateOf(shoesColors[0].id)
 
-
+    val isLoading = mutableStateOf(false)
 
     fun getProductInfo(id:Int) {
         viewModelScope.launch {
             productRepository.getProduct(id = id)
                 .flowOn(Dispatchers.IO)
                 .collect {
+                    isLoading.value = it.isLoading()
                     it.onSuccess {
                         val result = it
                         product.value = result
@@ -63,6 +64,18 @@ class ProductCardViewModel(
     fun addProductToBacket(id: Int) {
         viewModelScope.launch {
             backetRepository.addProductToBacket(BacketItemModel(id))
+                .flowOn(Dispatchers.IO)
+                .collect {
+                    it.onSuccess {
+                        getProductInfo(id)
+                    }
+                }
+        }
+    }
+
+    fun addOrDeleteItemWishList(id: Int){
+        viewModelScope.launch {
+            productRepository.addProductToWishList(id)
                 .flowOn(Dispatchers.IO)
                 .collect {
                     it.onSuccess {

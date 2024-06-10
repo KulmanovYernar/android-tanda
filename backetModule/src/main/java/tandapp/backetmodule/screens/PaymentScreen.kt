@@ -1,15 +1,20 @@
 package tandapp.backetmodule.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
@@ -54,7 +59,9 @@ fun PaymentScreen(
 
 
     Scaffold(
-        modifier = Modifier.padding(horizontal = spacing16).background(Base100),
+        modifier = Modifier
+            .padding(horizontal = spacing16)
+            .background(Base100),
         topBar = {
             DefaultToolbarWithRightIcon(onBackClick = onBackClick, buttonText = "Назад")
         },
@@ -72,6 +79,9 @@ fun PaymentScreen(
     ) {
         it.calculateBottomPadding()
         LazyColumn(modifier = Modifier.fillMaxSize()) {
+            item {
+                Spacer(modifier = Modifier.height(spacing24))
+            }
             item {
                 DeliveryItem()
             }
@@ -95,7 +105,7 @@ fun DeliveryItem() {
             )
         )) {
         Text(
-            text = "Пункт Выдачи",
+            text = "Пункт выдачи",
             fontSize = fontSize16,
             lineHeight = lineHeight22,
             fontWeight = FontWeight(500),
@@ -105,7 +115,7 @@ fun DeliveryItem() {
         Spacer(modifier = Modifier.height(spacing4))
 
         Row(modifier = Modifier.fillMaxWidth()) {
-            Icon(
+            Image(
                 painter = painterResource(id = tandapp.icons.R.drawable.img_delivery_card),
                 contentDescription = null,
                 modifier = Modifier

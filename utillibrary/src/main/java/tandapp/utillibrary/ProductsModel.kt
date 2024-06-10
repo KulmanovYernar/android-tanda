@@ -15,6 +15,8 @@ data class ProductModel(
     val brand: String?,
     val price: Int?,
     val previewImage: Int?,
+    val category: String?,
+    val subCategory: String?,
     val color: String?,
     val colors: List<Color>?,
     val description: String?,
@@ -24,6 +26,7 @@ data class ProductModel(
     val quantity: Int?,
     val size: String?,
     val sizes: List<Size>?,
+    val hex: String?
 )
 
 @Keep
@@ -31,7 +34,8 @@ data class Color(
     val available: Boolean?,
     val color: String?,
     val previewImage: Int?,
-    val productId: Int?
+    val productId: Int?,
+    val hex: String?
 )
 
 @Keep

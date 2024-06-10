@@ -28,4 +28,13 @@ class ProductRepositoryImpl(private val dataSource: ProductService) : ProductRep
         else emit(Event.error(response.message()))
     }
 
+    override suspend fun addProductToWishList(productId: Int) = flow {
+        emit(Event.loading())
+
+        val response = dataSource.addProductToWishList(productId = productId)
+
+        if (response.isSuccessful) emit(Event.success(response.body()))
+        else emit(Event.error(response.message()))
+    }
+
 }

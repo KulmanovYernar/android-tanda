@@ -81,7 +81,9 @@ fun DefaultToolbarWithRightIcon(
     onBackClick: () -> Unit,
     buttonText: String,
     title: String = "",
-    @DrawableRes icon: Int? = null
+    @DrawableRes icon: Int? = null,
+    onIconClick: () -> Unit = {},
+    inWishList: Boolean = false
 ) {
     Column(
         Modifier
@@ -113,16 +115,19 @@ fun DefaultToolbarWithRightIcon(
                 )
             }
 
-//            if (icon != null) {
-//                Spacer(modifier = Modifier.weight(1f))
-//                Icon(
-//                    painter = painterResource(id = R.drawable.ic_like),
-//                    contentDescription = null,
-//                    tint = Silver3,
-//                    modifier = Modifier
-//                        .size(24.dp)
-//                )
-//            }
+            if (icon != null) {
+                Spacer(modifier = Modifier.weight(1f))
+                Icon(
+                    painter = painterResource(id = icon),
+                    contentDescription = null,
+                    tint = if(inWishList) Color.Red else Silver3,
+                    modifier = Modifier
+                        .size(24.dp)
+                        .click {
+                            onIconClick()
+                        }
+                )
+            }
         }
     }
 }
