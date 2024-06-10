@@ -6,5 +6,5 @@ import tandapp.domain.event.Event
 import tandapp.utillibrary.ProductModel
 
 interface ChatRepository {
-    suspend fun sendMessage(text: String): Flow<Event<ProductModel>>
+    suspend fun sendMessage(text: String): Flow<Event<Any>>
 }

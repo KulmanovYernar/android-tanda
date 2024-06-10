@@ -51,9 +51,11 @@ dependencies {
     implementation(libs.koin.compose)
     implementation(project(":domain:catalog"))
     implementation(project(":domain:backet"))
+    implementation(libs.androidx.ui.tooling.preview.android)
     androidTestImplementation(libs.espresso.core)
     //Coil for load image
     implementation("io.coil-kt:coil-compose:2.6.0")
 
     implementation ("androidx.compose.ui:ui-util:1.6.1")
+    debugImplementation(libs.androidx.ui.tooling)
 }

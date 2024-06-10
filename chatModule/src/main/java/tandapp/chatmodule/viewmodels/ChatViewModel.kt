@@ -42,7 +42,7 @@ class ChatViewModel(
             )
             chatRepository.sendMessage(text).collect {
                 it.onSuccess {
-                    val result = it
+                    val result = it as ProductModel
                     receivedMessage.value = result
                     updateList(
                         MessageBox(

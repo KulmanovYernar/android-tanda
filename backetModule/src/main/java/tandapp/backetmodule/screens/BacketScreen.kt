@@ -35,6 +35,7 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 import tandapp.backetmodule.viewmodels.BacketViewModel
 import tandapp.navigationmodule.CustomBottomNavigation
+import tandapp.navigationmodule.destinations.BacketDestinations
 import tandapp.navigationmodule.destinations.CatalogDestinations
 import tandapp.utillibrary.buttons.CustomButton
 import tandapp.utillibrary.buttons.CustomButtonText
@@ -161,9 +162,11 @@ fun BacketScreen(
                                 modifier = Modifier
                                     .height(40.dp),
                                 content = {
-                                    CustomButtonText(text = "Оформить заказ")
+                                    CustomButtonText(text = "Перейти к оплате")
                                 },
-                                onButtonClicked = {}
+                                onButtonClicked = {
+                                    navController.navigate(BacketDestinations.PAYMENT_SCREEN)
+                                }
                             )
                             Spacer(modifier = Modifier.height(spacing18))
                         }
