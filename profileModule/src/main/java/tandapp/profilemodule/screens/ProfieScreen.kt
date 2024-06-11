@@ -1,12 +1,10 @@
 package tandapp.profilemodule.screens
 
-import android.os.Build
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -53,6 +51,7 @@ import org.koin.androidx.compose.getViewModel
 import tandapp.icons.R
 import tandapp.navigationmodule.CustomBottomNavigation
 import tandapp.navigationmodule.destinations.LoginDestinations
+import tandapp.navigationmodule.destinations.ProfileDestinations
 import tandapp.profilemodule.viewmodels.ProfileViewModel
 import tandapp.utillibrary.buttons.CustomButton
 import tandapp.utillibrary.buttons.CustomButtonText
@@ -67,6 +66,7 @@ import tandapp.utillibrary.values.cornerRadius24
 import tandapp.utillibrary.values.fontSize13
 import tandapp.utillibrary.values.fontSize14
 import tandapp.utillibrary.values.fontSize16
+import tandapp.utillibrary.values.lineHeight18
 import tandapp.utillibrary.values.lineHeight20
 import tandapp.utillibrary.values.lineHeight24
 import tandapp.utillibrary.values.spacing10
@@ -82,7 +82,6 @@ import tandapp.utillibrary.values.spacing8
 import tandapp.utils.SharedPreferencesHelper
 import tandapp.utils.permissions.RequestMediaPermission
 
-@RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 fun ProfileScreen(
     navController: NavController,
@@ -126,7 +125,6 @@ fun ProfileScreen(
 //                val base = Base64.encodeToString(inputData, Base64.NO_WRAP)
                 // to file
                 // to base64
-                val s = viewModel.fileFromContentUri(context, uri)
                 Log.d("imagePickerLauncher", "URI: $uri")
 //                viewModel.uploadProfileImage(
 //                    file = s
@@ -285,7 +283,9 @@ fun ProfileScreen(
                                 icon = tandapp.icons.R.drawable.ic_favorite,
                                 title = "Избранные",
                                 hint = "24",
-                                onClick = {}
+                                onClick = {
+                                    navController.navigate(ProfileDestinations.WISH_LIST)
+                                }
                             )
                             DefaultRowItem(
                                 icon = tandapp.icons.R.drawable.ic_faq,
@@ -377,7 +377,7 @@ fun ProfileScreen(
                         text = "Информация для клиентов",
                         style = TextStyle(
                             fontSize = fontSize13,
-                            lineHeight = 18.sp,
+                            lineHeight = lineHeight18,
                             fontWeight = FontWeight(400),
                             color = Color(0xFF8D68F0),
                             textAlign = TextAlign.Center,

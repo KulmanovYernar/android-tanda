@@ -5,7 +5,7 @@ import domain.profile.models.ProfileImageModel
 import domain.profile.models.ProfileModel
 import kotlinx.coroutines.flow.Flow
 import tandapp.domain.event.Event
-import java.io.File
+import tandapp.utillibrary.ProductModel
 
 interface ProfileRepository {
     suspend fun changeProfileImage(id:Int, file: FileModel): Flow<Event<Unit>>
@@ -17,5 +17,7 @@ interface ProfileRepository {
     suspend fun getProfileInfo(): Flow<Event<ProfileModel>>
 
     suspend fun getProfileImage(id:Int): Flow<Event<ProfileImageModel>>
+
+    suspend fun getWishList(): Flow<Event<List<ProductModel>>>
 
 }

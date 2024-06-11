@@ -16,6 +16,7 @@ import domain.profile.models.ProfileModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
+import tandapp.utillibrary.ProductModel
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -30,8 +31,11 @@ class ProfileViewModel(
     val firstName:MutableState<String> = mutableStateOf("")
     val lastName:MutableState<String> = mutableStateOf("")
 
+    val wishList: MutableState<List<ProductModel>> = mutableStateOf(emptyList())
+
     init {
         getProfileInfo()
+        getWishList()
     }
 
 
@@ -62,6 +66,19 @@ class ProfileViewModel(
                     it.onSuccess {
                         val result = it
                         profileInfo.value = result
+                    }
+                }
+        }
+    }
+
+    fun getWishList() {
+        viewModelScope.launch {
+            profileRepository.getWishList()
+                .flowOn(Dispatchers.IO)
+                .collect {
+                    it.onSuccess {
+                        val result = it
+                        wishList.value = result ?: emptyList()
                     }
                 }
         }

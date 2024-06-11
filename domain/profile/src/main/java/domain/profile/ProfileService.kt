@@ -3,7 +3,6 @@ package domain.profile
 import domain.profile.models.FileModel
 import domain.profile.models.ProfileImageModel
 import domain.profile.models.ProfileModel
-import tandapp.utillibrary.ProductsModel
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -11,6 +10,7 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
+import tandapp.utillibrary.ProductModel
 
 interface ProfileService {
     @PUT("customer/blobs/update/{id}")
@@ -29,5 +29,5 @@ interface ProfileService {
     suspend fun getProfileImage(@Path("id") id:Int): Response<ProfileImageModel>
 
     @GET("customer/wish_list")
-    suspend fun getWishList(): Response<ProductsModel>
+    suspend fun getWishList(): Response<List<ProductModel>>
 }
