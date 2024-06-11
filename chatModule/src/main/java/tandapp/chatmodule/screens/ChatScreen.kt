@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,7 +19,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -37,37 +37,41 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import domain.chat.models.MessageBox
-import domain.chat.models.MessageType
 import org.koin.androidx.compose.getViewModel
 import tandapp.chatmodule.MessageItem
-import tandapp.chatmodule.R
 import tandapp.chatmodule.viewmodels.ChatViewModel
 import tandapp.navigationmodule.destinations.CatalogDestinations
+import tandapp.navigationmodule.destinations.LoginDestinations
+import tandapp.utillibrary.buttons.CustomButton
+import tandapp.utillibrary.buttons.CustomButtonText
 import tandapp.utillibrary.click
 import tandapp.utillibrary.toolbars.DefaultChatToolbar
-import tandapp.utillibrary.ui_components.BoxImage
 import tandapp.utillibrary.values.Base200
 import tandapp.utillibrary.values.Base400
-import tandapp.utillibrary.values.Base500
 import tandapp.utillibrary.values.Base900
 import tandapp.utillibrary.values.Green500
 import tandapp.utillibrary.values.Purple
 import tandapp.utillibrary.values.Silver2
-import tandapp.utillibrary.values.Silver3
-import tandapp.utillibrary.values.Silver4
 import tandapp.utillibrary.values.cornerRadius20
+import tandapp.utillibrary.values.fontSize13
 import tandapp.utillibrary.values.fontSize16
+import tandapp.utillibrary.values.spacing100
 import tandapp.utillibrary.values.spacing12
 import tandapp.utillibrary.values.spacing16
+import tandapp.utillibrary.values.spacing20
 import tandapp.utillibrary.values.spacing24
+import tandapp.utillibrary.values.spacing28
+import tandapp.utillibrary.values.spacing52
 import tandapp.utillibrary.values.spacing8
+import tandapp.utils.SharedPreferencesHelper
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @OptIn(ExperimentalFoundationApi::class)
@@ -78,6 +82,7 @@ fun ChatScreen(
     onBack: (String?) -> Unit
 ) {
     val route = navController.currentBackStackEntry?.destination?.route
+    val registered by SharedPreferencesHelper.onLogged.collectAsStateWithLifecycle()
     BackHandler {
         onBack(route)
     }
@@ -89,9 +94,6 @@ fun ChatScreen(
     val messages by viewModel.conversation.collectAsStateWithLifecycle()
     Log.d("ChatScreen", "LazyColumn recomposed. Messages: $messages")
     val scope = rememberCoroutineScope()
-//    val lazyListState = rememberForeverLazyListState(key = "main",
-//        initialData = viewModel.mainVerticalScrollState.value,
-//        scrollStateCallback = viewModel.scrollStateSaveCallback)
 
     val pagerState = rememberPagerState(initialPage = 0, pageCount = { 6 })
 
@@ -134,20 +136,82 @@ fun ChatScreen(
                     ),
                 verticalArrangement = Arrangement.spacedBy(spacing16, Alignment.Bottom)
             ) {
-                Log.d("ChatScreen", "LazyColumn recomposed. Messages: $messages")
-                items(messages?.size ?: 0) {
-                    MessageItem(
-                        model = messages?.get(it),
-                        onClickProduct = {
-                            navController.currentBackStackEntry?.savedStateHandle?.set(
-                                "productId",
-                                messages?.get(it)?.product?.id
+                if (registered != true) {
+                    item {
+                        Column(
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(
+                                    spacing20
+                                )
+                                .padding(top = spacing52)
+                        ) {
+                            Image(
+                                painter = painterResource(id = tandapp.icons.R.drawable.img_profile_sign_in),
+                                contentDescription = null,
+                                modifier = Modifier.size(70.dp)
                             )
-                            navController.navigate(CatalogDestinations.CATALOG_PRODUCT_CARD_ITEM)
-                        }
-                    )
-                }
 
+                            Spacer(modifier = Modifier.height(spacing28))
+
+                            Text(
+                                text = "Войдите в свой профиль",
+                                style = TextStyle(
+                                    fontSize = 20.sp,
+                                    lineHeight = 22.sp,
+                                    fontWeight = FontWeight(500),
+                                    color = Color.Black,
+                                )
+                            )
+                            Spacer(modifier = Modifier.height(spacing16))
+                            Text(
+                                text = "Войдите в аккаунт, для того, чтобы пользоваться чатом",
+                                style = TextStyle(
+                                    fontSize = fontSize13,
+                                    lineHeight = 18.sp,
+                                    fontWeight = FontWeight(400),
+                                    color = Color.Black,
+                                    textAlign = TextAlign.Center,
+                                )
+                            )
+                            Spacer(modifier = Modifier.height(spacing24))
+
+                            CustomButton(
+                                modifier = Modifier.fillMaxWidth(),
+                                content = {
+                                    CustomButtonText(
+                                        text = "Войти в профиль",
+                                        fontSize = 16.sp,
+                                        lineHeight = 24.sp,
+                                        fontWeight = FontWeight(500),
+                                        color = Color.White,
+                                    )
+                                }
+                            ) {
+                                navController.navigate(LoginDestinations.SIGN_IN)
+                            }
+                            
+                            Spacer(modifier = Modifier.height(spacing100))
+
+                        }
+                    }
+                } else {
+                    Log.d("ChatScreen", "LazyColumn recomposed. Messages: $messages")
+                    items(messages?.size ?: 0) {
+                        MessageItem(
+                            model = messages?.get(it),
+                            onClickProduct = {
+                                navController.currentBackStackEntry?.savedStateHandle?.set(
+                                    "productId",
+                                    messages?.get(it)?.product?.id
+                                )
+                                navController.navigate(CatalogDestinations.CATALOG_PRODUCT_CARD_ITEM)
+                            }
+                        )
+                    }
+                }
             }
         },
         bottomBar = {
@@ -172,7 +236,7 @@ fun ChatScreen(
                             .weight(1f),
                         placeholder = {
                             Text(
-                                text = "Type here...",
+                                text = if(registered != true) "Войдите в аккаунт" else "Type here...",
                                 fontSize = fontSize16,
                                 fontWeight = FontWeight.Normal,
                                 color = Base400

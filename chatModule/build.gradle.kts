@@ -44,6 +44,7 @@ dependencies {
     implementation(projects.icons)
     implementation(projects.domain.chat)
     implementation(projects.domain.event)
+    implementation(projects.utils)
 
 
     implementation(libs.androidx.ktx)

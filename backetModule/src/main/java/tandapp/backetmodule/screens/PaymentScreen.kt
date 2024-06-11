@@ -6,18 +6,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBars
-import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -30,13 +25,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.FlowPreview
-import org.koin.androidx.compose.getViewModel
-import tandapp.backetmodule.viewmodels.PaymentViewModel
 import tandapp.utillibrary.buttons.CustomButton
 import tandapp.utillibrary.buttons.CustomButtonText
 import tandapp.utillibrary.toolbars.DefaultToolbarWithRightIcon
-import tandapp.utillibrary.values.Base100
 import tandapp.utillibrary.values.Base200
 import tandapp.utillibrary.values.Base50
 import tandapp.utillibrary.values.Green500
@@ -47,8 +38,6 @@ import tandapp.utillibrary.values.lineHeight18
 import tandapp.utillibrary.values.lineHeight22
 import tandapp.utillibrary.values.spacing12
 import tandapp.utillibrary.values.spacing16
-import tandapp.utillibrary.values.spacing18
-import tandapp.utillibrary.values.spacing24
 import tandapp.utillibrary.values.spacing4
 import tandapp.utillibrary.values.spacing8
 
@@ -94,6 +83,10 @@ fun PaymentScreen(
             }
             item {
                 Spacer(modifier = Modifier.height(spacing8))
+            }
+
+            item {
+
             }
 
         }
