@@ -44,7 +44,7 @@ dependencies {
     implementation(libs.androidx.ktx)
     implementation(libs.appcompat)
     implementation(libs.com.google.android.material.material)
-    androidTestImplementation(libs.androidx.test.ext.junit)
+//    androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
     implementation ("androidx.activity:activity-compose:1.6.1")

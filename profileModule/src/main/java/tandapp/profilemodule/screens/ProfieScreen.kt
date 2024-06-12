@@ -119,6 +119,7 @@ fun ProfileScreen(
     LaunchedEffect(key1 = Unit) {
         if(registered == true) {
             viewModel.getProfileInfo()
+            viewModel.getWishList()
         }
     }
 

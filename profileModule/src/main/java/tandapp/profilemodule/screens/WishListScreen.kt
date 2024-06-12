@@ -25,6 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import tandapp.icons.R
 import tandapp.profilemodule.viewmodels.ProfileViewModel
+import tandapp.utillibrary.Loading
 import tandapp.utillibrary.buttons.CustomButton
 import tandapp.utillibrary.buttons.CustomButtonText
 import tandapp.utillibrary.toolbars.DefaultHomeToolbar
@@ -48,6 +49,9 @@ fun WishListScreen(
     onBasketCLick: () -> Unit,
     viewModel: ProfileViewModel,
 ) {
+
+
+    if(viewModel.isLoading.value) Loading()
 
     Scaffold(
         backgroundColor = Color.White,

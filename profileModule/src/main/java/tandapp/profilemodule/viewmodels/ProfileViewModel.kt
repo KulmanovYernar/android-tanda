@@ -27,6 +27,7 @@ class ProfileViewModel(
     val lastName: MutableState<String> = mutableStateOf("")
 
     val wishList: MutableState<List<ProductModel>> = mutableStateOf(emptyList())
+    val isLoading = mutableStateOf(false)
 
     init {
         getProfileInfo()
@@ -101,7 +102,9 @@ class ProfileViewModel(
             productRepository.addProductToWishList(id)
                 .flowOn(Dispatchers.IO)
                 .collect {
+                    isLoading.value = it.isLoading()
                     it.onSuccess {
+                        getWishList()
                     }
                 }
         }

@@ -41,8 +41,8 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.com.google.android.material.material)
     implementation(project(":utillibrary"))
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit)
+//    testImplementation(libs.junit)
+//    androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
 

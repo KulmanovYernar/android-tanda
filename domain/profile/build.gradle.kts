@@ -40,7 +40,7 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.com.google.android.material.material)
     implementation(project(":utillibrary"))
-    androidTestImplementation(libs.androidx.test.ext.junit)
+//    androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
     //retrofit
