@@ -42,7 +42,7 @@ class ProductCardViewModel(
     )
 
     val selectedSize: MutableState<String> = mutableStateOf(shoesSizes[0])
-    val selectedColor: MutableState<Int> = mutableStateOf(shoesColors[0].id)
+    val selectedColor: MutableState<tandapp.utillibrary.Color?> = mutableStateOf(null)
 
     val isLoading = mutableStateOf(false)
 

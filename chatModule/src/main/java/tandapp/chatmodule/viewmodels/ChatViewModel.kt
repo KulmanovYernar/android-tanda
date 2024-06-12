@@ -3,6 +3,7 @@ package tandapp.chatmodule.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import domain.chat.ChatRepository
+import domain.chat.models.ChatResponseModel
 import domain.chat.models.MessageBox
 import domain.chat.models.MessageType
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +14,7 @@ class ChatViewModel(
     private val chatRepository: ChatRepository
 ) : ViewModel() {
 
-    val receivedMessage: MutableStateFlow<ProductModel?> = MutableStateFlow(null)
+    val receivedMessage: MutableStateFlow<ChatResponseModel?> = MutableStateFlow(null)
     val conversation: MutableStateFlow<MutableList<MessageBox>?> = MutableStateFlow(
         mutableListOf<MessageBox>(
             MessageBox(
@@ -39,13 +40,13 @@ class ChatViewModel(
 
             chatRepository.sendMessage(text).collect {
                 it.onSuccess {
-                    val result = it as ProductModel
+                    val result = it
                     receivedMessage.value = result
 
                     updateList(
                         MessageBox(
-                            text = "",
-                            product = receivedMessage?.value,
+                            text = receivedMessage.value?.messages.orEmpty(),
+                            product = receivedMessage.value?.productDto,
                             type = MessageType.IN
                         )
                     )

@@ -88,7 +88,7 @@ fun ProductCardItem(
                 DefaultToolbarWithRightIcon(
                     onBackClick = onBackClick,
                     buttonText = "Назад",
-                    icon = if(product?.onWishList == true) tandapp.icons.R.drawable.ic_like_red else tandapp.icons.R.drawable.ic_like,
+                    icon = if (product?.onWishList == true) tandapp.icons.R.drawable.ic_like_red else tandapp.icons.R.drawable.ic_like,
                     onIconClick = {
                         viewModel.addOrDeleteItemWishList(product?.id ?: 1)
                     },
@@ -143,7 +143,9 @@ fun ProductCardItem(
                                 lineHeight = lineHeight18
                             )
                         }) {
-                        viewModel.addProductToBacket(id)
+                        viewModel.addProductToBacket(
+                            viewModel.selectedColor.value?.productId ?: product?.id ?: 0
+                        )
 
                     }
                 }
@@ -161,9 +163,11 @@ fun ProductCardItem(
                 }
                 item {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        val previewImage =
+                            viewModel.selectedColor.value?.previewImage ?: product?.previewImage
                         CardPager(
                             pagerState = pagerState,
-                            image = "http://91.147.105.187:9000/product/get_image/${product?.previewImage}",
+                            image = "http://91.147.105.187:9000/product/get_image/${previewImage}",
                         )
                     }
 
@@ -240,7 +244,7 @@ fun ProductCardItem(
                         }
                         Spacer(modifier = Modifier.height(spacing8))
                         Text(
-                            text = "Цвет: ${viewModel.shoesColors.get(viewModel.selectedColor.value).title}",
+                            text = "Цвет: ${viewModel.selectedColor.value?.color ?: product?.color.orEmpty()}",
                             style = TextStyle(
                                 fontSize = 14.sp,
                                 lineHeight = 18.sp,
@@ -253,9 +257,12 @@ fun ProductCardItem(
                             modifier = Modifier.fillMaxWidth(),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            repeat(viewModel.shoesColors.size) {
+                            repeat(product?.colors?.size ?: 0) {
                                 val selected =
-                                    viewModel.selectedColor.value == viewModel.shoesColors[it].id
+                                    viewModel.selectedColor.value == product?.colors?.get(it)
+
+                                val color =
+                                    android.graphics.Color.parseColor(product?.colors?.get(it)?.hex)
                                 Box(
                                     modifier = Modifier
                                         .size(36.dp)
@@ -265,11 +272,14 @@ fun ProductCardItem(
                                             shape = RoundedCornerShape(cornerRadius8)
                                         )
                                         .background(
-                                            viewModel.shoesColors[it].color,
+                                            color = Color(color),
                                         )
                                         .click {
-                                            viewModel.selectedColor.value =
-                                                viewModel.shoesColors[it].id
+                                            viewModel.selectedColor.value = product?.colors?.get(it)
+                                            viewModel.getProductInfo(
+                                                viewModel.selectedColor.value?.productId
+                                                    ?: product?.id ?: 0
+                                            )
                                         },
                                     contentAlignment = Alignment.Center
                                 ) {
@@ -322,5 +332,5 @@ fun ProductCardItem(
         }
     )
 
-    if(viewModel.isLoading.value) Loading()
+    if (viewModel.isLoading.value) Loading()
 }
