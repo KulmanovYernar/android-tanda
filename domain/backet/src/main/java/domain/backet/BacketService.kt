@@ -26,7 +26,7 @@ interface BacketService {
     @GET("basket/get")
     suspend fun getBacket(): Response<BacketProductsModel>
 
-    @GET("backet/decrease")
-    suspend fun decreaseBacket(@Query("productId") productId: Int, @Query("decreaseBy") decreaseBy: Int): Response<Unit>
+    @GET("basket/decrease")
+    suspend fun decreaseBacket(@Query("productId") productId: Int, @Query("decreaseBy") decreaseBy: Int = 1): Response<Unit>
 
 }

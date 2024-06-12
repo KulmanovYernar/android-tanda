@@ -6,6 +6,10 @@ import tandapp.profilemodule.viewmodels.ProfileViewModel
 
 val profileFeatureModule = module {
     viewModel {
-        ProfileViewModel(get())
+        ProfileViewModel(
+            profileRepository = get(),
+            productRepository = get(),
+            backetRepository = get()
+        )
     }
 }

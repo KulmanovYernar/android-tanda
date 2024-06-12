@@ -13,8 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ButtonColors
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Divider
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
@@ -29,10 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import org.jetbrains.annotations.Async
 import tandapp.utillibrary.ProductModel
-import tandapp.utillibrary.buttons.CustomButton
-import tandapp.utillibrary.buttons.CustomButtonText
 import tandapp.utillibrary.click
 import tandapp.utillibrary.values.Purple
 import tandapp.utillibrary.values.Silver4
@@ -45,8 +40,6 @@ import tandapp.utillibrary.values.lineHeight10
 import tandapp.utillibrary.values.lineHeight22
 import tandapp.utillibrary.values.spacing16
 import tandapp.utillibrary.values.spacing2
-import tandapp.utillibrary.values.spacing20
-import tandapp.utillibrary.values.spacing24
 import tandapp.utillibrary.values.spacing4
 import tandapp.utillibrary.values.spacing40
 import tandapp.utillibrary.values.spacing8
@@ -54,7 +47,9 @@ import tandapp.utillibrary.values.spacing8
 @Composable
 fun BacketItem(
     product: ProductModel?,
-    onDeleteProduct: () -> Unit = {}
+    onDeleteProduct: () -> Unit = {},
+    onAddClick: () -> Unit = {},
+    onDecreaseClick: () -> Unit = {},
 ) {
     Column(
         modifier = Modifier
@@ -171,7 +166,11 @@ fun BacketItem(
                             )
                         )
                         .click {
-
+                            if(product?.quantity == 1){
+                                onDeleteProduct()
+                            }else {
+                                onDecreaseClick()
+                            }
                         },
                     contentAlignment = Alignment.Center
                 ) {
@@ -206,7 +205,7 @@ fun BacketItem(
                             )
                         )
                         .click {
-
+                            onAddClick()
                         },
                     contentAlignment = Alignment.Center
                 ) {
@@ -218,6 +217,5 @@ fun BacketItem(
                 }
             }
         }
-
     }
 }

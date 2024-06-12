@@ -63,7 +63,7 @@ class ProductCardViewModel(
 
     fun addProductToBacket(id: Int) {
         viewModelScope.launch {
-            backetRepository.addProductToBacket(BacketItemModel(id))
+            backetRepository.addProductToBasket(BacketItemModel(id))
                 .flowOn(Dispatchers.IO)
                 .collect {
                     it.onSuccess {

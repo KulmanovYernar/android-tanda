@@ -1,15 +1,13 @@
 package tandapp.profilemodule.viewmodels
 
-import android.content.Context
-import android.net.Uri
-import android.os.Build
 import android.util.Log
-import android.webkit.MimeTypeMap
-import androidx.annotation.RequiresApi
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import domain.backet.BacketRepository
+import domain.backet.models.BacketItemModel
+import domain.catalog.ProductRepository
 import domain.profile.ProfileRepository
 import domain.profile.models.FileModel
 import domain.profile.models.ProfileModel
@@ -17,19 +15,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import tandapp.utillibrary.ProductModel
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
-import java.io.InputStream
-import java.io.OutputStream
 
 class ProfileViewModel(
-    private val profileRepository: ProfileRepository
+    private val profileRepository: ProfileRepository,
+    private val productRepository: ProductRepository,
+    private val backetRepository: BacketRepository,
 ) : ViewModel() {
 
     val profileInfo: MutableState<ProfileModel?> = mutableStateOf(null)
-    val firstName:MutableState<String> = mutableStateOf("")
-    val lastName:MutableState<String> = mutableStateOf("")
+    val firstName: MutableState<String> = mutableStateOf("")
+    val lastName: MutableState<String> = mutableStateOf("")
 
     val wishList: MutableState<List<ProductModel>> = mutableStateOf(emptyList())
 
@@ -39,10 +34,11 @@ class ProfileViewModel(
     }
 
 
-    fun onFirstNameChange(value: String){
+    fun onFirstNameChange(value: String) {
         firstName.value = value
     }
-    fun onLastNameChange(value: String){
+
+    fun onLastNameChange(value: String) {
         lastName.value = value
     }
 
@@ -87,7 +83,10 @@ class ProfileViewModel(
 
     fun updateProfileInfo() {
         viewModelScope.launch {
-            profileRepository.updateProfileInfo(firstName = firstName.value, lastName = lastName.value)
+            profileRepository.updateProfileInfo(
+                firstName = firstName.value,
+                lastName = lastName.value
+            )
                 .flowOn(Dispatchers.IO)
                 .collect {
                     it.onSuccess {
@@ -97,42 +96,28 @@ class ProfileViewModel(
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.Q)
-    fun fileFromContentUri(context: Context, contentUri: Uri): File {
-
-        val fileExtension = getFileExtension(context, contentUri)
-        val fileName = "temporary_file" + if (fileExtension != null) ".$fileExtension" else ""
-
-        val tempFile = File(context.cacheDir, fileName)
-        tempFile.createNewFile()
-
-        try {
-            val oStream = FileOutputStream(tempFile)
-            val inputStream = context.contentResolver.openInputStream(contentUri)
-
-            inputStream?.let {
-                copy(inputStream, oStream)
-            }
-
-            oStream.flush()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-        return tempFile
-    }
-
-    private fun getFileExtension(context: Context, uri: Uri): String? {
-        val fileType: String? = context.contentResolver.getType(uri)
-        return MimeTypeMap.getSingleton().getExtensionFromMimeType(fileType)
-    }
-
-    @Throws(IOException::class)
-    private fun copy(source: InputStream, target: OutputStream) {
-        val buf = ByteArray(8192)
-        var length: Int
-        while (source.read(buf).also { length = it } > 0) {
-            target.write(buf, 0, length)
+    fun addOrDeleteItemWishList(id: Int) {
+        viewModelScope.launch {
+            productRepository.addProductToWishList(id)
+                .flowOn(Dispatchers.IO)
+                .collect {
+                    it.onSuccess {
+                    }
+                }
         }
     }
+
+    fun addProductToBacket(id: Int) {
+        viewModelScope.launch {
+            backetRepository.addProductToBasket(BacketItemModel(id))
+                .flowOn(Dispatchers.IO)
+                .collect {
+                    it.onSuccess {
+                        getWishList()
+                    }
+                }
+        }
+    }
+
+
 }

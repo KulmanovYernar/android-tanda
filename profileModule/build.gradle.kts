@@ -52,6 +52,14 @@ dependencies {
     implementation(libs.material)
     implementation(libs.compose.ui)
     implementation(libs.koin.compose)
+    implementation(project(":backetModule"))
+    //Coil for load image
+    implementation("io.coil-kt:coil-compose:2.6.0")
+
+    implementation ("androidx.compose.ui:ui-util:1.6.1")
+    implementation(project(":domain:catalog"))
+    implementation(project(":domain:backet"))
+    implementation(project(":domain:backet"))
 
     androidTestImplementation(libs.espresso.core)
     implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")

@@ -12,7 +12,7 @@ import com.example.loginmodule.navigation.loginGraph
 import tandapp.backetmodule.navigation.backetGraph
 import tandapp.catalogmodule.navigation.catalogGraph
 import tandapp.homemodule.navigation.mainGraph
-import tandapp.navigationmodule.BACKET_ROUTE
+import tandapp.navigationmodule.BASKET_ROUTE
 import tandapp.navigationmodule.CATALOG_ROUTE
 import tandapp.navigationmodule.CHAT_ROUTE
 import tandapp.navigationmodule.HOME_ROUTE
@@ -61,7 +61,7 @@ fun MainNavHost(
         }
         navigation(
             startDestination = MainDestinations.BACKET.destination,
-            route = BACKET_ROUTE
+            route = BASKET_ROUTE
         ) {
             backetGraph(
                 navController = navController

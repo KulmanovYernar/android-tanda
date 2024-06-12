@@ -37,6 +37,7 @@ import tandapp.backetmodule.viewmodels.BacketViewModel
 import tandapp.navigationmodule.CustomBottomNavigation
 import tandapp.navigationmodule.destinations.BacketDestinations
 import tandapp.navigationmodule.destinations.CatalogDestinations
+import tandapp.utillibrary.Loading
 import tandapp.utillibrary.buttons.CustomButton
 import tandapp.utillibrary.buttons.CustomButtonText
 import tandapp.utillibrary.toolbars.DefaultHomeToolbar
@@ -78,6 +79,9 @@ fun BacketScreen(
         viewModel.getProducts()
     }
     val pagerState = rememberPagerState(initialPage = 0, pageCount = { 6 })
+    val padding = if(viewModel.productsForBacket.value?.productsSelected?.isEmpty() == true) 0.dp else spacing16
+
+    if(viewModel.isLoading.value) Loading()
 
     Scaffold(
         backgroundColor = Color.White,
@@ -110,8 +114,8 @@ fun BacketScreen(
                     .padding(
                         top = spacing8,
                         bottom = it.calculateBottomPadding(),
-                        start = spacing16,
-                        end = spacing16
+                        start = padding,
+                        end = padding
                     )
             ) {
                 if ((viewModel.productsForBacket.value?.productsSelected?.size ?: 0) > 0) {
@@ -121,6 +125,12 @@ fun BacketScreen(
                             product = product,
                             onDeleteProduct = {
                                 viewModel.deleteProduct(product?.id ?: 0)
+                            },
+                            onAddClick = {
+                                viewModel.addProductToBacket(product?.id ?: 0)
+                            },
+                            onDecreaseClick = {
+                                viewModel.decreaseItem(product?.id ?: 0)
                             }
                         )
                         Spacer(modifier = Modifier.height(spacing16))
@@ -227,7 +237,7 @@ fun BacketScreen(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .background(Silver2.copy(alpha = 0.8f))
-                                .padding(vertical = spacing8),
+                                .padding(vertical = spacing8, horizontal = spacing16),
                         ) {
                             Text(
                                 text = "Рекомендуем",

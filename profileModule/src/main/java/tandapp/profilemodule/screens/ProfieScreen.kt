@@ -25,6 +25,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -114,6 +115,11 @@ fun ProfileScreen(
 
     val lastNameFocusReq = remember {
         mutableStateOf(FocusRequester())
+    }
+    LaunchedEffect(key1 = Unit) {
+        if(registered == true) {
+            viewModel.getProfileInfo()
+        }
     }
 
     val imagePickerLauncher = rememberLauncherForActivityResult(
@@ -274,21 +280,21 @@ fun ProfileScreen(
 //                                uploadImageClick.value = true
 //                            })
                             DefaultRowItem(
-                                icon = tandapp.icons.R.drawable.language,
+                                icon = R.drawable.language,
                                 title = "Язык",
                                 hint = "Русский",
                                 onClick = {}
                             )
                             DefaultRowItem(
-                                icon = tandapp.icons.R.drawable.ic_favorite,
+                                icon = R.drawable.ic_favorite,
                                 title = "Избранные",
-                                hint = "24",
+                                hint = "${viewModel.wishList.value.size ?: 0}",
                                 onClick = {
                                     navController.navigate(ProfileDestinations.WISH_LIST)
                                 }
                             )
                             DefaultRowItem(
-                                icon = tandapp.icons.R.drawable.ic_faq,
+                                icon = R.drawable.ic_faq,
                                 title = "Tanda App FAQ",
                                 onClick = {}
                             )
